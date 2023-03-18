@@ -150,7 +150,7 @@ public class CustomerCreate extends JDialog {
 
 		         if(Checking.IsValidName(txtcusname.getText()))
 		        {
-		            JOptionPane.showMessageDialog(null, "Please enter VALID Name!");
+		            JOptionPane.showMessageDialog(null, "Please enter VALID Name.");
 		            txtcusname.requestFocus();
 		            txtcusname.selectAll();
 		        }
