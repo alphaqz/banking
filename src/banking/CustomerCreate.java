@@ -70,7 +70,7 @@ public class CustomerCreate extends JDialog {
 		lblNewLabel_2.setBounds(43, 133, 56, 14);
 		panel.add(lblNewLabel_2);
 		
-		JLabel lblPhoneNp = new JLabel("Phone No:");
+		JLabel lblPhoneNp = new JLabel("Phone no:");
 		lblPhoneNp.setBounds(38, 177, 79, 14);
 		panel.add(lblPhoneNp);
 		
