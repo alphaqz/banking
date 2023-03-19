@@ -32,9 +32,9 @@ public class mySQLQueries {
 	    {
 	        query = "insert into brand values ('"+data[0]+"','"+data[1]+"');";
 	    }
-	    else if(tbName.equals("type"))
+	    else if(tbName.equals("accounttype"))
 	    {
-	        query = "insert into type values ('"+data[0]+"','"+data[1]+"')";
+	        query = "insert into accounttype values ('"+data[0]+"','"+data[1]+"' , " + Integer.parseInt(data[2]) + ")";
 	    }
 	    else if(tbName.equals("supplier"))
 	    {
@@ -79,9 +79,9 @@ public class mySQLQueries {
 	    {
 	        query = "select * from brand where brandname='"+data[0]+"'";
 	    }
-	    else if(tbName.equals("type"))
+	    else if(tbName.equals("accounttype"))
 	    {
-	        query = "select * from type where typename='"+data[0]+"'";
+	        query = "select * from accounttype where title='"+data[0]+"'";
 	    }
 
 	    else if(tbName.equals("supplier"))
@@ -209,7 +209,7 @@ public class mySQLQueries {
              else if(tbName.equals("type"))
                  rs=connect.SQLSelect("typeID", "type");
              else if(tbName.equals("customer"))
-                 rs=connect.SQLSelect("customerID", "customer");
+                 rs=connect.SQLSelect("email", "customer");
              else if(tbName.equals("merchandise"))
                  rs=connect.SQLSelect("merID", "merchandise");
              else if(tbName.equals("brand"))
