@@ -36,9 +36,9 @@ public class mySQLQueries {
 	    {
 	        query = "insert into accounttype values ('"+data[0]+"','"+data[1]+"' , " + Integer.parseInt(data[2]) + ")";
 	    }
-	    else if(tbName.equals("supplier"))
+	    else if(tbName.equals("staff"))
 	    {
-	        query = "insert into supplier(supplierID,Name,Address,PhoneNo,Email)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"')";
+	        query = "insert into staff(id,name,gender,phone,email)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"')";
 	    }
 
 	    else if(tbName.equals("merchandise"))
@@ -84,9 +84,9 @@ public class mySQLQueries {
 	        query = "select * from accounttype where title='"+data[0]+"'";
 	    }
 
-	    else if(tbName.equals("supplier"))
+	    else if(tbName.equals("staff"))
 	    {
-	        query = "select * from supplier where Name ='"+data[0]+"'and Address ='"+data[1]+"'and PhoneNo ='"+data[2]+"'and Email='"+data[3]+"'";
+	        query = "select * from staff where name ='"+data[0]+"'and phone ='"+data[1]+"'and email ='"+data[1]+"'";
 	    }
 	    
 	    else if(tbName.equals("merchandise"))
