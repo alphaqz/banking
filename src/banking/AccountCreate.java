@@ -129,6 +129,9 @@ public class AccountCreate extends JDialog {
 				        }
 					}
 				});
+				
+				JButton btnClear = new JButton("Clear");
+				buttonPane.add(btnClear);
 				btnSave.setActionCommand("OK");
 				buttonPane.add(btnSave);
 				getRootPane().setDefaultButton(btnSave);
