@@ -40,6 +40,10 @@ public class mySQLQueries {
 	    {
 	        query = "insert into staff(id,name,gender,phone,email)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"')";
 	    }
+	    else if(tbName.equals("deposit"))
+	    {
+	        query = "insert into deposit(id,amount,accountno,staffno)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"')";
+	    }
 
 	    else if(tbName.equals("merchandise"))
 	    {
@@ -209,7 +213,10 @@ public class mySQLQueries {
              else if(tbName.equals("type"))
                  rs=connect.SQLSelect("typeID", "type");
              else if(tbName.equals("customer"))
-                 rs=connect.SQLSelect("email", "customer");
+                 rs=connect.SQLSelect("id", "customer");
+             else if(tbName.equals("staff"))
+                 rs=connect.SQLSelect("id", "staff");
+             /*
              else if(tbName.equals("merchandise"))
                  rs=connect.SQLSelect("merID", "merchandise");
              else if(tbName.equals("brand"))
@@ -217,7 +224,8 @@ public class mySQLQueries {
              else if(tbName.equals("orders"))
                  rs=connect.SQLSelect("distinct orderid","orders");
              else if(tbName.equals("orderdetail"))
-                 rs = connect.SQLSelect("orderid","orderdetail where remark !=0");
+                 rs = connect.SQLSelect("orderid","orderdetail where remark !=0"); 
+              */
 
              int rowcount = 0 ;
              while(rs.next())
@@ -271,7 +279,9 @@ public class mySQLQueries {
              else if(tbName.equals("brand"))
                  rs=connect.SQLSelect("brandname", "brand");
              else if(tbName.equals("customer"))
-                 rs = connect.SQLSelect("name","customer");
+                 rs = connect.SQLSelect("email","customer");
+             else if(tbName.equals("staff"))
+                 rs = connect.SQLSelect("email","staff");
               else if(tbName.equals("customeraddress"))
                  rs = connect.SQLSelect("distinct address","customer");
                else if(tbName.equals("supplieraddress"))
