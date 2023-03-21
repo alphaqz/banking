@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
 
 public class StaffEntry extends JDialog {
 	private JLabel lblstaid;
@@ -45,12 +47,12 @@ public class StaffEntry extends JDialog {
 	 * @throws ClassNotFoundException 
 	 */
 	public StaffEntry() throws ClassNotFoundException {
-		setTitle("Customer Entry");
+		setTitle("Staff Entry");
 		setBounds(100, 100, 392, 454);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Customer Info:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Staff Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 317, 253);
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -124,12 +126,6 @@ public class StaffEntry extends JDialog {
 		            txtstaname.requestFocus();
 		            txtstaname.selectAll();
 		        }
-//		        else if(Checking.IsNull(txtaddress.getText()))
-//		        {
-//		            JOptionPane.showMessageDialog(null,"Please enter Address.");;
-//		            txtaddress.requestFocus();
-//		            txtaddress.selectAll();
-//		        }
 		        else if(Checking.IsNull(txtphone.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null, "Please enter Phone.");
@@ -160,12 +156,7 @@ public class StaffEntry extends JDialog {
 						st[0] = (String)txtstaname.getText();
 						st[1] = gender;
 						st[2] = (String) txtphone.getText();
-						st[3] = (String)txtEmail.getText();
-//						st[3] = (String)txtphone.getText();
-//						st[4] = (String)txtEmail.getText();
-//						st[5] = (String)txtNrc.getText();
-//						st[6] = (String)txtEmail.getText();
-//						st[7] = (String)txtJob.getText();
+						st[3] = (String)txtEmail.getText();					
 						
 			            boolean ee = mySQLQueries.isduplicate("staff", st);
 			            if(!ee)
@@ -238,7 +229,7 @@ public class StaffEntry extends JDialog {
 		getContentPane().add(btnclose);
 		AutoID();
 	}
-public void clear()
+		public void clear()
 	    {
 	        txtstaname.setText("");
 	        
@@ -247,7 +238,7 @@ public void clear()
 	        txtstaname.requestFocus();
 	    }
 
-public void AutoID() throws ClassNotFoundException
+		public void AutoID() throws ClassNotFoundException
 	    {
 	    	 lblstaid.setText((String.valueOf(mySQLQueries.getAutoid("id", "staff", "ST-"))));
 	    }

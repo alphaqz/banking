@@ -206,10 +206,10 @@ public class mySQLQueries {
      public static String[]getIDForChoice(String tbName)
      {
          try{
-             if((tbName.equals("itemdetail")))
-                 rs = connect.SQLSelect("itemID","itemdetail ");
-             else if(tbName.equals("supplier"))
-                 rs=connect.SQLSelect("supplierID", "supplier");
+             if((tbName.equals("staff")))
+                 rs = connect.SQLSelect("id","staff");
+             else if(tbName.equals("account"))
+                 rs=connect.SQLSelect("id", "account");
              else if(tbName.equals("type"))
                  rs=connect.SQLSelect("typeID", "type");
              else if(tbName.equals("customer"))
