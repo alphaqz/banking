@@ -32,7 +32,7 @@ public class DepositCreate extends JDialog {
 	JComboBox cboAccount;
 	JComboBox cboStaff; 
 	List<String> staffIdList = new ArrayList<String>();  
-
+	List<String> AccountIdList = new ArrayList<String>(); 
 	/**
 	 * Launch the application.
 	 */
@@ -117,13 +117,20 @@ public class DepositCreate extends JDialog {
 				            	str[0] = (String)lblForID.getText();						
 				            	str[1] = (String)txtAmount.getText();
 
-				            	str[2] = "AC-0000001"; //change this later
+				            	str[2] =  (String) cboAccount.getSelectedItem();
 				            	str[3] = staffIdList.get(cboStaff.getSelectedIndex()-1);
-				            	System.out.println("inserting into deposit " + str[0] + str[1] + str[3]);
+				            	//System.out.println("inserting into deposit " + str[0] + str[1] + str[3]);
 				            	boolean save = mySQLQueries.insertData("deposit", str);
 					            if(save)
 					            {
-					                JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);
+					            	//String action,String id , String amount)
+					            	boolean updatesuccess = mySQLQueries.updateAmount("deposit", (String)cboAccount.getSelectedItem() , (String)txtAmount.getText());
+					            	if(updatesuccess) {
+					            		JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);					            		
+					            	}  else
+						            {
+						                JOptionPane.showMessageDialog(null,"Failed to update account balance.","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
+						            }
 					                
 					                try {
 										AutoID();
@@ -160,16 +167,16 @@ public class DepositCreate extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		fillCustomer();
+		fillAccount();
 		fillStaff();
 		AutoID();
 	}
-	public void fillCustomer()
+	public void fillAccount()
     {
-        String str[]=mySQLQueries.getNameForChoice("customer");
+        String str[]=mySQLQueries.getIDForChoice("account");
         cboAccount.addItem("-Select-");
         for(int i=0;i<str.length;i++)
-        	cboAccount.addItem(str[i].toString());
+        	cboAccount.addItem(str[i].toString());				
     }
 	public void fillStaff()
     {
@@ -178,7 +185,7 @@ public class DepositCreate extends JDialog {
         staffIdList = Arrays.asList(temp);
         cboStaff.addItem("-Select-");
         for(int i=0;i<str.length;i++)
-        	cboStaff.addItem(str[i].toString());
+        	cboStaff.addItem(str[i].toString());				
     }
 	public void clear()
     {      

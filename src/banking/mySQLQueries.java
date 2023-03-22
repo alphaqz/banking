@@ -1,7 +1,7 @@
 package banking;
 import banking.clsDBConnection;
 import java.sql.*;
-import java.sql.Connection;
+
 import javax.swing.*;
 
 
@@ -343,6 +343,32 @@ public class mySQLQueries {
               int cat = data[0].indexOf("(");
               query = "update orders set orderdate='"+data[0].substring(0,cat)+"'where orderid='"+id+"'";
          }
+
+             
+             try{
+            	 con=connect.getConnection();
+                 stmt = con.createStatement();
+                 if(stmt.executeUpdate(query)==1)
+                 {
+                     return true;
+                 }
+                 else{
+                     JOptionPane.showMessageDialog(null,"The table does not contain the specified ID.","Update Fail",JOptionPane.ERROR_MESSAGE);
+                     return false;}
+             }
+             catch(SQLException e)
+             {
+                 JOptionPane.showMessageDialog(null, e.getMessage(), "SQLException", JOptionPane.ERROR_MESSAGE);
+                 return false;
+             }
+       }
+     public static boolean updateAmount(String action,String id , String amount)
+     {
+         if(action.equals("deposit"))
+             query = "update account set balance= balance +"+ Integer.parseInt(amount) +" where id='"+id+"'";
+        // else  if(action.equals("customer"))
+        //     query = "update customer set Name='"+data[0]+"',Address='"+data[1]+"',PhoneNo='"+data[2]+"',Email='"+data[3]+"'where customerID='"+id+"'";
+        
 
              
              try{
