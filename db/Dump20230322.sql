@@ -43,7 +43,7 @@ CREATE TABLE `account` (
 
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('AC-0000001',10000,'CU-0000001','AT-0000001','2023-03-21 16:49:14','2023-03-21 16:49:14');
+INSERT INTO `account` VALUES ('AC-0000001',60999,'CU-0000001','AT-0000001','2023-03-21 16:49:14','2023-03-22 15:35:58');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,7 @@ CREATE TABLE `deposit` (
 
 LOCK TABLES `deposit` WRITE;
 /*!40000 ALTER TABLE `deposit` DISABLE KEYS */;
-INSERT INTO `deposit` VALUES ('DE-0000001',1234,'AC-0000001','ST-0000002','2023-03-21 16:49:40');
+INSERT INTO `deposit` VALUES ('DE-0000001',1234,'AC-0000001','ST-0000002','2023-03-21 16:49:40'),('DE-0000002',1234,'AC-0000001','ST-0000001','2023-03-22 15:04:57'),('DE-0000003',999,'AC-0000001','ST-0000001','2023-03-22 15:32:37'),('DE-0000004',888,'AC-0000001','ST-0000001','2023-03-22 15:33:52'),('DE-0000005',777,'AC-0000001','ST-0000001','2023-03-22 15:35:14'),('DE-0000006',222,'AC-0000001','ST-0000002','2023-03-22 15:35:58');
 /*!40000 ALTER TABLE `deposit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,6 +159,36 @@ LOCK TABLES `staff` WRITE;
 INSERT INTO `staff` VALUES ('ST-0000001','staff','male','09797246971','staff@gmail.com'),('ST-0000002','staff 2','male','09797246971','staff2@gmail.com');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `withdraw`
+--
+
+DROP TABLE IF EXISTS `withdraw`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `withdraw` (
+  `id` varchar(15) NOT NULL,
+  `amount` decimal(10,0) DEFAULT NULL,
+  `accountno` varchar(45) NOT NULL,
+  `staffno` varchar(45) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `a_idx` (`accountno`),
+  KEY `s_idx` (`staffno`),
+  CONSTRAINT `acc_with` FOREIGN KEY (`accountno`) REFERENCES `account` (`id`),
+  CONSTRAINT `staff_with` FOREIGN KEY (`staffno`) REFERENCES `staff` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `withdraw`
+--
+
+LOCK TABLES `withdraw` WRITE;
+/*!40000 ALTER TABLE `withdraw` DISABLE KEYS */;
+/*!40000 ALTER TABLE `withdraw` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -169,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-22 21:10:01
+-- Dump completed on 2023-03-22 23:16:31
