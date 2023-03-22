@@ -49,6 +49,10 @@ public class mySQLQueries {
 	    {
 	        query = "insert into deposit(id,amount,accountno,staffno)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"')";
 	    }
+	    else if(tbName.equals("withdraw"))
+	    {
+	        query = "insert into deposit(id,amount,accountno,staffno)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"')";
+	    }
 
 	    else if(tbName.equals("merchandise"))
 	    {
@@ -163,6 +167,7 @@ public class mySQLQueries {
             return null;
         }
     }
+    
     public String getBrandID(String brandname)
     {
         try{
@@ -223,6 +228,7 @@ public class mySQLQueries {
                  rs=connect.SQLSelect("id", "customer");
              else if(tbName.equals("staff"))
                  rs=connect.SQLSelect("id", "staff");
+             
              /*
              else if(tbName.equals("merchandise"))
                  rs=connect.SQLSelect("merID", "merchandise");
@@ -366,6 +372,8 @@ public class mySQLQueries {
      {
          if(action.equals("deposit"))
              query = "update account set balance= balance +"+ Integer.parseInt(amount) +" where id='"+id+"'";
+         else if(action.equals("withdraw"))
+             query = "update account set balance= balance -"+ Integer.parseInt(amount) +" where id='"+id+"'";
         // else  if(action.equals("customer"))
         //     query = "update customer set Name='"+data[0]+"',Address='"+data[1]+"',PhoneNo='"+data[2]+"',Email='"+data[3]+"'where customerID='"+id+"'";
         
@@ -415,7 +423,7 @@ public class mySQLQueries {
      }
 
 
-
+  
 
      public static void main(String[] args) 
      {
@@ -427,6 +435,25 @@ public class mySQLQueries {
 			e.printStackTrace();
 		}
      }
+
+	public static String getAccountBalance(String id) {
+		 try{
+             String result;
+             con=connect.getConnection();
+             stmt = con.createStatement();
+             query = "select balance from account where id='"+id+"';";
+             rs=stmt.executeQuery(query);
+             rs.next();
+             result=rs.getString(1);
+             return result;
+         }catch(SQLException sqle)
+         {
+             System.out.println(sqle);
+             return null;
+         }
+	}
+
+
      
 
 
