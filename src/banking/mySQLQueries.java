@@ -36,6 +36,11 @@ public class mySQLQueries {
 	    {
 	        query = "insert into accounttype values ('"+data[0]+"','"+data[1]+"' , " + Integer.parseInt(data[2]) + ")";
 	    }
+	    else if(tbName.equals("account"))
+	    {
+	        query = "insert into account(id,balance,cusID,accTypeID,staffID)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"'  )";
+	    }
+
 	    else if(tbName.equals("staff"))
 	    {
 	        query = "insert into staff(id,name,gender,phone,email)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"')";
@@ -210,6 +215,8 @@ public class mySQLQueries {
                  rs = connect.SQLSelect("id","staff");
              else if(tbName.equals("account"))
                  rs=connect.SQLSelect("id", "account");
+             else if(tbName.equals("accounttype"))
+                 rs = connect.SQLSelect("id","accounttype");
              else if(tbName.equals("type"))
                  rs=connect.SQLSelect("typeID", "type");
              else if(tbName.equals("customer"))
@@ -282,6 +289,8 @@ public class mySQLQueries {
                  rs = connect.SQLSelect("email","customer");
              else if(tbName.equals("staff"))
                  rs = connect.SQLSelect("email","staff");
+             else if(tbName.equals("accounttype"))
+                 rs = connect.SQLSelect("title","accounttype");
               else if(tbName.equals("customeraddress"))
                  rs = connect.SQLSelect("distinct address","customer");
                else if(tbName.equals("supplieraddress"))
