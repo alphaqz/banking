@@ -28,7 +28,7 @@ public class CustomerCreate extends JDialog {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField txtNrc;
 	private JTextField txtJob;
-	private String gender = "male";
+	private String gender = "";
 
 	/**
 	 * Launch the application.

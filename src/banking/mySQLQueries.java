@@ -85,7 +85,54 @@ public class mySQLQueries {
 	        return true;
 	    }
 	}
-	
+	   public static String []getCustomerData(String id)
+	     {
+	         try
+	         {
+	        	 con=connect.getConnection();
+	             stmt = con.createStatement();
+	             String str[];
+	             query = "select * from customer where id='"+id+"'";
+	             str = new String[7];
+	             rs = stmt.executeQuery(query);
+	             if(rs.next())
+	             {
+	                 for(int i = 0 ; i<str.length ; i++)
+	                 {
+	                     str[i]=rs.getString(i+2);
+	                 }
+	             }
+	             return str;
+	         }catch(SQLException e)
+	         {
+	             JOptionPane.showMessageDialog(null,e.getMessage());
+	             return null;
+	         }
+	     }
+    public static void deleteRecord(String tbName,String id)
+    {
+        int returnvalue = 0 ;
+        String query = "";
+        if(tbName.equals("supplier"))
+        {
+            query = "delete from supplier where id = '"+id+"' ";
+        }
+        if(tbName.equals("customer"))
+        {
+            query = "delete from customer where id = '"+id+"' ";
+        }
+        try{
+            stmt = con.createStatement();
+            if(!query.equals("")&&stmt.executeUpdate(query)==1)
+                JOptionPane.showMessageDialog(null, "The record is deleted successfully in"+tbName+"table.");
+            else
+                JOptionPane.showMessageDialog(null,"The specified ID does not found in the table .","Delete Fail",JOptionPane.ERROR_MESSAGE);
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
 	public static boolean isduplicate(String tbName , String []data)
 	{
 	    if(tbName.equals("brand"))
@@ -335,7 +382,8 @@ public class mySQLQueries {
          if(tbName.equals("supplier"))
              query = "update supplier set Name='"+data[0]+"',Address='"+data[1]+"',PhoneNo='"+data[2]+"',Email='"+data[3]+"'where supplierID='"+id+"'";
          else  if(tbName.equals("customer"))
-             query = "update customer set Name='"+data[0]+"',Address='"+data[1]+"',PhoneNo='"+data[2]+"',Email='"+data[3]+"'where customerID='"+id+"'";
+        	 //id name gender phone address job nrc email
+             query = "update customer set Name='"+data[0]+"',gender='"+data[1]+"',phone='"+data[2]+"',address='"+data[3]+"',job='"+data[4]+"',nrc='"+data[5]+"',Email='"+data[6]+"'where id='"+id+"'";
          else if(tbName.equals("itemdetail"))
              query = "update itemdetail set itemname='"+data[0]+"',cursaleprice="+data[1]+",remark='"+data[2]+"'where itemid='"+id+"'";
          else if(tbName.equals("brand"))
