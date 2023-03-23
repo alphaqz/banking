@@ -32,7 +32,7 @@ public class WithdrawCreate extends JDialog {
 	private JLabel lblForBalance;
 	JComboBox cboAccount;
 	JComboBox cboStaff; 
-	List<String> staffIdList = new ArrayList<String>();  
+	List<String> staffIdList = new ArrayList<String>();
 	List<String> AccountIdList = new ArrayList<String>(); 
 	static String balance;
 	/**
@@ -53,7 +53,7 @@ public class WithdrawCreate extends JDialog {
 	 * @throws ClassNotFoundException 
 	 */
 	public WithdrawCreate() throws ClassNotFoundException {
-		setTitle("Deposit Entry");
+		setTitle("Withdraw Entry");
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Withdraw Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
