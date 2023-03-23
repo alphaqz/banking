@@ -270,7 +270,7 @@ public class CustomerCreate extends JDialog {
 		getContentPane().add(btnclose);
 		AutoID();
 	}
-	public void clear()
+public void clear()
 	    {
 	        txtcusname.setText("");
 	        txtaddress.setText("");
@@ -279,8 +279,8 @@ public class CustomerCreate extends JDialog {
 	        txtcusname.requestFocus();
 	    }
 
-		public void AutoID() throws ClassNotFoundException
+public void AutoID() throws ClassNotFoundException
 	    {
 	    	 lblcusid.setText((String.valueOf(mySQLQueries.getAutoid("id", "customer", "CU-"))));
 	    }
-	}
+}
