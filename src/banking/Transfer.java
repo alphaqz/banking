@@ -2,6 +2,9 @@ package banking;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -27,6 +30,8 @@ public class Transfer extends JDialog {
 	private JButton btnClose;
 	private JButton btnSave;
 	private JLabel lblTID;
+	
+	List<String> staffIdList = new ArrayList<String>();
 
 	/**
 	 * Launch the application.
@@ -88,25 +93,25 @@ public class Transfer extends JDialog {
 		panel.add(lblTID);
 		
 		txtAmount = new JTextField();
-		txtAmount.setBounds(206, 93, 96, 25);
+		txtAmount.setBounds(206, 93, 157, 25);
 		panel.add(txtAmount);
 		txtAmount.setColumns(10);
 		
 		txtDate = new JTextField();
 		txtDate.setColumns(10);
-		txtDate.setBounds(206, 140, 96, 25);
+		txtDate.setBounds(206, 140, 157, 25);
 		panel.add(txtDate);
 		
 		cboRAcc = new JComboBox();
-		cboRAcc.setBounds(206, 183, 96, 27);
+		cboRAcc.setBounds(206, 183, 157, 27);
 		panel.add(cboRAcc);
 		
 		cboTAcc = new JComboBox();
-		cboTAcc.setBounds(206, 229, 96, 27);
+		cboTAcc.setBounds(206, 229, 157, 27);
 		panel.add(cboTAcc);
 		
 		cboStaff = new JComboBox();
-		cboStaff.setBounds(206, 279, 96, 27);
+		cboStaff.setBounds(206, 279, 157, 27);
 		panel.add(cboStaff);
 		
 		btnSave = new JButton("Save");
@@ -143,12 +148,15 @@ public class Transfer extends JDialog {
 		}
 	}
 
-	private void fillStaff() {
-		String str[]=mySQLQueries.getIDForChoice("staff");
-		for(int i=0;i<str.length;i++) {
-			cboStaff.addItem(str[i].toString());
-		}
-	}
+	public void fillStaff()
+    {
+        String str[]=mySQLQueries.getNameForChoice("staff");
+        String temp[] = mySQLQueries.getIDForChoice("staff");
+        staffIdList = Arrays.asList(temp);
+        cboStaff.addItem("-Select-");
+        for(int i=0;i<str.length;i++)
+        	cboStaff.addItem(str[i].toString());				
+    }
 
 	public void AutoID() throws ClassNotFoundException
     {
