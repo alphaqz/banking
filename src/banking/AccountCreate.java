@@ -90,6 +90,10 @@ public class AccountCreate extends JDialog {
 		contentPanel.add(lblAccountType);
 		
 		cboAccountType = new JComboBox();
+		cboAccountType.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		cboAccountType.setBounds(222, 143, 186, 22);
 		contentPanel.add(cboAccountType);
 		
