@@ -1,35 +1,43 @@
 package banking;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import banking.date;
 import banking.mySQLQueries;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Transfer extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtAmount;
-	private JTextField txtDate;
-	private JComboBox cboTAcc;
-	private JComboBox cboRAcc;
+	private JComboBox cboTransfer;
+	private JComboBox cboReceive;
 	private JComboBox cboStaff;
 	private JButton btnCancel;
 	private JButton btnClose;
 	private JButton btnSave;
 	private JLabel lblTID;
+	
+	date d=new date();
 	
 	List<String> staffIdList = new ArrayList<String>();
 
@@ -72,9 +80,9 @@ public class Transfer extends JDialog {
 		lblDate.setBounds(10, 96, 90, 19);
 		panel.add(lblDate);
 		
-		JLabel lblDate_1 = new JLabel("Date :");
-		lblDate_1.setBounds(10, 143, 90, 19);
-		panel.add(lblDate_1);
+		JLabel lblDatelabel = new JLabel("Date :");
+		lblDatelabel.setBounds(10, 143, 90, 19);
+		panel.add(lblDatelabel);
 		
 		JLabel lblReceivedAccountNo = new JLabel("Received Account No :");
 		lblReceivedAccountNo.setBounds(10, 187, 148, 19);
@@ -97,24 +105,104 @@ public class Transfer extends JDialog {
 		panel.add(txtAmount);
 		txtAmount.setColumns(10);
 		
-		txtDate = new JTextField();
-		txtDate.setColumns(10);
-		txtDate.setBounds(206, 140, 157, 25);
-		panel.add(txtDate);
+		cboReceive = new JComboBox();
+		cboReceive.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		cboReceive.setBounds(206, 183, 157, 27);
+		panel.add(cboReceive);
 		
-		cboRAcc = new JComboBox();
-		cboRAcc.setBounds(206, 183, 157, 27);
-		panel.add(cboRAcc);
-		
-		cboTAcc = new JComboBox();
-		cboTAcc.setBounds(206, 229, 157, 27);
-		panel.add(cboTAcc);
+		cboTransfer = new JComboBox();
+		cboTransfer.setBounds(206, 229, 157, 27);
+		panel.add(cboTransfer);
 		
 		cboStaff = new JComboBox();
 		cboStaff.setBounds(206, 279, 157, 27);
 		panel.add(cboStaff);
 		
+		Border backline=BorderFactory.createLineBorder(Color.black);
+		JLabel lbldate = new JLabel("");
+		lbldate.setBounds(206, 143, 157, 19);
+		lbldate.setBorder(backline);
+		panel.add(lbldate);
+		
 		btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Checking.IsNull(txtAmount.getText()))
+		        {
+		            JOptionPane.showMessageDialog(null, "Please enter Amount.");
+		            txtAmount.requestFocus();
+		            txtAmount.selectAll();
+		        }
+		        else if(!Checking.IsAllDigit(txtAmount.getText()))
+		        {
+		            JOptionPane.showMessageDialog(null,"Please enter valid number.");
+		            txtAmount.requestFocus();
+		            txtAmount.selectAll();
+		        }
+		        else if(cboTransfer.getSelectedIndex()==0){
+		        	JOptionPane.showMessageDialog(null, "Please choose Transfer Account No");						
+		        }
+		        else {
+		        	
+		            String str[] = new String[6];
+		            str[0] = (String)lblTID.getText();						
+		            str[1] = (String)txtAmount.getText();
+		            str[2] = (String)lbldate.getText();
+		             
+		            str[4] = (String) cboTransfer.getSelectedItem(); 
+		            
+		            filterReceiveAccount();
+		            str[3] = (String) cboReceive.getSelectedItem();
+		            str[5] = staffIdList.get(cboStaff.getSelectedIndex()-1); 
+		            	
+//		            System.out.println(str[1]);
+		            
+//		            if(cboTransfer.getSelectedIndex()!=0) {
+//		            	fillReceivedAccountNo();
+		            
+//		            	System.out.print(cboTransfer.getSelectedItem());
+		            	
+		            	
+		            	int saveAmount=0;
+		            	int t_amount=Integer.parseInt(str[1]);
+		            	
+		            	String t_id=cboTransfer.getSelectedItem().toString();
+						String r_id=cboReceive.getSelectedItem().toString();
+						
+						int total_amount= Integer.parseInt(mySQLQueries.getAmount(t_id));
+//						System.out.println(total_amount);
+						
+		            	if(t_amount > total_amount) {
+		            		JOptionPane.showMessageDialog(null, "Insufficient balance!");
+		            		txtAmount.setText("");
+							txtAmount.requestFocus();
+		            	}
+		            	else {
+		            		boolean save = mySQLQueries.insertData("transfer", str);
+		            		saveAmount+=total_amount-t_amount;
+		            		int r_amount=Integer.parseInt(mySQLQueries.getAmount(r_id));	
+							r_amount+=t_amount;
+							boolean success=mySQLQueries.updateAmount("transfer", r_id, String.valueOf(r_amount));						
+							boolean success1=mySQLQueries.updateAmount("transfer", t_id,String.valueOf(saveAmount));
+							
+							if(save && success && success1) {
+			            		JOptionPane.showMessageDialog(null, "Successfully transfered amount!","Save Record.",JOptionPane.INFORMATION_MESSAGE);					            		
+			            	}  else
+				            {
+				                JOptionPane.showMessageDialog(null,"Failed to update account balance.","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
+				            }
+		            	}
+//		            }
+			            
+		        }
+			}
+
+			
+		});
 		btnSave.setMnemonic('S');
 		btnSave.setBounds(107, 390, 87, 27);
 		contentPanel.add(btnSave);
@@ -133,18 +221,32 @@ public class Transfer extends JDialog {
 		fillReceivedAccountNo();
 		fillTransferedAccountNo();
 		fillStaff();
+		lbldate.setText(d.getMySQLDateFormat());
 	}
 	private void fillTransferedAccountNo() {
 		String str[]=mySQLQueries.getIDForChoice("account");
+		cboTransfer.addItem("- Select -");
 		for(int i=0;i<str.length;i++) {
-			cboTAcc.addItem(str[i].toString());
+			cboTransfer.addItem(str[i].toString());
 		}
 	}
-
+	private void clear() {
+		
+	}
 	private void fillReceivedAccountNo() {
 		String str[]=mySQLQueries.getIDForChoice("account");
+		cboReceive.addItem("- Select -");
 		for(int i=0;i<str.length;i++) {
-			cboRAcc.addItem(str[i].toString());
+			cboReceive.addItem(str[i].toString());
+		}
+	}
+	private void filterReceiveAccount() {
+		String str[]=mySQLQueries.getIDForFilter(cboTransfer.getSelectedItem().toString());
+		
+		cboReceive.addItem("- Select -");
+		for(int i=0;i<str.length;i++) {
+			cboReceive.addItem(str[i].toString());
+//			System.out.println(Arrays.toString(str));
 		}
 	}
 
@@ -157,7 +259,8 @@ public class Transfer extends JDialog {
         for(int i=0;i<str.length;i++)
         	cboStaff.addItem(str[i].toString());				
     }
-
+	
+	
 	public void AutoID() throws ClassNotFoundException
     {
     	 lblTID.setText((String.valueOf(mySQLQueries.getAutoid("id", "transfer", "TR-"))));

@@ -77,6 +77,11 @@ public class DepositCreate extends JDialog {
 		contentPanel.add(txtAmount);
 		
 		cboAccount = new JComboBox();
+		cboAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		cboAccount.setBounds(222, 143, 186, 22);
 		contentPanel.add(cboAccount);
 		

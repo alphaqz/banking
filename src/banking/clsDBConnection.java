@@ -50,6 +50,20 @@ public ResultSet SQLSelect(String field , String table) throws ClassNotFoundExce
     }
     return rs;
 }
+public ResultSet SQLSelect1(String table , String condition) throws ClassNotFoundException
+{
+    ResultSet rs = null ;
+    
+    try
+    {
+        Statement stmt = (Statement) getConnection().createStatement();
+        rs = stmt.executeQuery("SELECT * FROM "+table+" WHERE id=AC-0000001");
+    }catch(SQLException ex)
+    {
+        System.out.println(ex);
+    }
+    return rs;
+}
 
 public boolean ExecuteSQL(String sql) throws ClassNotFoundException
 {

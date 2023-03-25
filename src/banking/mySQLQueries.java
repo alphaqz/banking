@@ -4,6 +4,8 @@ import java.sql.*;
 
 import javax.swing.*;
 
+import com.mysql.jdbc.Statement;
+
 
 public class mySQLQueries {
 	
@@ -38,7 +40,7 @@ public class mySQLQueries {
 	    }
 	    else if(tbName.equals("account"))
 	    {
-	        query = "insert into account(id,balance,cusID,accTypeID,staffID)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"'  )";
+	        query = "insert into account(id,balance,cusID,accTypeID,staffID)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"')";
 	    }
 
 	    else if(tbName.equals("staff"))
@@ -54,9 +56,9 @@ public class mySQLQueries {
 	        query = "insert into deposit(id,amount,accountno,staffno)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"')";
 	    }
 
-	    else if(tbName.equals("merchandise"))
+	    else if(tbName.equals("transfer"))
 	    {
-	        query = "insert into merchandise(merID,brandID,typeID)values('"+data[0]+"','"+data[1]+"','"+data[2]+"')";
+	        query = "insert into transfer(id, amount, date, receivedAccount, transferedAccount, staffId)values('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"','"+data[5]+"')";
 	    }
 	    else if(tbName.equals("customer"))
 	    {
@@ -69,7 +71,7 @@ public class mySQLQueries {
 
 	    try{
 	    	con=connect.getConnection();
-	        stmt = con.createStatement();
+	        stmt = (Statement) con.createStatement();
 	        boolean r = stmt.execute(query);
 	       //System.out.println(query+r);
 	        if(r)
@@ -90,7 +92,7 @@ public class mySQLQueries {
 	         try
 	         {
 	        	 con=connect.getConnection();
-	             stmt = con.createStatement();
+	             stmt = (Statement) con.createStatement();
 	             String str[];
 	             query = "select * from customer where id='"+id+"'";
 	             str = new String[7];
@@ -122,7 +124,7 @@ public class mySQLQueries {
             query = "delete from customer where id = '"+id+"' ";
         }
         try{
-            stmt = con.createStatement();
+            stmt = (Statement) con.createStatement();
             if(!query.equals("")&&stmt.executeUpdate(query)==1)
                 JOptionPane.showMessageDialog(null, "The record is deleted successfully in"+tbName+"table.");
             else
@@ -166,7 +168,7 @@ public class mySQLQueries {
 	    
 	    try{
 	    	con=connect.getConnection();
-	        stmt = con.createStatement();
+	        stmt = (Statement) con.createStatement();
 	        rs = stmt.executeQuery(query);
 	        if(rs.next())
 	            return false;
@@ -184,7 +186,7 @@ public class mySQLQueries {
         {
             String typename;
             con=connect.getConnection();
-            stmt = con.createStatement();
+            stmt = (Statement) con.createStatement();
             query = "select * from type where typeID ='"+typeid+"';";
             rs=stmt.executeQuery(query);
             rs.next();
@@ -201,7 +203,7 @@ public class mySQLQueries {
         String typeid;
         try
         {
-            stmt = con.createStatement();
+            stmt = (Statement) con.createStatement();
             query = "select typeid from type where typename='"+typename+"';";
             rs=stmt.executeQuery(query);
             rs.next();
@@ -219,7 +221,7 @@ public class mySQLQueries {
     {
         try{
             String brandid;
-            stmt = con.createStatement();
+            stmt = (Statement) con.createStatement();
             query = "select brandid from brand where brandname='"+brandname+"';";
             rs=stmt.executeQuery(query);
             rs.next();
@@ -236,7 +238,7 @@ public class mySQLQueries {
         try{
             String brandname;
             con=connect.getConnection();
-            stmt = con.createStatement();
+            stmt = (Statement) con.createStatement();
             query = "select * from brand where brandid='"+brandid+"';";
             rs=stmt.executeQuery(query);
             rs.next();
@@ -318,7 +320,7 @@ public class mySQLQueries {
          try{
         	 con=connect.getConnection();
              String[]value= new String[2];
-             stmt=con.createStatement();
+             stmt=(Statement) con.createStatement();
              query = "select * from merchandise where merid='"+merid+"'";
              rs=stmt.executeQuery(query);
              rs.next();
@@ -401,7 +403,7 @@ public class mySQLQueries {
              
              try{
             	 con=connect.getConnection();
-                 stmt = con.createStatement();
+                 stmt = (Statement) con.createStatement();
                  if(stmt.executeUpdate(query)==1)
                  {
                      return true;
@@ -422,14 +424,13 @@ public class mySQLQueries {
              query = "update account set balance= balance +"+ Integer.parseInt(amount) +" where id='"+id+"'";
          else if(action.equals("withdraw"))
              query = "update account set balance= balance -"+ Integer.parseInt(amount) +" where id='"+id+"'";
-        // else  if(action.equals("customer"))
-        //     query = "update customer set Name='"+data[0]+"',Address='"+data[1]+"',PhoneNo='"+data[2]+"',Email='"+data[3]+"'where customerID='"+id+"'";
-        
+         else  if(action.equals("transfer"))
+             query = "update account set balance="+Integer.parseInt(amount)+" where id='"+id+"'";
 
              
              try{
             	 con=connect.getConnection();
-                 stmt = con.createStatement();
+                 stmt = (Statement) con.createStatement();
                  if(stmt.executeUpdate(query)==1)
                  {
                      return true;
@@ -445,12 +446,12 @@ public class mySQLQueries {
              }
        }
 
-     public static String []getSupplierData(String id)
+    public static String []getSupplierData(String id)
      {
          try
          {
         	 con=connect.getConnection();
-             stmt = con.createStatement();
+             stmt = (Statement) con.createStatement();
              String str[];
              query = "select * from supplier where supplierID='"+id+"'";
              str = new String[4];
@@ -470,10 +471,7 @@ public class mySQLQueries {
          }
      }
 
-
-  
-
-     public static void main(String[] args) 
+    public static void main(String[] args) 
      {
     	 try {
     		 mySQLQueries q=new mySQLQueries();
@@ -488,7 +486,7 @@ public class mySQLQueries {
 		 try{
              String result;
              con=connect.getConnection();
-             stmt = con.createStatement();
+             stmt = (Statement) con.createStatement();
              query = "select balance from account where id='"+id+"';";
              rs=stmt.executeQuery(query);
              rs.next();
@@ -501,11 +499,51 @@ public class mySQLQueries {
          }
 	}
 
+	public static String getAmount(String transferID) {
+		try{
+			con=connect.getConnection();
+            stmt = (Statement) con.createStatement();
+            String amt = null;
+            query = "select balance from account where id='"+transferID+"'";
+            rs=stmt.executeQuery(query);
+            if(rs.next())
+            {
+                amt=rs.getString(1);//id
+            }
+            return amt;
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
 
-     
+	}
 
-
-
-
+	public static String[] getIDForFilter(String id) {
+		try{
+            con=connect.getConnection();
+            stmt = (Statement) con.createStatement();
+            query = "select id from account where id!='"+id+"';";
+            rs=stmt.executeQuery(query);
+            int rowcount = 0 ;
+            while(rs.next())
+            {
+                rowcount++;
+            }
+            String []temp = new String[rowcount];
+            rs.beforeFirst();
+            int i = 0 ;
+            while(rs.next())
+            {
+                temp[i]=rs.getString(1);
+                i++;
+            }
+            return temp;
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        }
+	}
 
 }
