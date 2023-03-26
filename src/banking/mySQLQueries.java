@@ -121,6 +121,10 @@ public class mySQLQueries {
         {
             query = "delete from customer where id = '"+id+"' ";
         }
+        if(tbName.equals("staff"))
+        {
+            query = "delete from staff where id = '"+id+"' ";
+        }
         if(tbName.equals("deposit"))
         {
             query = "delete from deposit where id = '"+id+"' ";
@@ -392,8 +396,8 @@ public class mySQLQueries {
      }
      public static boolean updateRecord(String tbName,String id , String []data)
      {
-         if(tbName.equals("supplier"))
-             query = "update supplier set Name='"+data[0]+"',Address='"+data[1]+"',PhoneNo='"+data[2]+"',Email='"+data[3]+"'where supplierID='"+id+"'";
+         if(tbName.equals("staff"))
+             query = "update staff set name='"+data[0]+"',gender='"+data[1]+"',phone='"+data[2]+"',email='"+data[3]+"'where id='"+id+"'";
          else  if(tbName.equals("customer"))
         	 //id name gender phone address job nrc email
              query = "update customer set Name='"+data[0]+"',gender='"+data[1]+"',phone='"+data[2]+"',address='"+data[3]+"',job='"+data[4]+"',nrc='"+data[5]+"',Email='"+data[6]+"'where id='"+id+"'";
@@ -458,14 +462,14 @@ public class mySQLQueries {
              }
        }
 
-    public static String []getSupplierData(String id)
+    public static String []getStaffData(String id)
      {
          try
          {
         	 con=connect.getConnection();
              stmt = (Statement) con.createStatement();
              String str[];
-             query = "select * from supplier where supplierID='"+id+"'";
+             query = "select * from staff where id='"+id+"'";
              str = new String[4];
              rs = stmt.executeQuery(query);
              if(rs.next())
