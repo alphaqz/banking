@@ -115,13 +115,13 @@ public class mySQLQueries {
     {
         int returnvalue = 0 ;
         String query = "";
-        if(tbName.equals("supplier"))
-        {
-            query = "delete from supplier where id = '"+id+"' ";
-        }
         if(tbName.equals("customer"))
         {
             query = "delete from customer where id = '"+id+"' ";
+        }
+        if(tbName.equals("transfer"))
+        {
+            query = "delete from transfer where id = '"+id+"' ";
         }
         try{
             stmt = (Statement) con.createStatement();
@@ -271,8 +271,8 @@ public class mySQLQueries {
                  rs=connect.SQLSelect("id", "account");
              else if(tbName.equals("accounttype"))
                  rs = connect.SQLSelect("id","accounttype");
-             else if(tbName.equals("type"))
-                 rs=connect.SQLSelect("typeID", "type");
+             else if(tbName.equals("transfer"))
+                 rs=connect.SQLSelect("id", "transfer");
              else if(tbName.equals("customer"))
                  rs=connect.SQLSelect("id", "customer");
              else if(tbName.equals("staff"))
@@ -315,17 +315,21 @@ public class mySQLQueries {
          }
      }
 
-     public static String []getMerchandise(String merid)
+     public static String []getTransferData(String tid)
      {
          try{
         	 con=connect.getConnection();
-             String[]value= new String[2];
+             String[]value= new String[5];
              stmt=(Statement) con.createStatement();
-             query = "select * from merchandise where merid='"+merid+"'";
+             query = "select * from transfer where id='"+tid+"'";
              rs=stmt.executeQuery(query);
-             rs.next();
-             value[0]=rs.getString(2);
-             value[1]=rs.getString(3);
+             if(rs.next())
+             {
+                 for(int i = 0 ; i<value.length ; i++)
+                 {
+                     value[i]=rs.getString(i+2);
+                 }
+             }
              return value;
          }catch(SQLException e)
          {
@@ -426,7 +430,8 @@ public class mySQLQueries {
              query = "update account set balance= balance -"+ Integer.parseInt(amount) +" where id='"+id+"'";
          else  if(action.equals("transfer"))
              query = "update account set balance="+Integer.parseInt(amount)+" where id='"+id+"'";
-
+         else if(action.equals("transferUpdate"))
+        	 query = "update transfer set amount="+Integer.parseInt(amount)+" where id='"+id+"'";
              
              try{
             	 con=connect.getConnection();
@@ -505,6 +510,25 @@ public class mySQLQueries {
             stmt = (Statement) con.createStatement();
             String amt = null;
             query = "select balance from account where id='"+transferID+"'";
+            rs=stmt.executeQuery(query);
+            if(rs.next())
+            {
+                amt=rs.getString(1);//id
+            }
+            return amt;
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+	}
+	public static String getReceiveAmount(String receiveID) {
+		try{
+			con=connect.getConnection();
+            stmt = (Statement) con.createStatement();
+            String amt = null;
+            query = "select balance from account where id='"+receiveID+"'";
             rs=stmt.executeQuery(query);
             if(rs.next())
             {

@@ -190,7 +190,14 @@ public class Transfer extends JDialog {
 							boolean success1=mySQLQueries.updateAmount("transfer", t_id,String.valueOf(saveAmount));
 							
 							if(save && success && success1) {
-			            		JOptionPane.showMessageDialog(null, "Successfully transfered amount!","Save Record.",JOptionPane.INFORMATION_MESSAGE);					            		
+			            		JOptionPane.showMessageDialog(null, "Successfully transfered amount!","Save Record.",JOptionPane.INFORMATION_MESSAGE);	
+			            		try {
+									AutoID();
+									clear();
+								} catch (ClassNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 			            	}  else
 				            {
 				                JOptionPane.showMessageDialog(null,"Failed to update account balance.","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
@@ -208,11 +215,24 @@ public class Transfer extends JDialog {
 		contentPanel.add(btnSave);
 		
 		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clear();
+			}
+		});
 		btnCancel.setMnemonic('C');
 		btnCancel.setBounds(221, 390, 87, 27);
 		contentPanel.add(btnCancel);
 		
 		btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(JOptionPane.showConfirmDialog(null,"Are you sure you want to exit?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
+				{	
+					dispose();
+				}
+			}
+		});
 		btnClose.setMnemonic('L');
 		btnClose.setBounds(337, 390, 87, 27);
 		contentPanel.add(btnClose);
@@ -231,7 +251,10 @@ public class Transfer extends JDialog {
 		}
 	}
 	private void clear() {
-		
+		cboTransfer.setSelectedIndex(0);
+		cboReceive.setSelectedIndex(0);
+		cboStaff.setSelectedIndex(0);
+		txtAmount.setText("");
 	}
 	private void fillReceivedAccountNo() {
 		String str[]=mySQLQueries.getIDForChoice("account");
