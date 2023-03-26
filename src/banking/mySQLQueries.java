@@ -16,8 +16,10 @@ public class mySQLQueries {
 	static clsDBConnection connect = new clsDBConnection();
 	public mySQLQueries() throws ClassNotFoundException
 	{
+		System.out.println("mysqlqueries initiated");
 	    try{
 	        con=connect.getConnection();
+	        System.out.println("con: " + con);
 	    }
 	    catch(SQLException sqle)
 	    {
@@ -119,11 +121,16 @@ public class mySQLQueries {
         {
             query = "delete from customer where id = '"+id+"' ";
         }
+        if(tbName.equals("deposit"))
+        {
+            query = "delete from deposit where id = '"+id+"' ";
+        }
         if(tbName.equals("transfer"))
         {
             query = "delete from transfer where id = '"+id+"' ";
         }
         try{
+        	 con=connect.getConnection();
             stmt = (Statement) con.createStatement();
             if(!query.equals("")&&stmt.executeUpdate(query)==1)
                 JOptionPane.showMessageDialog(null, "The record is deleted successfully in"+tbName+"table.");

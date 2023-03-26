@@ -49,17 +49,17 @@ public class CustomerList extends JDialog {
 	 */
 	public CustomerList() throws ClassNotFoundException {
 		setTitle("Customer List");
-		setBounds(100, 100, 597, 476);
+		setBounds(100, 100, 719, 476);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Customer List", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 558, 415);
+		panel.setBounds(10, 11, 683, 415);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 50, 530, 310);
+		scrollPane.setBounds(10, 50, 663, 310);
 		panel.add(scrollPane);
 		
 		tblcustomer = new JTable();
@@ -74,7 +74,7 @@ public class CustomerList extends JDialog {
 				}
 			}
 		});
-		btnClose.setBounds(451, 371, 89, 33);
+		btnClose.setBounds(584, 371, 89, 33);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -87,7 +87,7 @@ public class CustomerList extends JDialog {
 		        }
 			}
 		});
-		btnPrint.setBounds(338, 371, 89, 33);
+		btnPrint.setBounds(471, 371, 89, 33);
 		panel.add(btnPrint);
 		
 		try{
@@ -110,8 +110,11 @@ public class CustomerList extends JDialog {
    {
        dtm.addColumn("Customer ID");
        dtm.addColumn("Customer Name");
+       dtm.addColumn("Gender");
+       dtm.addColumn("Phone");
        dtm.addColumn("Address");
-       dtm.addColumn("Phone No");
+       dtm.addColumn("Job");
+       dtm.addColumn("NRC");
        dtm.addColumn("Email");
        tblcustomer.setModel(dtm);
        setColumnWidth(0,40);
@@ -132,7 +135,7 @@ public class CustomerList extends JDialog {
 
     public void fillCustomer()
     {
-        String strdataitem[]=new String[5];
+        String strdataitem[]=new String[8];
         try{
             Statement ste = (Statement) con.createStatement();
             String str = "select * from Customer";
@@ -144,6 +147,9 @@ public class CustomerList extends JDialog {
                 strdataitem[2]=rs.getString(3);
                 strdataitem[3]=rs.getString(4);
                 strdataitem[4]=rs.getString(5);
+                strdataitem[5]=rs.getString(6);
+                strdataitem[6]=rs.getString(7);
+                strdataitem[7]=rs.getString(8);
                 dtm.addRow(strdataitem);
             }
             tblcustomer.setModel(dtm);
