@@ -28,6 +28,8 @@ public class StaffEntry extends JDialog {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private String gender = "male";
 	private JTextField txtEmail;
+	private JRadioButton rdoMale;
+	private JRadioButton rdoFemale;
 
 	/**
 	 * Launch the application.
@@ -87,25 +89,25 @@ public class StaffEntry extends JDialog {
 		lblGender.setBounds(10, 111, 46, 14);
 		panel.add(lblGender);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Male");
-		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+		rdoMale = new JRadioButton("Male");
+		rdoMale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gender = "male";
 			}
 		});
-		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(109, 103, 81, 23);
-		panel.add(rdbtnNewRadioButton);
+		buttonGroup.add(rdoMale);
+		rdoMale.setBounds(109, 103, 81, 23);
+		panel.add(rdoMale);
 		
-		JRadioButton rdbtnFemale = new JRadioButton("Female");
-		rdbtnFemale.addActionListener(new ActionListener() {
+		rdoFemale = new JRadioButton("Female");
+		rdoFemale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gender = "female";
 			}
 		});
-		buttonGroup.add(rdbtnFemale);
-		rdbtnFemale.setBounds(192, 103, 109, 23);
-		panel.add(rdbtnFemale);
+		buttonGroup.add(rdoFemale);
+		rdoFemale.setBounds(192, 103, 109, 23);
+		panel.add(rdoFemale);
 		
 		JLabel lblEmail = new JLabel("Email :");
 		lblEmail.setBounds(12, 211, 79, 14);
@@ -228,13 +230,16 @@ public class StaffEntry extends JDialog {
 		btnclose.setBounds(228, 279, 85, 23);
 		getContentPane().add(btnclose);
 		AutoID();
+		clear();
 	}
 		public void clear()
 	    {
 	        txtstaname.setText("");
-	        
 	        txtphone.setText("");
-	       
+	        txtEmail.setText("");
+	        rdoMale.setSelected(false);
+	        rdoFemale.setSelected(false);
+	        
 	        txtstaname.requestFocus();
 	    }
 
