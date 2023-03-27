@@ -256,7 +256,13 @@ public class DepositCreate extends JDialog {
     }
 	public void clear()
     {      
+		lblforaccid.setText("");
+		lblforacctype.setText("");
+		lblforbalance.setText("");
+		lblforcusname.setText("");
         txtAmount.setText("");
+        cboAccount.setSelectedIndex(0);
+        cboStaff.setSelectedIndex(0);
     }
 	public void AutoID() throws ClassNotFoundException
 	{
