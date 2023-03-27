@@ -76,6 +76,10 @@ public class AccountTypeCreate extends JDialog {
 		txtIntrest.setColumns(10);
 		txtIntrest.setBounds(225, 149, 86, 20);
 		contentPanel.add(txtIntrest);
+		
+		JLabel lblKsPer = new JLabel("kyat per 1 year");
+		lblKsPer.setBounds(321, 152, 86, 14);
+		contentPanel.add(lblKsPer);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

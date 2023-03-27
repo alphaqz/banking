@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
 
 public class DepositCreate extends JDialog {
 
@@ -31,6 +32,10 @@ public class DepositCreate extends JDialog {
 	private JLabel lblForID;
 	JComboBox cboAccount;
 	JComboBox cboStaff; 
+	JLabel lblforaccid;
+	JLabel lblforbalance;
+	JLabel lblforcusname;
+	JLabel lblforacctype;
 	List<String> staffIdList = new ArrayList<String>();  
 	List<String> AccountIdList = new ArrayList<String>(); 
 	/**
@@ -52,15 +57,16 @@ public class DepositCreate extends JDialog {
 	 */
 	public DepositCreate() throws ClassNotFoundException {
 		setTitle("Deposit Entry");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 456);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblAccID = new JLabel("ID:");
-		lblAccID.setBounds(103, 57, 46, 14);
-		contentPanel.add(lblAccID);
+		JLabel lblDepositID = new JLabel("ID:");
+		lblDepositID.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDepositID.setBounds(126, 57, 46, 14);
+		contentPanel.add(lblDepositID);
 		
 		lblForID = new JLabel("");
 		lblForID.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -68,6 +74,7 @@ public class DepositCreate extends JDialog {
 		contentPanel.add(lblForID);
 		
 		JLabel lblAmount = new JLabel("Amount:");
+		lblAmount.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblAmount.setBounds(103, 104, 69, 14);
 		contentPanel.add(lblAmount);
 		
@@ -79,23 +86,78 @@ public class DepositCreate extends JDialog {
 		cboAccount = new JComboBox();
 		cboAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(cboAccount.getSelectedIndex()> 0) {	
+					String[] result = mySQLQueries.getAccountData((String)cboAccount.getSelectedItem());
+					lblforaccid.setText(result[0]);
+					lblforbalance.setText(result[1]);
+					lblforacctype.setText(result[2]);
+					lblforcusname.setText(result[3]);
+				}
 			}
 		});
 		cboAccount.setBounds(222, 143, 186, 22);
 		contentPanel.add(cboAccount);
 		
 		JLabel lblAccount = new JLabel("Account:");
-		lblAccount.setBounds(80, 147, 69, 14);
+		lblAccount.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAccount.setBounds(103, 147, 69, 14);
 		contentPanel.add(lblAccount);
 		
 		JLabel lblStaff = new JLabel("Staff:");
-		lblStaff.setBounds(80, 183, 69, 14);
+		lblStaff.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblStaff.setBounds(103, 180, 69, 14);
 		contentPanel.add(lblStaff);
 		
 		cboStaff = new JComboBox();
 		cboStaff.setBounds(222, 176, 186, 22);
 		contentPanel.add(cboStaff);
+		
+		JPanel contentPanel_1 = new JPanel();
+		contentPanel_1.setLayout(null);
+		contentPanel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Information", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		contentPanel_1.setBounds(0, 240, 434, 133);
+		contentPanel.add(contentPanel_1);
+		
+		JLabel lblAccID = new JLabel("ID:");
+		lblAccID.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAccID.setBounds(105, 30, 74, 14);
+		contentPanel_1.add(lblAccID);
+		
+		lblforaccid = new JLabel("");
+		lblforaccid.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblforaccid.setBounds(224, 30, 86, 14);
+		contentPanel_1.add(lblforaccid);
+		
+		JLabel lblbalance = new JLabel("Balance:");
+		lblbalance.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblbalance.setBounds(105, 56, 74, 14);
+		contentPanel_1.add(lblbalance);
+		
+	
+		lblforbalance = new JLabel("");
+		lblforbalance.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblforbalance.setBounds(224, 56, 86, 14);
+		contentPanel_1.add(lblforbalance);
+		
+		JLabel lblCust = new JLabel("Account type:");
+		lblCust.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCust.setBounds(93, 81, 86, 14);
+		contentPanel_1.add(lblCust);
+		
+		lblforacctype = new JLabel("");
+		lblforacctype.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblforacctype.setBounds(224, 81, 164, 14);
+		contentPanel_1.add(lblforacctype);
+		
+		JLabel lblCustomerName = new JLabel("Customer Name:");
+		lblCustomerName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCustomerName.setBounds(49, 106, 130, 14);
+		contentPanel_1.add(lblCustomerName);
+	
+		lblforcusname = new JLabel("");
+		lblforcusname.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblforcusname.setBounds(224, 106, 172, 14);
+		contentPanel_1.add(lblforcusname);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

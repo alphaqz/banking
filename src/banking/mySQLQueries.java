@@ -486,6 +486,37 @@ public class mySQLQueries {
              return null;
          }
      }
+    
+    public static String []getAccountData(String id)
+    {
+        try
+        {
+       	 con=connect.getConnection();
+            stmt = (Statement) con.createStatement();
+            String str[];
+            query = "select a.id, a.balance, t.title as 'account type title', c.name as 'customer name'\r\n"
+            		+ "from account a \r\n"
+            		+ "join accounttype t\r\n"
+            		+ "on a.accTypeID = t.id\r\n"
+            		+ "join customer c\r\n"
+            		+ "on a.cusID = c.id\r\n"
+            		+ "where a.id = '"+id+"'";
+            str = new String[4];
+            rs = stmt.executeQuery(query);
+            if(rs.next())
+            {
+                for(int i = 0 ; i<str.length ; i++)
+                {
+                    str[i]=rs.getString(i+1);
+                }
+            }
+            return str;
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+            return null;
+        }
+    }
 
     public static void main(String[] args) 
      {
