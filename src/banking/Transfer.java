@@ -107,8 +107,7 @@ public class Transfer extends JDialog {
 		
 		cboReceive = new JComboBox();
 		cboReceive.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
+			public void actionPerformed(ActionEvent e) {	
 			}
 		});
 		cboReceive.setBounds(206, 183, 157, 27);
@@ -155,7 +154,7 @@ public class Transfer extends JDialog {
 		             
 		            str[4] = (String) cboTransfer.getSelectedItem(); 
 		            
-		            filterReceiveAccount();
+//		            filterReceiveAccount();
 		            str[3] = (String) cboReceive.getSelectedItem();
 		            str[5] = staffIdList.get(cboStaff.getSelectedIndex()-1); 
 		            	

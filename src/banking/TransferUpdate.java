@@ -185,8 +185,9 @@ public class TransferUpdate extends JDialog {
                     if(JOptionPane.showConfirmDialog(null, "Are you Sure Delete?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
                     {
                     	mySQLQueries.deleteRecord("transfer", id);
+//                    	cboTID.removeAll();
+                    	fillTransferID();
                     	clear();
-//                    	fillTransferID();
                     }
                     else
                     {
@@ -242,13 +243,13 @@ public class TransferUpdate extends JDialog {
 		lbldate.setText(d.getMySQLDateFormat());
 	}
 	private void fillTransferID() {
+//		cboTID.removeAllItems();
 		String str[]=mySQLQueries.getIDForChoice("transfer");
 		cboTID.addItem("- Select -");
 		for(int i=0;i<str.length;i++) {
-			cboTID.setSelectedIndex(0);
 			cboTID.addItem(str[i].toString());
 		}
-		
+		cboTID.setSelectedIndex(0);
 	}
 	public void ShowTransferDetail()
     {

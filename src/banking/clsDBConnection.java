@@ -11,6 +11,7 @@ import com.mysql.jdbc.Statement;
 public class clsDBConnection {
 	private final String CONNECTION =  
 			"jdbc:mysql://localhost:3306/banking?characterEncoding=latin1&useConfigs=maxPerformance";
+	private final String c="jdbc:mysql://localhost/test?zeroDateTimeBehavior=convertToNull";
 	private final String PASSWORD = "root";
 	private static Connection con = null;
 
