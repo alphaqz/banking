@@ -6,10 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JToggleButton;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import java.awt.Font;
 
 public class Main extends JFrame {
-
-	private JPanel contentPane;
+	private JButton btnStaffEntry;
 
 	/**
 	 * Launch the application.
@@ -31,13 +37,47 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		setTitle("Bank Management System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		setBounds(100, 100, 969, 744);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 128));
+		panel.setBounds(0, 0, 294, 690);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JToggleButton menu = new JToggleButton("");
+		menu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(menu.isSelected()) {
+					panel.setSize(300,690);
+				}
+				else {
+					panel.setSize(71,690);
+				}
+			}
+		});
+		menu.setIcon(new ImageIcon("D:\\MMDCR_Project\\project image\\menu-icon.png"));
+		menu.setBounds(10, 15, 42, 34);
+		panel.add(menu);
+		
+		btnStaffEntry = new JButton("Staff Entry");
+		btnStaffEntry.setFont(new Font("Pyidaungsu", Font.PLAIN, 12));
+		btnStaffEntry.setBounds(122, 110, 87, 27);
+		panel.add(btnStaffEntry);
+		
+		JButton btnStaffEntry_1 = new JButton("Customer Entry");
+		btnStaffEntry_1.setBounds(122, 164, 143, 27);
+		panel.add(btnStaffEntry_1);
+		
+		JButton btnStaffEntry_2 = new JButton("Staff Entry");
+		btnStaffEntry_2.setBounds(122, 224, 87, 27);
+		panel.add(btnStaffEntry_2);
+		
+		JButton btnStaffEntry_3 = new JButton("Staff Entry");
+		btnStaffEntry_3.setBounds(122, 283, 87, 27);
+		panel.add(btnStaffEntry_3);
 	}
-
 }
