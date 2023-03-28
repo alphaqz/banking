@@ -544,7 +544,7 @@ public class mySQLQueries {
          }
      }
     
-    public static String []getAccountData(String id)
+    public static String []getAccountDataFordeposit(String id)
     {
         try
         {
