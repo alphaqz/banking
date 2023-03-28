@@ -36,6 +36,7 @@ public class DepositCreate extends JDialog {
 	JLabel lblforbalance;
 	JLabel lblforcusname;
 	JLabel lblforacctype;
+	JLabel lblforbalanceNew;
 	List<String> staffIdList = new ArrayList<String>();  
 	List<String> AccountIdList = new ArrayList<String>(); 
 	/**
@@ -87,11 +88,13 @@ public class DepositCreate extends JDialog {
 		cboAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(cboAccount.getSelectedIndex()> 0) {	
-					String[] result = mySQLQueries.getAccountData((String)cboAccount.getSelectedItem());
+					String[] result = mySQLQueries.getAccountDataFordeposit((String)cboAccount.getSelectedItem());
 					lblforaccid.setText(result[0]);
 					lblforbalance.setText(result[1]);
 					lblforacctype.setText(result[2]);
 					lblforcusname.setText(result[3]);
+					lblforbalanceNew.setText(""+CalculateIntrest.something(result[0]));
+					
 				}
 			}
 		});
@@ -158,6 +161,11 @@ public class DepositCreate extends JDialog {
 		lblforcusname.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lblforcusname.setBounds(224, 106, 172, 14);
 		contentPanel_1.add(lblforcusname);
+		
+		lblforbalanceNew = new JLabel("");
+		lblforbalanceNew.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblforbalanceNew.setBounds(338, 56, 86, 14);
+		contentPanel_1.add(lblforbalanceNew);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

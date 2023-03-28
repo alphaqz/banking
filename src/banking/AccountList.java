@@ -113,12 +113,14 @@ public class AccountList extends JDialog {
        dtm.addColumn("Customer ID");
        dtm.addColumn("Account Type ID");
        dtm.addColumn("Staff ID");
+       dtm.addColumn("Balance new");
        tblaccount.setModel(dtm);
        setColumnWidth(0,40);
        setColumnWidth(1,50);
        setColumnWidth(2,100);
        setColumnWidth(3,40);
        setColumnWidth(4,60);
+       setColumnWidth(1,50);
 
    }
 
@@ -144,6 +146,7 @@ public class AccountList extends JDialog {
                 strdataitem[2]=rs.getString(3);
                 strdataitem[3]=rs.getString(4);
                 strdataitem[4]=rs.getString(5);
+                //strdataitem[5] = ""+CalculateIntrest.something(rs.getString(1));
                 dtm.addRow(strdataitem);
             }
             tblaccount.setModel(dtm);

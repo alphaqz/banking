@@ -18,13 +18,19 @@ public class CalculateIntrest {
 	static String query , query1;
 	static ResultSet rs;
 	static clsDBConnection connect = new clsDBConnection();
-	
+	//private static int total = 0;  
+	//private static String id = "";
 	public static void main(String[] args) {
+	 int output =	something("ac-0000003");
+	 System.out.println(output);
+	}
+	public static int something(String accid) {
+		int total = 0;  
 		System.out.println("calculating intrest");		
 		String str[] ;
 		  str = new String[3];
-		int total = 0;  
 		Date currDate = null;
+		int currMonth = 0;
 		int todayTotal = 0;
 		double intrestTotal = 0.0;
 		
@@ -35,43 +41,57 @@ public class CalculateIntrest {
              
              String query  = "(select w.id,w.amount,w.date "
      				+ " from withdraw w "
-     				+ "where w.accountno = 'AC-0000003')	"
+     				+ "where w.accountno = '"+accid +"')	"
      				//;
      				+"UNION"
      				+ "(select d.id, d.amount, d.date  from deposit d "
-     				+ "where d.accountno = 'AC-0000003' ) order by date;";
+     				+ "where d.accountno = '"+accid +"' ) order by date;";
              
              rs = stmt.executeQuery(query);
              
              while(rs.next())
              {
             	 //System.out.println("new loop");
-            	 
+            	// System.out.println("wtf");
             	 String id = rs.getString(1);
             	 Date tempDate = rs.getDate(3);
             	 LocalDate localDate = tempDate.toLocalDate();
-            	 int month = localDate.getMonthValue();
-
+            	 int tempMonth = localDate.getMonthValue();
+            	 int day = localDate.getDayOfMonth();
+            	 if(currDate !=null && !currDate.equals(tempDate)) {
+            		 //System.out.println("new date");
+            		 intrestTotal+=getIntrest(todayTotal);
+            		 
+            		// System.out.println(intrestTotal + " today intrest: " +getIntrest(todayTotal));
+            		// System.out.println("total amount is : "+total);
+            	 }
             	 int currAmount = Integer.parseInt(rs.getString(2));
             	 
-            	 if(currDate !=null && !currDate.equals(tempDate)) {
-            		 System.out.println(currDate + " intrest is " + getIntrest(todayTotal));
-            		 intrestTotal+=getIntrest(todayTotal);
-            		 System.out.println("new date");   		 
+            	 if(currDate == null) {
+            		// System.out.println("start date");   		 
+            	 }
+            	
+            	 if(currMonth != 0 && currMonth != tempMonth) {
+            		 System.out.println("new month");
+            		 total += intrestTotal;
+            		 intrestTotal = 0;
             	 }
             	 if(id.startsWith("D")) {
             		 //deposit
-            		 todayTotal += Integer.parseInt(rs.getString(2));
+            		 todayTotal += currAmount;
             	 }else {
             		 //withdraw
-            		 todayTotal -= Integer.parseInt(rs.getString(2));
+            		 todayTotal -= currAmount;
             	 }
-            	 currDate = tempDate; 
             	 
             	
-            	 System.out.println(" month: "+month);
+            	 //System.out.print(""+tempMonth + "/" + day + " ");
+            	// System.out.println("amount "+ currAmount + " intrest: " + getIntrest(todayTotal));
+            	
+            	
             	 
-            	 
+            	 currDate = tempDate; 
+            	 currMonth = tempMonth;
             	 if(id.startsWith("D")) {
             		 //deposit
             		 total += Integer.parseInt(rs.getString(2));
@@ -94,9 +114,15 @@ public class CalculateIntrest {
          {
              JOptionPane.showMessageDialog(null,e.getMessage());
          }
+		 return total;
 	}
+//	public static int getTotal(String idinput) {
+//		id = idinput;
+//		something();
+//		return total;
+//	}
 	public static double getIntrest(int amount) {
-		return Math.floor( amount * 0.00033);
+		return Math.floor( amount * 0.0001);
 	}
 
 }
