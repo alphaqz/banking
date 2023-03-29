@@ -544,11 +544,8 @@ public class mySQLQueries {
          }
      }
     
-<<<<<<< Updated upstream
     public static String []getAccountDataFordeposit(String id)
-=======
-    public static String []getAccountTypeData1(String id)
->>>>>>> Stashed changes
+
     {
         try
         {
