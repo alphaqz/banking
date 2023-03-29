@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -21,6 +22,8 @@ import javax.swing.table.TableColumn;
 import com.mysql.jdbc.Statement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
 
 public class TransferList extends JDialog {
 	private JTable tbltransfer;
@@ -29,6 +32,11 @@ public class TransferList extends JDialog {
 	DefaultTableModel dtm = new DefaultTableModel();
 	Statement ste = null ;
 	Connection con = null ;
+	private JComboBox cboyear;
+	private JComboBox cbomonth;
+	private JRadioButton rdomonth;
+	private JRadioButton rdoyear;
+	private JRadioButton rdoAll;
 
 
 	/**
@@ -59,7 +67,7 @@ public class TransferList extends JDialog {
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 50, 586, 310);
+		scrollPane.setBounds(10, 139, 586, 217);
 		panel.add(scrollPane);
 		
 		tbltransfer = new JTable();
@@ -90,6 +98,95 @@ public class TransferList extends JDialog {
 		btnPrint.setBounds(338, 371, 89, 33);
 		panel.add(btnPrint);
 		
+		rdomonth = new JRadioButton("Monthly");
+		rdomonth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        cbomonth.setVisible(true);
+		        cboyear.setVisible(false);
+			}
+		});
+		rdomonth.setBounds(10, 42, 109, 27);
+		panel.add(rdomonth);
+		
+		rdoyear = new JRadioButton("Yearly");
+		rdoyear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        cbomonth.setVisible(false);
+		        cboyear.setVisible(true);
+			}
+		});
+		rdoyear.setBounds(121, 42, 109, 27);
+		panel.add(rdoyear);
+		
+		rdoAll = new JRadioButton("Monthly & Yearly");
+		rdoAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        cbomonth.setVisible(true);
+		        cboyear.setVisible(true);
+			}
+		});
+		rdoAll.setBounds(232, 42, 109, 27);
+		panel.add(rdoAll);
+		
+		cbomonth = new JComboBox();
+		cbomonth.setModel(new DefaultComboBoxModel(new String[] { "-Selected-", "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+		cbomonth.setBounds(10, 96, 82, 27);
+		panel.add(cbomonth);
+		
+		cboyear = new JComboBox();
+		cboyear.setBounds(121, 96, 82, 27);
+		panel.add(cboyear);
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rdomonth.isSelected()) {
+		            if(cbomonth.getSelectedIndex()==0) {
+		                JOptionPane.showMessageDialog(null,"Please choose Month");
+		                cbomonth.requestFocus();
+		            } else {
+		                String str = "select * from transfer where Month(Date)="+cbomonth.getSelectedIndex();
+		                System.out.println(str);
+		                fillTransferData();
+		            }
+		        } else if(rdoyear.isSelected()) {
+
+		            if(cboyear.getSelectedIndex()==0) {
+		                JOptionPane.showMessageDialog(null,"Please choose Year");
+		                cboyear.requestFocus();
+		            } else {
+		                String str = "select * from transfer where Year(Date)="+cboyear.getSelectedItem().toString();
+		                fillTransferDataYear();
+		            }
+		        } else if (rdoAll.isSelected()) {
+
+		            if(cbomonth.getSelectedIndex()==0) {
+		                JOptionPane.showMessageDialog(null,"Please choose Month");
+		                cbomonth.requestFocus();
+		            } else if(cboyear.getSelectedIndex()==0) {
+		                JOptionPane.showMessageDialog(null,"Please choose Year");
+		                cboyear.requestFocus();
+		            } else {
+//		                String str = "select * from purchase,purchasedetail where purchase.purchaseid=purchasedetail.purchaseid and Month(purchase.purchasedate)="+cbomonth.getSelectedIndex()+" and Year(purchase.purchasedate)="+cboyear.getSelectedItem().toString()+"";
+		                fillTransferDataYear();
+		            }
+		        }
+			}
+		});
+		btnSearch.setBounds(243, 96, 87, 27);
+		panel.add(btnSearch);
+		
+		JButton btnAll = new JButton("Show All");
+		btnAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fillTransferData();
+			    cbomonth.setSelectedIndex(0);
+			    cboyear.setSelectedIndex(0);
+			}
+		});
+		btnAll.setBounds(361, 97, 87, 27);
+		panel.add(btnAll);
+		
 		try{
 			clsDBConnection c=new clsDBConnection();
             con=c.getConnection();
@@ -103,7 +200,9 @@ public class TransferList extends JDialog {
         }
         createtable();
         fillTransferData();
-
+        fillYear();
+        cbomonth.setVisible(false);
+        cboyear.setVisible(false);
 	}
 
     public void createtable()
@@ -156,7 +255,38 @@ public class TransferList extends JDialog {
         {
             System.out.println(sqle);
         }
+    }   
+        public void fillTransferDataYear()
+        {
+            String strdataitem[]=new String[7];
+            try{
+                Statement ste = (Statement) con.createStatement();
+                String st="select date from transfer";
+                String str = "select * from transfer Year(Date)="+cboyear.getSelectedItem().toString();
+                ResultSet rs = ste.executeQuery(str);
+                while(rs.next())
+                {
+                    strdataitem[0]=rs.getString(1);
+                    strdataitem[1]=rs.getString(2);
+                    strdataitem[2]=rs.getString(3);
+                    strdataitem[3]=rs.getString(4);
+                    strdataitem[4]=rs.getString(5);
+                    strdataitem[5]=rs.getString(6);
+                    
+                    dtm.addRow(strdataitem);
+                }
+                tbltransfer.setModel(dtm);
+            }
+            catch(SQLException sqle)
+            {
+                System.out.println(sqle);
+            }
     }
 
-
+    public void fillYear()
+    {
+        cboyear.addItem("-Selected-");
+        for(int i=2010 ; i<=2050 ; i++ )
+            cboyear.addItem(i);
+    }
 }
