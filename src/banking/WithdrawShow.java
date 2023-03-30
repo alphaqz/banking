@@ -156,7 +156,7 @@ public class WithdrawShow extends JDialog {
 				{
 					JLabel lblNewLabel_2 = new JLabel("Amount:");
 					lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblNewLabel_2.setBounds(439, 33, 46, 14);
+					lblNewLabel_2.setBounds(398, 33, 85, 14);
 					panel_1.add(lblNewLabel_2);
 				}
 				{
@@ -173,7 +173,7 @@ public class WithdrawShow extends JDialog {
 			                        String id = lblforWithdrawID.getText().toString();
 			                        if(JOptionPane.showConfirmDialog(null, "Are you Sure Delete?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
 			                        {
-			                        	mySQLQueries.deleteRecord("deposit", id);
+			                        	mySQLQueries.deleteRecord("withdraw", id);
 			                        }
 			                        else
 			                        {
@@ -304,7 +304,7 @@ public class WithdrawShow extends JDialog {
 		fillAccount();
 		fillStaff();
 		createtable();
-		fillDeposit();
+		fillWithdraw();
 	}
 	
 	
@@ -351,7 +351,7 @@ public class WithdrawShow extends JDialog {
         tblwithdraw.setModel(dtm);
         
     }
-    public void fillDeposit()
+    public void fillWithdraw()
     {
         String strdataitem[]=new String[5];
         try{

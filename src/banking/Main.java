@@ -44,7 +44,7 @@ public class Main extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 128));
-		panel.setBounds(0, 0, 294, 690);
+		panel.setBounds(0, 0, 62, 690);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		

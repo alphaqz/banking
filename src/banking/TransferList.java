@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -38,6 +39,7 @@ public class TransferList extends JDialog {
 	private JRadioButton rdoyear;
 	private JRadioButton rdoAll;
 
+//	LocalDate localDate = currDate.toLocalDate();
 
 	/**
 	 * Launch the application.
@@ -145,7 +147,7 @@ public class TransferList extends JDialog {
 		                JOptionPane.showMessageDialog(null,"Please choose Month");
 		                cbomonth.requestFocus();
 		            } else {
-		                String str = "select * from transfer where Month(Date)="+cbomonth.getSelectedIndex();
+		                String str = "select * from transfer where Month(transfer.date)="+cbomonth.getSelectedIndex();
 		                System.out.println(str);
 		                fillTransferData();
 		            }
@@ -155,7 +157,8 @@ public class TransferList extends JDialog {
 		                JOptionPane.showMessageDialog(null,"Please choose Year");
 		                cboyear.requestFocus();
 		            } else {
-		                String str = "select * from transfer where Year(Date)="+cboyear.getSelectedItem().toString();
+		                String str1 = "select * from transfer where Year(transfer.date)="+cboyear.getSelectedItem().toString();
+		                System.out.println(str1);
 		                fillTransferDataYear();
 		            }
 		        } else if (rdoAll.isSelected()) {

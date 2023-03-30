@@ -63,7 +63,7 @@ public class CalculateIntrest {
             	 if(currDate !=null && prevDate != null) {            		 
 	            	 long diffInMillies = Math.abs(currDate.getTime() - prevDate.getTime());
 	            	 long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-	            	 System.out.println(diff);
+	            	 System.out.println("date diff = " + diff);
 	            	 
 	            	 intrestTotal+= (diff * getIntrest(prevAmount));
             	 }

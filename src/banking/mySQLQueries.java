@@ -178,6 +178,10 @@ public class mySQLQueries {
         {
             query = "delete from deposit where id = '"+id+"' ";
         }
+        if(tbName.equals("withdraw"))
+        {
+            query = "delete from withdraw where id = '"+id+"' ";
+        }
         if(tbName.equals("transfer"))
         {
             query = "delete from transfer where id = '"+id+"' ";

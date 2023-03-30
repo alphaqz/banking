@@ -156,7 +156,7 @@ public class DepositShow extends JDialog {
 				{
 					JLabel lblNewLabel_2 = new JLabel("Amount:");
 					lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblNewLabel_2.setBounds(439, 33, 46, 14);
+					lblNewLabel_2.setBounds(419, 33, 64, 14);
 					panel_1.add(lblNewLabel_2);
 				}
 				{
