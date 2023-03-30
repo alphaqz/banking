@@ -21,6 +21,7 @@ import javax.swing.table.TableColumn;
 import com.mysql.jdbc.Statement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class AccountList extends JDialog {
 	private JTable tblaccount;
@@ -29,6 +30,9 @@ public class AccountList extends JDialog {
 	DefaultTableModel dtm = new DefaultTableModel();
 	Statement ste = null ;
 	Connection con = null ;
+	private JComboBox cboAccNo;
+	private JButton btnSearch;
+	private JButton btnShowAll;
 
 
 	/**
@@ -59,7 +63,7 @@ public class AccountList extends JDialog {
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 50, 663, 310);
+		scrollPane.setBounds(10, 125, 663, 235);
 		panel.add(scrollPane);
 		
 		tblaccount = new JTable();
@@ -90,6 +94,36 @@ public class AccountList extends JDialog {
 		btnPrint.setBounds(471, 371, 89, 33);
 		panel.add(btnPrint);
 		
+		cboAccNo = new JComboBox();
+		cboAccNo.setBounds(10, 42, 124, 27);
+		panel.add(cboAccNo);
+		
+		btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(cboAccNo.getSelectedIndex()==0) {
+	                JOptionPane.showMessageDialog(null,"Please choose Month");
+	                cboAccNo.requestFocus();
+	            } else {
+	            	tblaccount.removeAll();
+	            	String str = "select id,balance,cusID,accTypeID,staffID from account where id='"+cboAccNo.getSelectedItem().toString()+"'";
+//	            	fillAccountForSelected();
+	            	fillAccount(str);
+	            }
+			}
+		});
+		btnSearch.setBounds(171, 42, 87, 27);
+		panel.add(btnSearch);
+		
+		btnShowAll = new JButton("Show All");
+		btnShowAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fillAccount("select id,balance,cusID,accTypeID,staffID from account");
+			}
+		});
+		btnShowAll.setBounds(297, 42, 87, 27);
+		panel.add(btnShowAll);
+		
 		try{
 			clsDBConnection c=new clsDBConnection();
             con=c.getConnection();
@@ -102,8 +136,8 @@ public class AccountList extends JDialog {
             e.printStackTrace();
         }
         createtable();
-        fillAccount();
-
+        fillAccount("select id,balance,cusID,accTypeID,staffID from account");
+        fillAccountData();
 	}
 
     public void createtable()
@@ -113,14 +147,14 @@ public class AccountList extends JDialog {
        dtm.addColumn("Customer ID");
        dtm.addColumn("Account Type ID");
        dtm.addColumn("Staff ID");
-       dtm.addColumn("Balance new");
+//       dtm.addColumn("Balance new");
        tblaccount.setModel(dtm);
        setColumnWidth(0,40);
        setColumnWidth(1,50);
        setColumnWidth(2,100);
        setColumnWidth(3,40);
        setColumnWidth(4,60);
-       setColumnWidth(1,50);
+//       setColumnWidth(1,50);
 
    }
 
@@ -132,12 +166,36 @@ public class AccountList extends JDialog {
     }
 
 
-    public void fillAccount()
+    public void fillAccount(String sql)
     {
         String strdataitem[]=new String[8];
         try{
             Statement ste = (Statement) con.createStatement();
-            String str = "select id,balance,cusID,accTypeID,staffID from account";
+            
+            ResultSet rs = ste.executeQuery(sql);
+            while(rs.next())
+            {
+                strdataitem[0]=rs.getString(1);
+                strdataitem[1]=rs.getString(2);
+                strdataitem[2]=rs.getString(3);
+                strdataitem[3]=rs.getString(4);
+                strdataitem[4]=rs.getString(5);
+                //strdataitem[5] = ""+CalculateIntrest.something(rs.getString(1));
+                dtm.addRow(strdataitem);
+            }
+            tblaccount.setModel(dtm);
+        }
+        catch(SQLException sqle)
+        {
+            System.out.println(sqle);
+        }
+    }
+    public void fillAccountForSelected()
+    {
+        String strdataitem[]=new String[8];
+        try{
+            Statement ste = (Statement) con.createStatement();
+            String str = "select id,balance,cusID,accTypeID,staffID from account where id='"+cboAccNo.getSelectedItem().toString()+"'";
             ResultSet rs = ste.executeQuery(str);
             while(rs.next())
             {
@@ -156,6 +214,11 @@ public class AccountList extends JDialog {
             System.out.println(sqle);
         }
     }
-
-
+    public void fillAccountData()
+    {
+        String str[]=mySQLQueries.getIDForChoice("account");
+        cboAccNo.addItem("-Select-");
+        for(int i=0;i<str.length;i++)
+        	cboAccNo.addItem(str[i].toString());				
+    }
 }

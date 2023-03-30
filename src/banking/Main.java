@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import java.awt.Font;
+import javax.swing.JDesktopPane;
 
 public class Main extends JFrame {
 	private JButton btnStaffEntry;
@@ -43,8 +44,8 @@ public class Main extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 0, 128));
 		panel.setBounds(0, 0, 62, 690);
+		panel.setBackground(new Color(0, 0, 128));
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -79,5 +80,9 @@ public class Main extends JFrame {
 		JButton btnStaffEntry_3 = new JButton("Staff Entry");
 		btnStaffEntry_3.setBounds(122, 283, 87, 27);
 		panel.add(btnStaffEntry_3);
+		
+		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBounds(905, 373, -660, -344);
+		getContentPane().add(desktopPane);
 	}
 }

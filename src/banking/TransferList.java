@@ -147,31 +147,31 @@ public class TransferList extends JDialog {
 		                JOptionPane.showMessageDialog(null,"Please choose Month");
 		                cbomonth.requestFocus();
 		            } else {
-		                String str = "select * from transfer where Month(transfer.date)="+cbomonth.getSelectedIndex();
-		                System.out.println(str);
-		                fillTransferData();
+		            	String str = "select * from transfer where Month(date)="+cbomonth.getSelectedIndex();
+		            	fillTransferData(str);
 		            }
 		        } else if(rdoyear.isSelected()) {
-
+		        	
 		            if(cboyear.getSelectedIndex()==0) {
 		                JOptionPane.showMessageDialog(null,"Please choose Year");
 		                cboyear.requestFocus();
 		            } else {
-		                String str1 = "select * from transfer where Year(transfer.date)="+cboyear.getSelectedItem().toString();
-		                System.out.println(str1);
-		                fillTransferDataYear();
+//		            	dtm.removeRow(0);
+//		            	tbltransfer.removeAll();
+		            	String str = "select * from transfer where Year(date)="+cboyear.getSelectedItem().toString();
+		            	fillTransferData(str);
 		            }
 		        } else if (rdoAll.isSelected()) {
-
+		        	
 		            if(cbomonth.getSelectedIndex()==0) {
 		                JOptionPane.showMessageDialog(null,"Please choose Month");
 		                cbomonth.requestFocus();
 		            } else if(cboyear.getSelectedIndex()==0) {
-		                JOptionPane.showMessageDialog(null,"Please choose Year");
-		                cboyear.requestFocus();
+		            	JOptionPane.showMessageDialog(null,"Please choose Year");
+		                cbomonth.requestFocus();
 		            } else {
-//		                String str = "select * from purchase,purchasedetail where purchase.purchaseid=purchasedetail.purchaseid and Month(purchase.purchasedate)="+cbomonth.getSelectedIndex()+" and Year(purchase.purchasedate)="+cboyear.getSelectedItem().toString()+"";
-		                fillTransferDataYear();
+		            	String str = "select * from transfer where Month(date)="+cbomonth.getSelectedIndex()+" and Year(date)="+cboyear.getSelectedItem().toString()+"";
+		                fillTransferData(str);
 		            }
 		        }
 			}
@@ -182,7 +182,7 @@ public class TransferList extends JDialog {
 		JButton btnAll = new JButton("Show All");
 		btnAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fillTransferData();
+				fillTransferData("select * from transfer");
 			    cbomonth.setSelectedIndex(0);
 			    cboyear.setSelectedIndex(0);
 			}
@@ -202,7 +202,7 @@ public class TransferList extends JDialog {
             e.printStackTrace();
         }
         createtable();
-        fillTransferData();
+        fillTransferData("select * from transfer");
         fillYear();
         cbomonth.setVisible(false);
         cboyear.setVisible(false);
@@ -234,13 +234,14 @@ public class TransferList extends JDialog {
     }
 
 
-    public void fillTransferData()
+    public void fillTransferData(String sql)
     {
+    	
         String strdataitem[]=new String[7];
         try{
             Statement ste = (Statement) con.createStatement();
-            String str = "select * from transfer";
-            ResultSet rs = ste.executeQuery(str);
+//            String str = "select * from transfer";
+            ResultSet rs = ste.executeQuery(sql);
             while(rs.next())
             {
                 strdataitem[0]=rs.getString(1);
@@ -259,33 +260,83 @@ public class TransferList extends JDialog {
             System.out.println(sqle);
         }
     }   
-        public void fillTransferDataYear()
-        {
-            String strdataitem[]=new String[7];
-            try{
-                Statement ste = (Statement) con.createStatement();
-                String st="select date from transfer";
-                String str = "select * from transfer Year(Date)="+cboyear.getSelectedItem().toString();
-                ResultSet rs = ste.executeQuery(str);
-                while(rs.next())
-                {
-                    strdataitem[0]=rs.getString(1);
-                    strdataitem[1]=rs.getString(2);
-                    strdataitem[2]=rs.getString(3);
-                    strdataitem[3]=rs.getString(4);
-                    strdataitem[4]=rs.getString(5);
-                    strdataitem[5]=rs.getString(6);
+    public void fillTransferForYear()
+    {
+       String strdataitem[]=new String[7];
+       try{
+         Statement ste = (Statement) con.createStatement();
+         String str = "select * from transfer where Year(date)="+cboyear.getSelectedItem().toString();
+         ResultSet rs = ste.executeQuery(str);
+         while(rs.next())
+         {
+           strdataitem[0]=rs.getString(1);
+           strdataitem[1]=rs.getString(2);
+           strdataitem[2]=rs.getString(3);
+           strdataitem[3]=rs.getString(4);
+           strdataitem[4]=rs.getString(5);
+           strdataitem[5]=rs.getString(6);
                     
-                    dtm.addRow(strdataitem);
-                }
-                tbltransfer.setModel(dtm);
-            }
-            catch(SQLException sqle)
-            {
-                System.out.println(sqle);
-            }
+           dtm.addRow(strdataitem);
+         }
+         tbltransfer.setModel(dtm);
+       }
+       catch(SQLException sqle)
+       {
+         System.out.println(sqle);
+       }
     }
 
+    public void fillTransferForMonth()
+    {
+       String strdataitem[]=new String[7];
+       try{
+         Statement ste = (Statement) con.createStatement();
+         String str = "select * from transfer where Month(date)="+cbomonth.getSelectedIndex();
+         ResultSet rs = ste.executeQuery(str);
+         while(rs.next())
+         {
+           strdataitem[0]=rs.getString(1);
+           strdataitem[1]=rs.getString(2);
+           strdataitem[2]=rs.getString(3);
+           strdataitem[3]=rs.getString(4);
+           strdataitem[4]=rs.getString(5);
+           strdataitem[5]=rs.getString(6);
+                    
+           dtm.addRow(strdataitem);
+         }
+         tbltransfer.setModel(dtm);
+       }
+       catch(SQLException sqle)
+       {
+         System.out.println(sqle);
+       }
+    }
+    
+    public void fillTransferForMonthAndYear()
+    {
+       String strdataitem[]=new String[7];
+       try{
+         Statement ste = (Statement) con.createStatement();
+         String str = "select * from transfer where Month(date)="+cbomonth.getSelectedIndex()+" and Year(date)="+cboyear.getSelectedItem().toString()+"";
+         ResultSet rs = ste.executeQuery(str);
+         while(rs.next())
+         {
+           strdataitem[0]=rs.getString(1);
+           strdataitem[1]=rs.getString(2);
+           strdataitem[2]=rs.getString(3);
+           strdataitem[3]=rs.getString(4);
+           strdataitem[4]=rs.getString(5);
+           strdataitem[5]=rs.getString(6);
+                    
+           dtm.addRow(strdataitem);
+         }
+         tbltransfer.setModel(dtm);
+       }
+       catch(SQLException sqle)
+       {
+         System.out.println(sqle);
+       }
+    }
     public void fillYear()
     {
         cboyear.addItem("-Selected-");
