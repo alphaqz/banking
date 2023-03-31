@@ -26,8 +26,7 @@ public class CalculateIntrest {
 	 System.out.println(output);
 	}
 	public static int something(String accid) {
-		int total = 0;  
-		System.out.println("calculating intrest");		
+		int total = 0;  	
 		String str[] ;
 		  str = new String[3];
 		Date prevDate = null;
@@ -49,23 +48,29 @@ public class CalculateIntrest {
      				+ "where d.accountno = '"+accid +"' ) order by date;";
              
              rs = stmt.executeQuery(query);
-             
+           
              while(rs.next())
              {
             	 Date currDate = rs.getDate(3);
             	 String id = rs.getString(1);
-            	 LocalDate localDate = currDate.toLocalDate();
-            	 int tempMonth = localDate.getMonthValue();
-            	 int day = localDate.getDayOfMonth();
+            	 LocalDate currLocalDate = currDate.toLocalDate();
+            	 
             	 double currAmount = Integer.parseInt(rs.getString(2));
             	 double currIntrest = getIntrest(currAmount);
             	 
-            	 if(currDate !=null && prevDate != null) {            		 
-	            	 long diffInMillies = Math.abs(currDate.getTime() - prevDate.getTime());
-	            	 long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-	            	 System.out.println("date diff = " + diff);
-	            	 
-	            	 intrestTotal+= (diff * getIntrest(prevAmount));
+            	 if(currDate !=null && prevDate != null) { 
+            		 LocalDate prevLocalDate = prevDate.toLocalDate();
+            		 //System.out.println("prev date " + prevDate.toLocalDate().plusDays(1));
+            		 while(!prevLocalDate.equals( currLocalDate)) {
+            			 if(prevLocalDate.plusDays(1).getDayOfMonth() == 1) {
+            				 System.out.println("@@@@@@   new month   @@@@@@");
+            				 total += intrestTotal;
+            				 intrestTotal = 0;
+            			 }
+            			 intrestTotal+= getIntrest(total);
+            			prevLocalDate =  prevLocalDate.plusDays(1);
+            			 System.out.println(prevLocalDate + " 	balance:" + total +" 	intrest:" +intrestTotal);
+            		 }
             	 }
             	    
             	 if(id.startsWith("D")) {
@@ -77,12 +82,14 @@ public class CalculateIntrest {
             	 }
             	 
             	 intrestTotal+= currIntrest;
+            	 total+=currAmount;
+            	 System.out.println("---------------added--------------- "+ currAmount);
             	 prevDate = currDate;
             	 prevAmount = currAmount;            	 
-            	 System.out.println(prevDate + " intrest is " + getIntrest(total));
+            	// System.out.println(prevDate + " intrest is " + intrestTotal);
              }
              System.out.println("total amount is : "+total);
-             System.out.println("total intrest is : "+intrestTotal);
+            // System.out.println("total intrest is : "+intrestTotal);
              
          }catch(SQLException e)
          {
@@ -90,72 +97,9 @@ public class CalculateIntrest {
          }
 		 return total;
 	}
-//	public static int getTotal(String idinput) {
-//		id = idinput;
-//		something();
-//		return total;
-//	}
 	public static double getIntrest(double currAmount) {
 		return Math.floor( currAmount * 0.0001);
 	}
 	
-	{
-		/*
-	  //System.out.println("new loop");
-            	// System.out.println("wtf");
-            	 String id = rs.getString(1);
-            	 Date tempDate = rs.getDate(3);
-            	 LocalDate localDate = tempDate.toLocalDate();
-            	 int tempMonth = localDate.getMonthValue();
-            	 int day = localDate.getDayOfMonth();
-            	 if(currDate !=null && !currDate.equals(tempDate)) {
-            		 //System.out.println("new date");
-            		 intrestTotal+=getIntrest(todayTotal);
-            		 
-            		// System.out.println(intrestTotal + " today intrest: " +getIntrest(todayTotal));
-            		// System.out.println("total amount is : "+total);
-            	 }
-            	 int currAmount = Integer.parseInt(rs.getString(2));
-            	 
-            	 if(currDate == null) {
-            		// System.out.println("start date");   		 
-            	 }
-            	
-            	 if(currMonth != 0 && currMonth != tempMonth) {
-            		 System.out.println("new month");
-            		 total += intrestTotal;
-            		 intrestTotal = 0;
-            	 }
-            	 if(id.startsWith("D")) {
-            		 //deposit
-            		 todayTotal += currAmount;
-            	 }else {
-            		 //withdraw
-            		 todayTotal -= currAmount;
-            	 }
-            	 
-            	
-            	 //System.out.print(""+tempMonth + "/" + day + " ");
-            	// System.out.println("amount "+ currAmount + " intrest: " + getIntrest(todayTotal));
-            	
-            	
-            	 
-            	 currDate = tempDate; 
-            	 currMonth = tempMonth;
-            	 if(id.startsWith("D")) {
-            		 //deposit
-            		 total += Integer.parseInt(rs.getString(2));
-            	 }else {
-            		 //withdraw
-            		 total -= Integer.parseInt(rs.getString(2));
-            	 }
-                 for(int i = 0 ; i<str.length ; i++)
-                 {                	
-                     str[i]=rs.getString(i+1);                     
-                     //System.out.print( rs.getString(i+1) + " ");                    
-                 }
-	  */
-	
-	}
 
 }
