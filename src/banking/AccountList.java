@@ -171,7 +171,9 @@ public class AccountList extends JDialog {
         String strdataitem[]=new String[8];
         try{
             Statement ste = (Statement) con.createStatement();
-            
+            while(dtm.getRowCount()>0) {
+            	dtm.removeRow(0);
+            }
             ResultSet rs = ste.executeQuery(sql);
             while(rs.next())
             {

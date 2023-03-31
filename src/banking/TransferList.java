@@ -240,6 +240,9 @@ public class TransferList extends JDialog {
         String strdataitem[]=new String[7];
         try{
             Statement ste = (Statement) con.createStatement();
+            while(dtm.getRowCount()>0) {
+            	dtm.removeRow(0);
+            }
 //            String str = "select * from transfer";
             ResultSet rs = ste.executeQuery(sql);
             while(rs.next())

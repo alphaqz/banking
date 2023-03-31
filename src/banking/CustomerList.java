@@ -21,6 +21,8 @@ import javax.swing.table.TableColumn;
 import com.mysql.jdbc.Statement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 
 public class CustomerList extends JDialog {
 	private JTable tblcustomer;
@@ -29,6 +31,10 @@ public class CustomerList extends JDialog {
 	DefaultTableModel dtm = new DefaultTableModel();
 	Statement ste = null ;
 	Connection con = null ;
+	private JRadioButton rdoAddress;
+	private JRadioButton rdoJob;
+	private JComboBox cboJob;
+	private JComboBox cboAddress;
 
 
 	/**
@@ -59,7 +65,7 @@ public class CustomerList extends JDialog {
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 50, 663, 310);
+		scrollPane.setBounds(10, 108, 663, 252);
 		panel.add(scrollPane);
 		
 		tblcustomer = new JTable();
@@ -89,6 +95,36 @@ public class CustomerList extends JDialog {
 		});
 		btnPrint.setBounds(471, 371, 89, 33);
 		panel.add(btnPrint);
+		
+		cboAddress = new JComboBox();
+		cboAddress.setBounds(10, 63, 103, 22);
+		panel.add(cboAddress);
+		
+		cboJob = new JComboBox();
+		cboJob.setBounds(150, 63, 109, 22);
+		panel.add(cboJob);
+		
+		rdoAddress = new JRadioButton("Address");
+		rdoAddress.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cboAddress.setVisible(true);
+		        cboJob.setVisible(false);
+			}
+		});
+		rdoAddress.setBounds(6, 22, 109, 23);
+		panel.add(rdoAddress);
+		
+		rdoJob = new JRadioButton("Job");
+		rdoJob.setBounds(150, 22, 109, 23);
+		panel.add(rdoJob);
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setBounds(296, 62, 89, 23);
+		panel.add(btnSearch);
+		
+		JButton btnShow = new JButton("Show All");
+		btnShow.setBounds(296, 22, 89, 23);
+		panel.add(btnShow);
 		
 		try{
 			clsDBConnection c=new clsDBConnection();
@@ -159,6 +195,4 @@ public class CustomerList extends JDialog {
             System.out.println(sqle);
         }
     }
-
-
 }
