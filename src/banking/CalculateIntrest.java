@@ -73,16 +73,17 @@ public class CalculateIntrest {
             		 }
             	 }
             	    
+            	
             	 if(id.startsWith("D")) {
             		 //deposit
-            		 todayTotal += currAmount;
+            		 total+=currAmount;
             	 }else {
             		 //withdraw
-            		 todayTotal -= currAmount;
+            		 total -=currAmount;
             	 }
             	 
             	 intrestTotal+= currIntrest;
-            	 total+=currAmount;
+            	 //total+=currAmount;
             	 System.out.println("---------------added--------------- "+ currAmount);
             	 prevDate = currDate;
             	 prevAmount = currAmount;            	 
