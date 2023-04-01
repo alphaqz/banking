@@ -44,7 +44,7 @@ public ResultSet SQLSelect(String field , String table) throws ClassNotFoundExce
     try
     {
         Statement stmt = (Statement) getConnection().createStatement();
-        rs = stmt.executeQuery("SELECT "+field+" FROM "+table);
+        rs = stmt.executeQuery("SELECT "+field+" FROM "+table+" ORDER BY " + field);
     }catch(SQLException ex)
     {
         System.out.println(ex);

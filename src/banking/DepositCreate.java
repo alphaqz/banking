@@ -140,7 +140,7 @@ public class DepositCreate extends JDialog {
 		lblforbalance = new JLabel("");
 		lblforbalance.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lblforbalance.setBounds(224, 56, 86, 14);
-		contentPanel_1.add(lblforbalance);
+		//contentPanel_1.add(lblforbalance);
 		
 		JLabel lblCust = new JLabel("Account type:");
 		lblCust.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -164,7 +164,7 @@ public class DepositCreate extends JDialog {
 		
 		lblforbalanceNew = new JLabel("");
 		lblforbalanceNew.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforbalanceNew.setBounds(338, 56, 86, 14);
+		lblforbalanceNew.setBounds(224, 55, 86, 14);
 		contentPanel_1.add(lblforbalanceNew);
 		{
 			JPanel buttonPane = new JPanel();
@@ -180,6 +180,14 @@ public class DepositCreate extends JDialog {
 				            JOptionPane.showMessageDialog(null, "Please enter Amount.");
 				            txtAmount.requestFocus();
 				            txtAmount.selectAll();
+				        }
+				        else if(cboStaff.getSelectedIndex()<1)
+				        {
+				            JOptionPane.showMessageDialog(null, "Please select staff.");
+				        }
+				        else if(cboAccount.getSelectedIndex()<1)
+				        {
+				            JOptionPane.showMessageDialog(null, "Please select account.");
 				        }
 				        else if(!Checking.IsAllDigit(txtAmount.getText()))
 				        {
@@ -197,16 +205,7 @@ public class DepositCreate extends JDialog {
 				            	//System.out.println("inserting into deposit " + str[0] + str[1] + str[3]);
 				            	boolean save = mySQLQueries.insertData("deposit", str);
 					            if(save)
-					            {
-					            	//String action,String id , String amount)
-					            	boolean updatesuccess = mySQLQueries.updateAmount("deposit", (String)cboAccount.getSelectedItem() , (String)txtAmount.getText());
-					            	if(updatesuccess) {
-					            		JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);					            		
-					            	}  else
-						            {
-						                JOptionPane.showMessageDialog(null,"Failed to update account balance.","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
-						            }
-					                
+					            {					            	
 					                try {
 										AutoID();
 									} catch (ClassNotFoundException e1) {

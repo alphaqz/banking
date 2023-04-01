@@ -60,7 +60,7 @@ public class mySQLQueries {
 
 	    else if(tbName.equals("transfer"))
 	    {
-	        query = "insert into transfer(id, amount, date, receivedAccount, transferedAccount, staffId)values('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"','"+data[5]+"')";
+	        query = "insert into transfer(id, amount, receivedAccount, transferedAccount, staffId)values('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"')";
 	    }
 	    else if(tbName.equals("customer"))
 	    {
@@ -324,14 +324,9 @@ public class mySQLQueries {
     }
      public static   String getAutoid(String field , String tabel , String prefix) throws ClassNotFoundException
      {
-         if(tabel.equals("sale")||tabel.equals("purchase"))
-         {
-             return connect.getPrimaryKey(field, tabel, prefix);
-         }
-         else
-         {
+        
              return connect.getPrimaryKey2(field, tabel, prefix);
-         }
+         
 
      }
      public static String[]getIDForChoice(String tbName)

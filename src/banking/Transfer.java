@@ -147,16 +147,16 @@ public class Transfer extends JDialog {
 		        }
 		        else {
 		        	
-		            String str[] = new String[6];
+		            String str[] = new String[5];
 		            str[0] = (String)lblTID.getText();						
 		            str[1] = (String)txtAmount.getText();
-		            str[2] = (String)lbldate.getText();
+//		            str[2] = (String)lbldate.getText();
 		             
-		            str[4] = (String) cboTransfer.getSelectedItem(); 
+		            str[3] = (String) cboTransfer.getSelectedItem(); 
 		            
 //		            filterReceiveAccount();
-		            str[3] = (String) cboReceive.getSelectedItem();
-		            str[5] = staffIdList.get(cboStaff.getSelectedIndex()-1); 
+		            str[2] = (String) cboReceive.getSelectedItem();
+		            str[4] = staffIdList.get(cboStaff.getSelectedIndex()-1); 
 		            	
 //		            System.out.println(str[1]);
 		            

@@ -57,7 +57,13 @@ public class CalculateIntrest {
             	 
             	 double currAmount = Integer.parseInt(rs.getString(2));
             	 double currIntrest = getIntrest(currAmount);
-            	 
+            	 if(id.startsWith("D")) {
+            		 //deposit
+            		 total+=currAmount;
+            	 }else {
+            		 //withdraw
+            		 total -=currAmount;
+            	 }
             	 if(currDate !=null && prevDate != null) { 
             		 LocalDate prevLocalDate = prevDate.toLocalDate();
             		 //System.out.println("prev date " + prevDate.toLocalDate().plusDays(1));
@@ -74,13 +80,7 @@ public class CalculateIntrest {
             	 }
             	    
             	
-            	 if(id.startsWith("D")) {
-            		 //deposit
-            		 total+=currAmount;
-            	 }else {
-            		 //withdraw
-            		 total -=currAmount;
-            	 }
+            
             	 
             	 intrestTotal+= currIntrest;
             	 //total+=currAmount;
@@ -89,6 +89,19 @@ public class CalculateIntrest {
             	 prevAmount = currAmount;            	 
             	// System.out.println(prevDate + " intrest is " + intrestTotal);
              }
+             LocalDate today = LocalDate.now();
+             LocalDate prevLocalDate = prevDate.toLocalDate();
+             while(!prevLocalDate.equals( today)) {
+    			 if(prevLocalDate.plusDays(1).getDayOfMonth() == 1) {
+    				 System.out.println("@@@@@@   new month   @@@@@@");
+    				 total += intrestTotal;
+    				 intrestTotal = 0;
+    			 }
+    			 intrestTotal+= getIntrest(total);
+    			prevLocalDate =  prevLocalDate.plusDays(1);
+    			 System.out.println(prevLocalDate + " 	balance:" + total +" 	intrest:" +intrestTotal);
+    		 }
+             
              System.out.println("total amount is : "+total);
             // System.out.println("total intrest is : "+intrestTotal);
              
