@@ -39,13 +39,17 @@ public class CalculateIntrest {
         	 con=connect.getConnection();
              stmt = (Statement) con.createStatement();
              
-             String query  = "(select w.id,w.amount,w.date "
-     				+ " from withdraw w "
-     				+ "where w.accountno = '"+accid +"')	"
-     				//;
-     				+"UNION"
-     				+ "(select d.id, d.amount, d.date  from deposit d "
-     				+ "where d.accountno = '"+accid +"' ) order by date;";
+             String query  =  "(select w.id,w.amount,w.date,w.accountno as received,w.accountno as transfered"
+             		+ "     				 from withdraw w "
+             		+ "     				where w.accountno = '"+accid+"' )	"
+             		+ "     			"
+             		+ "     				UNION"
+             		+ "     				(select d.id, d.amount, d.date,d.accountno,d.accountno  from deposit d "
+             		+ "     				 where d.accountno = '"+accid+"'  order by date)"
+             		+ "                     "
+             		+ "                     UNION"
+             		+ "(select t.id,t.amount,t.date,t.receivedAccount,t.transferedAccount "
+             		+ "from transfer t where receivedAccount = '"+accid+"' or transferedAccount = 'AC-0000004')";
              
              rs = stmt.executeQuery(query);
            
@@ -60,6 +64,13 @@ public class CalculateIntrest {
             	 if(id.startsWith("D")) {
             		 //deposit
             		 total+=currAmount;
+            	 }else if(id.startsWith("T")) {
+            		 
+            		if(rs.getString("received").toLowerCase().equals(accid.toLowerCase())) {
+            			 total+=currAmount;           			
+            		}else {
+            			total -=currAmount;
+            		}
             	 }else {
             		 //withdraw
             		 total -=currAmount;
