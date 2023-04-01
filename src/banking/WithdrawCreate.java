@@ -35,6 +35,8 @@ public class WithdrawCreate extends JDialog {
 	List<String> staffIdList = new ArrayList<String>();
 	List<String> AccountIdList = new ArrayList<String>(); 
 	static String balance;
+	private JButton btnclose;
+	private JButton btnClear;
 	/**
 	 * Launch the application.
 	 */
@@ -54,7 +56,7 @@ public class WithdrawCreate extends JDialog {
 	 */
 	public WithdrawCreate() throws ClassNotFoundException {
 		setTitle("Withdraw Entry");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 357);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Withdraw Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -187,17 +189,31 @@ public class WithdrawCreate extends JDialog {
 				        }
 					}
 				});
-				
-				JButton btnClear = new JButton("Clear");
-				buttonPane.add(btnClear);
 				btnSave.setActionCommand("OK");
 				buttonPane.add(btnSave);
 				getRootPane().setDefaultButton(btnSave);
 			}
+			
+			btnClear = new JButton("Clear");
+			btnClear.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					clear();
+				}
+			});
+			buttonPane.add(btnClear);
 			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				btnclose = new JButton("Close");
+				btnclose.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(JOptionPane.showConfirmDialog(null,"Are you sure you want to exit?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
+						{	
+							dispose();
+						}
+					}
+				});
+				btnclose.setMnemonic('L');
+				btnclose.setActionCommand("Cancel");
+				buttonPane.add(btnclose);
 			}
 		}
 		fillAccount();

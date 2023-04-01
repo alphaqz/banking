@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -41,6 +42,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
+import javax.swing.JRadioButton;
 
 public class WithdrawShow extends JDialog {
 	private JLabel lblforWithdrawID;
@@ -66,6 +68,13 @@ public class WithdrawShow extends JDialog {
    private JLabel lblForDate;
    private JLabel lblDate;
    private JLabel txtamount;
+   private JComboBox cboyear;
+   private JRadioButton rboyear;
+   private JRadioButton rbomonth;
+   private JRadioButton rboBoth;
+   private JComboBox cbomonth;
+   private JButton btnBoth;
+   private JButton btnSearch;
 
 
 
@@ -102,7 +111,7 @@ public class WithdrawShow extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 755, 499);
+			panel.setBounds(10, 11, 755, 620);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			{
@@ -188,7 +197,7 @@ public class WithdrawShow extends JDialog {
 
 						}
 					});
-					btndelete.setBounds(505, 114, 89, 23);
+					btndelete.setBounds(496, 114, 89, 23);
 					panel_1.add(btndelete);
 				}
 				{
@@ -208,7 +217,7 @@ public class WithdrawShow extends JDialog {
 			                }
 						}
 					});
-					btnupdate.setBounds(626, 114, 89, 23);
+					btnupdate.setBounds(604, 114, 89, 23);
 					panel_1.add(btnupdate);
 				}
 				{
@@ -242,7 +251,7 @@ public class WithdrawShow extends JDialog {
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setLayout(null);
-			panel_1.setBounds(219, 398, 290, 49);
+			panel_1.setBounds(219, 556, 290, 49);
 			panel.add(panel_1);
 			
 			JButton btnSave = new JButton("Save");
@@ -272,7 +281,7 @@ public class WithdrawShow extends JDialog {
 
 				}
 			});
-			scrollPane.setBounds(30, 170, 703, 192);
+			scrollPane.setBounds(20, 327, 703, 192);
 			panel.add(scrollPane);
 			
 			tblwithdraw = new JTable();
@@ -289,6 +298,98 @@ public class WithdrawShow extends JDialog {
 				}
 			});
 			scrollPane.setViewportView(tblwithdraw);
+			
+			rboyear = new JRadioButton("Year");
+			rboyear.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cbomonth.setVisible(false);
+			        cboyear.setVisible(true);
+				}
+			});
+			rboyear.setBounds(156, 199, 109, 27);
+			panel.add(rboyear);
+			
+			rbomonth = new JRadioButton("Month");
+			rbomonth.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cbomonth.setVisible(true);
+			        cboyear.setVisible(false);
+				}
+			});
+			rbomonth.setBounds(20, 199, 109, 27);
+			panel.add(rbomonth);
+			
+			rboBoth = new JRadioButton("Year & Month");
+			rboBoth.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cbomonth.setVisible(true);
+			        cboyear.setVisible(true);
+				}
+			});
+			rboBoth.setBounds(290, 199, 109, 27);
+			panel.add(rboBoth);
+			
+			cboyear = new JComboBox();
+			cboyear.setBounds(156, 246, 109, 27);
+			panel.add(cboyear);
+			
+			cbomonth = new JComboBox();
+			cbomonth.setModel(new DefaultComboBoxModel(new String[] { "-Selected-", "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+			cbomonth.setBounds(20, 246, 109, 27);
+			panel.add(cbomonth);
+			
+			btnSearch = new JButton("Search");
+			btnSearch.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(rbomonth.isSelected()) {
+			            if(cbomonth.getSelectedIndex()==0) {
+			                JOptionPane.showMessageDialog(null,"Please choose Month");
+			                cbomonth.requestFocus();
+			            } else {
+			            	String str = "select * from withdraw where Month(date)="+cbomonth.getSelectedIndex();
+			            	fillWithdraw(str);
+			            }
+			        } else if(rboyear.isSelected()) {
+			        	
+			            if(cboyear.getSelectedIndex()==0) {
+			                JOptionPane.showMessageDialog(null,"Please choose Year");
+			                cboyear.requestFocus();
+			            } else {
+//			            	dtm.removeRow(0);
+//			            	tbltransfer.removeAll();
+			            	String str = "select * from withdraw where Year(date)="+cboyear.getSelectedItem().toString();
+			            	fillWithdraw(str);
+			            }
+			        } else if (rboBoth.isSelected()) {
+			        	
+			            if(cbomonth.getSelectedIndex()==0) {
+			                JOptionPane.showMessageDialog(null,"Please choose Month");
+			                cbomonth.requestFocus();
+			            } else if(cboyear.getSelectedIndex()==0) {
+			            	JOptionPane.showMessageDialog(null,"Please choose Year");
+			                cbomonth.requestFocus();
+			            } else {
+			            	String str = "select * from withdraw where Month(date)="+cbomonth.getSelectedIndex()+" and Year(date)="+cboyear.getSelectedItem().toString()+"";
+			            	fillWithdraw(str);
+			            }
+			        }
+				}
+			});
+			btnSearch.setMnemonic('S');
+			btnSearch.setBounds(290, 246, 87, 27);
+			panel.add(btnSearch);
+			
+			btnBoth = new JButton("Show All");
+			btnBoth.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					fillWithdraw("select * from withdraw");
+				    cbomonth.setSelectedIndex(0);
+				    cboyear.setSelectedIndex(0);
+				}
+			});
+			btnBoth.setMnemonic('A');
+			btnBoth.setBounds(398, 246, 87, 27);
+			panel.add(btnBoth);
 		}
 		try{
 			clsDBConnection c=new clsDBConnection();
@@ -304,15 +405,12 @@ public class WithdrawShow extends JDialog {
 		fillAccount();
 		fillStaff();
 		createtable();
-		fillWithdraw();
+		fillWithdraw("select * from withdraw");
+		fillYearData();
+        cbomonth.setVisible(false);
+        cboyear.setVisible(false);
 	}
 	
-	
-	
-
-
-
- 
     public void clearItem()
     {
         lblforWithdrawID.setText("");
@@ -351,13 +449,16 @@ public class WithdrawShow extends JDialog {
         tblwithdraw.setModel(dtm);
         
     }
-    public void fillWithdraw()
+    public void fillWithdraw(String sql)
     {
         String strdataitem[]=new String[5];
         try{
             Statement ste = (Statement) con.createStatement();
-            String str = "select * from withdraw";
-            ResultSet rs = ste.executeQuery(str);
+//            String str = "select * from withdraw";
+            while(dtm.getRowCount()>0) {
+            	dtm.removeRow(0);
+            }
+            ResultSet rs = ste.executeQuery(sql);
             while(rs.next())
             {
                 strdataitem[0]=rs.getString(1);
@@ -398,5 +499,89 @@ public class WithdrawShow extends JDialog {
         tblwithdraw.setModel(dtm);
         vid.removeAllElements();
         vamount.removeAllElements();
+    }
+    public void fillYear()
+    {
+       String strdataitem[]=new String[7];
+       try{
+         Statement ste = (Statement) con.createStatement();
+         String str = "select * from transfer where Year(date)="+cboyear.getSelectedItem().toString();
+         ResultSet rs = ste.executeQuery(str);
+         while(rs.next())
+         {
+           strdataitem[0]=rs.getString(1);
+           strdataitem[1]=rs.getString(2);
+           strdataitem[2]=rs.getString(3);
+           strdataitem[3]=rs.getString(4);
+           strdataitem[4]=rs.getString(5);
+           strdataitem[5]=rs.getString(6);
+                    
+           dtm.addRow(strdataitem);
+         }
+         tblwithdraw.setModel(dtm);
+       }
+       catch(SQLException sqle)
+       {
+         System.out.println(sqle);
+       }
+    }
+
+    public void fillMonth()
+    {
+       String strdataitem[]=new String[7];
+       try{
+         Statement ste = (Statement) con.createStatement();
+         String str = "select * from transfer where Month(date)="+cbomonth.getSelectedIndex();
+         ResultSet rs = ste.executeQuery(str);
+         while(rs.next())
+         {
+           strdataitem[0]=rs.getString(1);
+           strdataitem[1]=rs.getString(2);
+           strdataitem[2]=rs.getString(3);
+           strdataitem[3]=rs.getString(4);
+           strdataitem[4]=rs.getString(5);
+           strdataitem[5]=rs.getString(6);
+                    
+           dtm.addRow(strdataitem);
+         }
+         tblwithdraw.setModel(dtm);
+       }
+       catch(SQLException sqle)
+       {
+         System.out.println(sqle);
+       }
+    }
+    
+    public void fillMonthAndYear()
+    {
+       String strdataitem[]=new String[7];
+       try{
+         Statement ste = (Statement) con.createStatement();
+         String str = "select * from transfer where Month(date)="+cbomonth.getSelectedIndex()+" and Year(date)="+cboyear.getSelectedItem().toString()+"";
+         ResultSet rs = ste.executeQuery(str);
+         while(rs.next())
+         {
+           strdataitem[0]=rs.getString(1);
+           strdataitem[1]=rs.getString(2);
+           strdataitem[2]=rs.getString(3);
+           strdataitem[3]=rs.getString(4);
+           strdataitem[4]=rs.getString(5);
+           strdataitem[5]=rs.getString(6);
+                    
+           dtm.addRow(strdataitem);
+         }
+         tblwithdraw.setModel(dtm);
+       }
+       catch(SQLException sqle)
+       {
+         System.out.println(sqle);
+       }
+    }
+    
+    public void fillYearData()
+    {
+        cboyear.addItem("-Selected-");
+        for(int i=2010 ; i<=2050 ; i++ )
+            cboyear.addItem(i);
     }
 }

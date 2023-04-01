@@ -29,6 +29,8 @@ public class CustomerCreate extends JDialog {
 	private JTextField txtNrc;
 	private JTextField txtJob;
 	private String gender = "";
+	private JRadioButton rdoMale;
+	private JRadioButton rdoFemale;
 
 	/**
 	 * Launch the application.
@@ -110,25 +112,25 @@ public class CustomerCreate extends JDialog {
 		lblNrc.setBounds(55, 257, 46, 14);
 		panel.add(lblNrc);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Male");
-		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+		rdoMale = new JRadioButton("Male");
+		rdoMale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gender = "male";
 			}
 		});
-		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(101, 83, 81, 23);
-		panel.add(rdbtnNewRadioButton);
+		buttonGroup.add(rdoMale);
+		rdoMale.setBounds(101, 83, 81, 23);
+		panel.add(rdoMale);
 		
-		JRadioButton rdbtnFemale = new JRadioButton("Female");
-		rdbtnFemale.addActionListener(new ActionListener() {
+		rdoFemale = new JRadioButton("Female");
+		rdoFemale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gender = "female";
 			}
 		});
-		buttonGroup.add(rdbtnFemale);
-		rdbtnFemale.setBounds(192, 83, 109, 23);
-		panel.add(rdbtnFemale);
+		buttonGroup.add(rdoFemale);
+		rdoFemale.setBounds(192, 83, 109, 23);
+		panel.add(rdoFemale);
 		
 		txtNrc = new JTextField("9/khamasa(n)0440252");
 		txtNrc.setColumns(10);
@@ -184,18 +186,21 @@ public class CustomerCreate extends JDialog {
 		            txtEmail.requestFocus();
 		            txtEmail.selectAll();
 		         }
+		         else if(rdoMale.isSelected()==false && rdoFemale.isSelected()==false)
+		         {
+		            JOptionPane.showMessageDialog(null, "Please select gender");
+		            
+		         }
 		         
 		         else{
 		        	 String st[] = new String[8];
 						st[0] = (String)txtcusname.getText();
 						st[1] = gender;
-						
-						st[2] = (String)txtaddress.getText();
-						st[3] = (String)txtphone.getText();
-						st[4] = (String)txtEmail.getText();
+						st[2] = (String)txtphone.getText();
+						st[3] = (String)txtaddress.getText();
+						st[4] = (String)txtJob.getText();
 						st[5] = (String)txtNrc.getText();
 						st[6] = (String)txtEmail.getText();
-						st[7] = (String)txtJob.getText();
 						
 			            boolean ee = mySQLQueries.isduplicate("customer", st);
 			            if(!ee)
@@ -276,6 +281,8 @@ public class CustomerCreate extends JDialog {
 	        txtaddress.setText("");
 	        txtphone.setText("");
 	        txtEmail.setText("");
+	        txtNrc.setText("");
+	        txtJob.setText("");
 	        txtcusname.requestFocus();
 	    }
 

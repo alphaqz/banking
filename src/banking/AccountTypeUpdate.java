@@ -154,7 +154,7 @@ public class AccountTypeUpdate extends JDialog {
 
 				}
 			});
-			btnDelete.setBounds(291, 279, 85, 39);
+			btnDelete.setBounds(329, 279, 85, 39);
 			getContentPane().add(btnDelete);
 		}
 		{
@@ -194,7 +194,7 @@ public class AccountTypeUpdate extends JDialog {
 			        }
 				}
 			});
-			btnUpdate.setBounds(168, 279, 79, 39);
+			btnUpdate.setBounds(240, 279, 79, 39);
 			getContentPane().add(btnUpdate);
 		}
 		fillAccountType();

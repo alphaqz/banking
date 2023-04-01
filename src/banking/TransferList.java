@@ -127,7 +127,7 @@ public class TransferList extends JDialog {
 		        cboyear.setVisible(true);
 			}
 		});
-		rdoAll.setBounds(232, 42, 109, 27);
+		rdoAll.setBounds(232, 42, 137, 27);
 		panel.add(rdoAll);
 		
 		cbomonth = new JComboBox();

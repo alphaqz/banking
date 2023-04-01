@@ -114,6 +114,18 @@ public class Transfer extends JDialog {
 		panel.add(cboReceive);
 		
 		cboTransfer = new JComboBox();
+		cboTransfer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(cboTransfer.getSelectedIndex()==0) {
+//					JOptionPane.showMessageDialog(null, "Please select Transfered Account.");
+//					cboTransfer.requestFocus();
+				}
+				else {
+					cboReceive.removeAllItems();
+					filterReceiveAccount();
+				}
+			}
+		});
 		cboTransfer.setBounds(206, 229, 157, 27);
 		panel.add(cboTransfer);
 		
@@ -145,6 +157,12 @@ public class Transfer extends JDialog {
 		        else if(cboTransfer.getSelectedIndex()==0){
 		        	JOptionPane.showMessageDialog(null, "Please choose Transfer Account No");						
 		        }
+		        else if(cboReceive.getSelectedIndex()==0){
+		        	JOptionPane.showMessageDialog(null, "Please choose Received Account No");						
+		        }
+		        else if(cboStaff.getSelectedIndex()==0){
+		        	JOptionPane.showMessageDialog(null, "Please choose Staff");						
+		        }
 		        else {
 		        	
 		            String str[] = new String[5];
@@ -154,60 +172,48 @@ public class Transfer extends JDialog {
 		             
 		            str[3] = (String) cboTransfer.getSelectedItem(); 
 		            
-//		            filterReceiveAccount();
 		            str[2] = (String) cboReceive.getSelectedItem();
 		            str[4] = staffIdList.get(cboStaff.getSelectedIndex()-1); 
 		            	
-//		            System.out.println(str[1]);
+		            int saveAmount=0;
+		            int t_amount=Integer.parseInt(str[1]);
 		            
-//		            if(cboTransfer.getSelectedIndex()!=0) {
-//		            	fillReceivedAccountNo();
-		            
-//		            	System.out.print(cboTransfer.getSelectedItem());
-		            	
-		            	
-		            	int saveAmount=0;
-		            	int t_amount=Integer.parseInt(str[1]);
-		            	
-		            	String t_id=cboTransfer.getSelectedItem().toString();
-						String r_id=cboReceive.getSelectedItem().toString();
+		            String t_id=cboTransfer.getSelectedItem().toString();
+					String r_id=cboReceive.getSelectedItem().toString();
+					
+					int total_amount= Integer.parseInt(mySQLQueries.getAmount(t_id));
+//					System.out.println(total_amount);
 						
-						int total_amount= Integer.parseInt(mySQLQueries.getAmount(t_id));
-//						System.out.println(total_amount);
+		            if(t_amount > total_amount) {
+		            	JOptionPane.showMessageDialog(null, "Insufficient balance!");
+		            	txtAmount.setText("");
+						txtAmount.requestFocus();
+		            }
+		            else {
+		            	boolean save = mySQLQueries.insertData("transfer", str);
+		            	saveAmount+=total_amount-t_amount;
+		            	int r_amount=Integer.parseInt(mySQLQueries.getAmount(r_id));	
+						r_amount+=t_amount;
+						boolean success=mySQLQueries.updateAmount("transfer", r_id, String.valueOf(r_amount));						
+						boolean success1=mySQLQueries.updateAmount("transfer", t_id,String.valueOf(saveAmount));
 						
-		            	if(t_amount > total_amount) {
-		            		JOptionPane.showMessageDialog(null, "Insufficient balance!");
-		            		txtAmount.setText("");
-							txtAmount.requestFocus();
-		            	}
-		            	else {
-		            		boolean save = mySQLQueries.insertData("transfer", str);
-		            		saveAmount+=total_amount-t_amount;
-		            		int r_amount=Integer.parseInt(mySQLQueries.getAmount(r_id));	
-							r_amount+=t_amount;
-							boolean success=mySQLQueries.updateAmount("transfer", r_id, String.valueOf(r_amount));						
-							boolean success1=mySQLQueries.updateAmount("transfer", t_id,String.valueOf(saveAmount));
-							
-							if(save && success && success1) {
-			            		JOptionPane.showMessageDialog(null, "Successfully transfered amount!","Save Record.",JOptionPane.INFORMATION_MESSAGE);	
-			            		try {
-									AutoID();
-									clear();
-								} catch (ClassNotFoundException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-			            	}  else
-				            {
-				                JOptionPane.showMessageDialog(null,"Failed to update account balance.","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
-				            }
-		            	}
-//		            }
+						if(save && success && success1) {
+			           		JOptionPane.showMessageDialog(null, "Successfully transfered amount!","Save Record.",JOptionPane.INFORMATION_MESSAGE);	
+			           		try {
+								AutoID();
+								clear();
+							} catch (ClassNotFoundException e1) {
+								e1.printStackTrace();
+							}
+			            }  
+						else
+				        {
+				            JOptionPane.showMessageDialog(null,"Failed to update account balance.","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
+				        }
+		            }
 			            
 		        }
-			}
-
-			
+			}	
 		});
 		btnSave.setMnemonic('S');
 		btnSave.setBounds(107, 390, 87, 27);
@@ -268,7 +274,6 @@ public class Transfer extends JDialog {
 		cboReceive.addItem("- Select -");
 		for(int i=0;i<str.length;i++) {
 			cboReceive.addItem(str[i].toString());
-//			System.out.println(Arrays.toString(str));
 		}
 	}
 
