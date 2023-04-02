@@ -84,22 +84,22 @@ public class CustomerCreate extends JDialog {
 		lblcusid.setBounds(111, 23, 151, 14);
 		panel.add(lblcusid);
 		
-		txtcusname = new JTextField("Kaung Thu Han");
+		txtcusname = new JTextField("");
 		txtcusname.setBounds(111, 59, 167, 20);
 		panel.add(txtcusname);
 		txtcusname.setColumns(10);
 		
-		txtaddress = new JTextField("Yangon");
+		txtaddress = new JTextField("");
 		txtaddress.setColumns(10);
 		txtaddress.setBounds(109, 130, 169, 20);
 		panel.add(txtaddress);
 		
-		txtphone = new JTextField("09797246971");
+		txtphone = new JTextField("");
 		txtphone.setColumns(10);
 		txtphone.setBounds(109, 174, 169, 20);
 		panel.add(txtphone);
 		
-		txtEmail = new JTextField("kaungthuhan@gmail.com");
+		txtEmail = new JTextField("");
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(111, 213, 167, 20);
 		panel.add(txtEmail);
@@ -132,12 +132,12 @@ public class CustomerCreate extends JDialog {
 		rdoFemale.setBounds(192, 83, 109, 23);
 		panel.add(rdoFemale);
 		
-		txtNrc = new JTextField("9/khamasa(n)0440252");
+		txtNrc = new JTextField("");
 		txtNrc.setColumns(10);
 		txtNrc.setBounds(111, 254, 167, 20);
 		panel.add(txtNrc);
 		
-		txtJob = new JTextField("Developer");
+		txtJob = new JTextField("");
 		txtJob.setColumns(10);
 		txtJob.setBounds(111, 299, 167, 20);
 		panel.add(txtJob);

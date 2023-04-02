@@ -181,7 +181,8 @@ public class Transfer extends JDialog {
 		            String t_id=cboTransfer.getSelectedItem().toString();
 					String r_id=cboReceive.getSelectedItem().toString();
 					
-					int total_amount= Integer.parseInt(mySQLQueries.getAmount(t_id));
+					int total_amount= CalculateIntrest.something(t_id);
+
 //					System.out.println(total_amount);
 						
 		            if(t_amount > total_amount) {

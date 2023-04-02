@@ -85,7 +85,8 @@ public class WithdrawCreate extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if(cboAccount.getSelectedIndex() > 0) {
 					try {
-						String result = mySQLQueries.getAccountBalance((String)cboAccount.getSelectedItem());
+						String result = ""+CalculateIntrest.something((String)cboAccount.getSelectedItem() );
+
 						lblForBalance.setText(result);
 						
 						System.out.println("balance is "+ result);		
@@ -221,8 +222,8 @@ public class WithdrawCreate extends JDialog {
 		AutoID();
 	}
 	public void fillBalance() {
-		//String result = mySQLQueries.getAccountBalance((String)cboAccount.getSelectedItem() );
-		//balance = result;
+		String result = ""+CalculateIntrest.something((String)cboAccount.getSelectedItem() );
+		balance = result;
 	}
 	public void fillAccount()
     {

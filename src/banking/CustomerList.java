@@ -55,17 +55,17 @@ public class CustomerList extends JDialog {
 	 */
 	public CustomerList() throws ClassNotFoundException {
 		setTitle("Customer List");
-		setBounds(100, 100, 719, 476);
+		setBounds(100, 100, 826, 476);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Customer List", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 683, 415);
+		panel.setBounds(10, 11, 790, 415);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 108, 663, 252);
+		scrollPane.setBounds(10, 108, 770, 252);
 		panel.add(scrollPane);
 		
 		tblcustomer = new JTable();
@@ -80,7 +80,7 @@ public class CustomerList extends JDialog {
 				}
 			}
 		});
-		btnClose.setBounds(584, 371, 89, 33);
+		btnClose.setBounds(673, 371, 89, 33);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -93,15 +93,15 @@ public class CustomerList extends JDialog {
 		        }
 			}
 		});
-		btnPrint.setBounds(471, 371, 89, 33);
+		btnPrint.setBounds(560, 371, 89, 33);
 		panel.add(btnPrint);
 		
 		cboAddress = new JComboBox();
-		cboAddress.setBounds(10, 63, 103, 22);
+		cboAddress.setBounds(80, 62, 103, 22);
 		panel.add(cboAddress);
 		
 		cboJob = new JComboBox();
-		cboJob.setBounds(150, 63, 109, 22);
+		cboJob.setBounds(310, 62, 109, 22);
 		panel.add(cboJob);
 		
 		rdoAddress = new JRadioButton("Address");
@@ -111,7 +111,7 @@ public class CustomerList extends JDialog {
 		        cboJob.setVisible(false);
 			}
 		});
-		rdoAddress.setBounds(6, 22, 109, 23);
+		rdoAddress.setBounds(76, 21, 109, 23);
 		panel.add(rdoAddress);
 		
 		rdoJob = new JRadioButton("Job");
@@ -121,7 +121,7 @@ public class CustomerList extends JDialog {
 		        cboJob.setVisible(true);
 			}
 		});
-		rdoJob.setBounds(150, 22, 109, 23);
+		rdoJob.setBounds(310, 21, 109, 23);
 		panel.add(rdoJob);
 		
 		JButton btnSearch = new JButton("Search");
@@ -161,7 +161,7 @@ public class CustomerList extends JDialog {
 		        }
 			}
 		});
-		btnSearch.setBounds(296, 62, 89, 23);
+		btnSearch.setBounds(560, 61, 89, 23);
 		panel.add(btnSearch);
 		
 		JButton btnShow = new JButton("Show All");
@@ -171,7 +171,7 @@ public class CustomerList extends JDialog {
 		        cboJob.setVisible(true);
 			}
 		});
-		btnShow.setBounds(296, 22, 89, 23);
+		btnShow.setBounds(560, 21, 89, 23);
 		panel.add(btnShow);
 		
 		try{
@@ -204,10 +204,10 @@ public class CustomerList extends JDialog {
        dtm.addColumn("NRC");
        dtm.addColumn("Email");
        tblcustomer.setModel(dtm);
-       setColumnWidth(0,40);
-       setColumnWidth(1,50);
-       setColumnWidth(2,100);
-       setColumnWidth(3,40);
+       setColumnWidth(0,50);
+       setColumnWidth(1,100);
+       setColumnWidth(2,35);
+       setColumnWidth(3,50);
        setColumnWidth(4,60);
 
    }

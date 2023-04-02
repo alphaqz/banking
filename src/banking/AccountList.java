@@ -178,7 +178,7 @@ public class AccountList extends JDialog {
             while(rs.next())
             {
                 strdataitem[0]=rs.getString(1);
-                strdataitem[1]=rs.getString(2);
+                strdataitem[1]=CalculateIntrest.something(rs.getString(1))+"";
                 strdataitem[2]=rs.getString(3);
                 strdataitem[3]=rs.getString(4);
                 strdataitem[4]=rs.getString(5);
