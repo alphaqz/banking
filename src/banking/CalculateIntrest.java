@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 
@@ -23,6 +26,8 @@ public class CalculateIntrest {
 		int total = 0;  
 		Date currDate = null;
 		int todayTotal = 0;
+		double intrestTotal = 0.0;
+		
 		 try
          {
         	 con=connect.getConnection();
@@ -40,15 +45,32 @@ public class CalculateIntrest {
              
              while(rs.next())
              {
+            	 //System.out.println("new loop");
+            	 
             	 String id = rs.getString(1);
-            	 Date temp = rs.getDate(3);
+            	 Date tempDate = rs.getDate(3);
+            	 LocalDate localDate = tempDate.toLocalDate();
+            	 int month = localDate.getMonthValue();
+
             	 int currAmount = Integer.parseInt(rs.getString(2));
-            	 if(currDate == null) {
-            		 currDate = temp;            		 
-            		 System.out.print(currDate + " income is " + currAmount);
-            	 }else {
-            		
+            	 
+            	 if(currDate !=null && !currDate.equals(tempDate)) {
+            		 System.out.println(currDate + " intrest is " + getIntrest(todayTotal));
+            		 intrestTotal+=getIntrest(todayTotal);
+            		 System.out.println("new date");   		 
             	 }
+            	 if(id.startsWith("D")) {
+            		 //deposit
+            		 todayTotal += Integer.parseInt(rs.getString(2));
+            	 }else {
+            		 //withdraw
+            		 todayTotal -= Integer.parseInt(rs.getString(2));
+            	 }
+            	 currDate = tempDate; 
+            	 
+            	
+            	 System.out.println(" month: "+month);
+            	 
             	 
             	 if(id.startsWith("D")) {
             		 //deposit
@@ -62,14 +84,19 @@ public class CalculateIntrest {
                      str[i]=rs.getString(i+1);                     
                      //System.out.print( rs.getString(i+1) + " ");                    
                  }
-                 System.out.println("");
              }
-             
+             intrestTotal+=getIntrest(todayTotal);
+             System.out.println(currDate + " intrest is " + getIntrest(todayTotal));
              System.out.println("total amount is : "+total);
+             System.out.println("total intrest is : "+intrestTotal);
+             
          }catch(SQLException e)
          {
              JOptionPane.showMessageDialog(null,e.getMessage());
          }
+	}
+	public static double getIntrest(int amount) {
+		return Math.floor( amount * 0.00033);
 	}
 
 }
