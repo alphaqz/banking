@@ -361,7 +361,7 @@ public class mySQLQueries {
        	 //id name gender phone address job nrc email
             query = "update customer set Name='"+data[0]+"',gender='"+data[1]+"',phone='"+data[2]+"',address='"+data[3]+"',job='"+data[4]+"',nrc='"+data[5]+"',Email='"+data[6]+"'where id='"+id+"'";
         else if(tbName.equals("account"))
-            query = "update account set balance='"+data[0]+"' where id='"+id+"'";
+            query = "update account set accTypeID='"+data[0]+"' where id='"+id+"'";
         else if(tbName.equals("accounttype"))
              query = "update accounttype set title='"+data[0]+"',interest='"+data[1]+"' where id='"+id+"'";
         else if(tbName.equals("type"))
@@ -627,4 +627,21 @@ public class mySQLQueries {
             return null;
         }
 	}
+	public static String getAccountTypeName(String id)
+    {
+        try{
+            String accountTypeName;
+            con=connect.getConnection();
+            stmt = (Statement) con.createStatement();
+            query = "select * from accounttype where id='"+id+"';";
+            rs=stmt.executeQuery(query);
+            rs.next();
+            accountTypeName=rs.getString(2);
+            return accountTypeName;
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return null;
+        }
+    }
 }

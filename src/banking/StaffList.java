@@ -59,7 +59,7 @@ public class StaffList extends JDialog {
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 50, 530, 310);
+		scrollPane.setBounds(10, 128, 530, 232);
 		panel.add(scrollPane);
 		
 		tblstaff = new JTable();

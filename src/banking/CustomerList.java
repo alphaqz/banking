@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 public class CustomerList extends JDialog {
 	private JTable tblcustomer;
@@ -35,6 +37,8 @@ public class CustomerList extends JDialog {
 	private JRadioButton rdoJob;
 	private JComboBox cboJob;
 	private JComboBox cboAddress;
+	private JTextField txtName;
+	private JTextField txtEmail;
 
 
 	/**
@@ -60,12 +64,12 @@ public class CustomerList extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Customer List", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 790, 415);
+		panel.setBounds(10, 26, 790, 400);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 108, 770, 252);
+		scrollPane.setBounds(10, 135, 770, 191);
 		panel.add(scrollPane);
 		
 		tblcustomer = new JTable();
@@ -80,7 +84,7 @@ public class CustomerList extends JDialog {
 				}
 			}
 		});
-		btnClose.setBounds(673, 371, 89, 33);
+		btnClose.setBounds(671, 352, 89, 33);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -93,35 +97,49 @@ public class CustomerList extends JDialog {
 		        }
 			}
 		});
-		btnPrint.setBounds(560, 371, 89, 33);
+		btnPrint.setBounds(560, 352, 89, 33);
 		panel.add(btnPrint);
 		
 		cboAddress = new JComboBox();
-		cboAddress.setBounds(80, 62, 103, 22);
+		cboAddress.setBounds(298, 98, 103, 22);
 		panel.add(cboAddress);
 		
 		cboJob = new JComboBox();
-		cboJob.setBounds(310, 62, 109, 22);
+		cboJob.setBounds(411, 98, 109, 22);
 		panel.add(cboJob);
 		
 		rdoAddress = new JRadioButton("Address");
 		rdoAddress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cboAddress.setVisible(true);
-		        cboJob.setVisible(false);
+				if(rdoAddress.isSelected()==false) {
+					cboAddress.setVisible(false);
+			        cboJob.setVisible(false);
+				}
+				else {
+					cboAddress.setVisible(true);
+			        cboJob.setVisible(false);
+				}
+				rdoJob.setSelected(false);
 			}
 		});
-		rdoAddress.setBounds(76, 21, 109, 23);
+		rdoAddress.setBounds(298, 61, 109, 23);
 		panel.add(rdoAddress);
 		
 		rdoJob = new JRadioButton("Job");
 		rdoJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cboAddress.setVisible(false);
-		        cboJob.setVisible(true);
+		        if(rdoJob.isSelected()==false) {
+					cboAddress.setVisible(false);
+			        cboJob.setVisible(false);
+				}
+				else {
+					cboAddress.setVisible(false);
+			        cboJob.setVisible(true);
+				}
+		        rdoAddress.setSelected(false);
 			}
 		});
-		rdoJob.setBounds(310, 21, 109, 23);
+		rdoJob.setBounds(411, 58, 109, 23);
 		panel.add(rdoJob);
 		
 		JButton btnSearch = new JButton("Search");
@@ -146,33 +164,76 @@ public class CustomerList extends JDialog {
 		            	String str = "select * from customer where job='"+cboJob.getSelectedItem().toString()+"'";
 		            	fillData(str);
 		            }
-//		        } else if (rdoBoth.isSelected()) {
-//		        	
-//		            if(cboAddress.getSelectedIndex()==0) {
-//		                JOptionPane.showMessageDialog(null,"Please choose Month");
-//		                cboAddress.requestFocus();
-//		            } else if(cboJob.getSelectedIndex()==0) {
-//		            	JOptionPane.showMessageDialog(null,"Please choose Year");
-//		                cboJob.requestFocus();
-//		            } else {
-//		            	String str = "select * from transfer where Month(date)="+cbomonth.getSelectedIndex()+" and Year(date)="+cboyear.getSelectedItem().toString()+"";
-//		                fillData(str);
-//		            }
+		        } else if (rdoAddress.isSelected() && rdoJob.isSelected()) {
+		        	
+		            if(cboAddress.getSelectedIndex()==0) {
+		                JOptionPane.showMessageDialog(null,"Please choose Address");
+		                cboAddress.requestFocus();
+		            } else if(cboJob.getSelectedIndex()==0) {
+		            	JOptionPane.showMessageDialog(null,"Please choose Job");
+		                cboJob.requestFocus();
+		            } else {
+		            	String str = "select * from customer where address='"+cboAddress.getSelectedItem().toString()+"' and job='"+cboJob.getSelectedItem().toString()+"'";
+		                fillData(str);
+		            }
+		            
 		        }
+		        else if(txtName.getText()!=null) {
+		        	String str = "select * from customer where name LIKE '"+txtName.getText().toString()+"%'";
+	            	fillData(str);
+	            }
+		        else if(txtEmail.getText()!=null) {
+		        	String str = "select * from customer where email LIKE '"+txtEmail.getText().toString()+"%'";
+	            	fillData(str);
+	            }
 			}
 		});
-		btnSearch.setBounds(560, 61, 89, 23);
+		btnSearch.setBounds(560, 97, 89, 23);
 		panel.add(btnSearch);
 		
 		JButton btnShow = new JButton("Show All");
 		btnShow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				rdoAddress.setSelected(true);
+				rdoJob.setSelected(true);
+				
 				cboAddress.setVisible(true);
 		        cboJob.setVisible(true);
+		        
+//		        if(cboAddress.getSelectedIndex()==0) {
+////	                JOptionPane.showMessageDialog(null,"Please choose Address");
+////	                cboAddress.requestFocus();
+//	            } else if(cboJob.getSelectedIndex()==0) {
+////	            	JOptionPane.showMessageDialog(null,"Please choose Job");
+////	                cboJob.requestFocus();
+//	            } else {
+//	            	String str = "select * from customer where address='"+cboAddress.getSelectedItem().toString()+"' and job='"+cboJob.getSelectedItem().toString()+"'";
+//	                fillData(str);
+//	            }
+//		        String str = "select * from customer";
+//            	fillData(str);
 			}
 		});
-		btnShow.setBounds(560, 21, 89, 23);
+		btnShow.setBounds(560, 58, 89, 23);
 		panel.add(btnShow);
+		
+		txtName = new JTextField();
+		txtName.setBounds(10, 95, 96, 25);
+		panel.add(txtName);
+		txtName.setColumns(10);
+		
+		txtEmail = new JTextField();
+		txtEmail.setColumns(10);
+		txtEmail.setBounds(139, 95, 96, 25);
+		panel.add(txtEmail);
+		
+		JLabel lblNewLabel = new JLabel("Search Name");
+		lblNewLabel.setBounds(10, 62, 96, 19);
+		panel.add(lblNewLabel);
+		
+		JLabel lblSearchEmail = new JLabel("Search Email");
+		lblSearchEmail.setBounds(139, 62, 96, 19);
+		panel.add(lblSearchEmail);
 		
 		try{
 			clsDBConnection c=new clsDBConnection();

@@ -85,11 +85,11 @@ public class Transfer extends JDialog {
 		panel.add(lblDatelabel);
 		
 		JLabel lblReceivedAccountNo = new JLabel("Received Account No :");
-		lblReceivedAccountNo.setBounds(10, 187, 148, 19);
+		lblReceivedAccountNo.setBounds(10, 233, 148, 19);
 		panel.add(lblReceivedAccountNo);
 		
 		JLabel lblTransferedAccountNo = new JLabel("Transfered Account No :");
-		lblTransferedAccountNo.setBounds(10, 233, 148, 19);
+		lblTransferedAccountNo.setBounds(10, 187, 148, 19);
 		panel.add(lblTransferedAccountNo);
 		
 		JLabel lblStaffId = new JLabel("Staff ID :");
@@ -107,10 +107,18 @@ public class Transfer extends JDialog {
 		
 		cboReceive = new JComboBox();
 		cboReceive.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {
+//				if(cboReceive.getSelectedIndex()==0) {
+////					JOptionPane.showMessageDialog(null, "Please select Transfered Account.");
+////					cboTransfer.requestFocus();
+//				}
+//				else {
+//					cboTransfer.removeAllItems();
+//					filterTransferAccount();
+//				}
 			}
 		});
-		cboReceive.setBounds(206, 183, 157, 27);
+		cboReceive.setBounds(206, 229, 157, 27);
 		panel.add(cboReceive);
 		
 		cboTransfer = new JComboBox();
@@ -126,7 +134,7 @@ public class Transfer extends JDialog {
 				}
 			}
 		});
-		cboTransfer.setBounds(206, 229, 157, 27);
+		cboTransfer.setBounds(206, 183, 157, 27);
 		panel.add(cboTransfer);
 		
 		cboStaff = new JComboBox();
@@ -277,6 +285,14 @@ public class Transfer extends JDialog {
 			cboReceive.addItem(str[i].toString());
 		}
 	}
+//	private void filterTransferAccount() {
+//		String str[]=mySQLQueries.getIDForFilter(cboReceive.getSelectedItem().toString());
+//		
+//		cboTransfer.addItem("- Select -");
+//		for(int i=0;i<str.length;i++) {
+//			cboTransfer.addItem(str[i].toString());
+//		}
+//	}
 
 	public void fillStaff()
     {

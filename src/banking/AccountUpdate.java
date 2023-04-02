@@ -16,6 +16,9 @@ import javax.swing.JComboBox;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
@@ -32,10 +35,13 @@ public class AccountUpdate extends JDialog {
 	private String gender = "";
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
+	List<String> accountTypeIDList = new ArrayList<>();
+	
 	Border backline=BorderFactory.createLineBorder(Color.black);
 	private JLabel lblCustomer;
-	private JLabel lblAccountType;
 	private JLabel lblStaff;
+	private JComboBox cboAccountType;
+	private JLabel lblAccountType;
 
 	/**
 	 * Launch the application.
@@ -55,13 +61,13 @@ public class AccountUpdate extends JDialog {
 	 */
 	public AccountUpdate() {
 		setTitle("Account Update");
-		setBounds(100, 100, 394, 319);
+		setBounds(100, 100, 547, 319);
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
 			panel.setLayout(null);
 			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Update Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 358, 207);
+			panel.setBounds(10, 11, 511, 207);
 			getContentPane().add(panel);
 			{
 				JLabel lblNewLabel = new JLabel("Account ID:");
@@ -81,23 +87,19 @@ public class AccountUpdate extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(cboaccountid.getSelectedIndex()<=0)
 						{
-							
-					        
+					        clear();
 						}
 						else
 						{
 							showAccount();
 						}
-							
-						
-						
 					}
 				});
 				cboaccountid.setBounds(170, 19, 167, 22);
 				panel.add(cboaccountid);
 			}
 			
-			JLabel lblJob = new JLabel("Account Type ID :");
+			JLabel lblJob = new JLabel("Account Type :");
 			lblJob.setHorizontalAlignment(SwingConstants.RIGHT);
 			lblJob.setBounds(10, 65, 101, 14);
 			panel.add(lblJob);
@@ -112,11 +114,6 @@ public class AccountUpdate extends JDialog {
 				}
 			});
 			
-			lblAccountType = new JLabel("");
-			lblAccountType.setBounds(170, 56, 167, 23);
-			lblAccountType.setBorder(backline);
-			panel.add(lblAccountType);
-			
 			lblCustomer = new JLabel("");
 			lblCustomer.setBounds(170, 105, 167, 23);
 			lblCustomer.setBorder(backline);
@@ -126,6 +123,28 @@ public class AccountUpdate extends JDialog {
 			lblStaff.setBounds(170, 160, 167, 23);
 			lblStaff.setBorder(backline);
 			panel.add(lblStaff);
+			
+			cboAccountType = new JComboBox();
+			cboAccountType.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(cboAccountType.getSelectedIndex()<=0)
+					{
+//				        clear();
+					}
+					else
+					{
+						lblAccountType.setText(cboAccountType.getSelectedItem().toString());
+					}
+				}
+			});
+			cboAccountType.setBounds(170, 59, 167, 27);
+			panel.add(cboAccountType);
+			{
+				lblAccountType = new JLabel("");
+				lblAccountType.setBorder(backline);
+				lblAccountType.setBounds(363, 59, 138, 23);
+				panel.add(lblAccountType);
+			}
 		}
 		{
 			btnclose = new JButton("Close");
@@ -178,10 +197,9 @@ public class AccountUpdate extends JDialog {
 						 if(JOptionPane.showConfirmDialog(null, "Are you Sure Update?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) 
 						 {
 							 String []st = new String[1];
+							 st[0]=accountTypeIDList.get(cboAccountType.getSelectedIndex()-1);
 						     String id = cboaccountid.getSelectedItem().toString();						               
-						               
-						    
-						     							
+						      							
 						     boolean save = mySQLQueries.updateRecord("account", id, st);
 						     if(save) 
 						     {
@@ -201,6 +219,7 @@ public class AccountUpdate extends JDialog {
 			getContentPane().add(btnUpdate);
 		}
 		fillAccount();
+		fillAccountType();
 	}
 
     public void fillAccount()
@@ -217,7 +236,8 @@ public class AccountUpdate extends JDialog {
         String result[]= mySQLQueries.getAccountData(cboaccountid.getSelectedItem().toString());
    
         lblCustomer.setText(result[1]);
-        lblAccountType.setText(result[2]);
+        String name=mySQLQueries.getAccountTypeName(result[2]);
+        lblAccountType.setText(name);
         
         lblStaff.setText(result[3]);
     }
@@ -228,5 +248,14 @@ public class AccountUpdate extends JDialog {
         lblStaff.setText("");
         cboaccountid.requestFocus();
         cboaccountid.setSelectedIndex(0);
+    }
+    public void fillAccountType()
+    {
+        String str[]=mySQLQueries.getNameForChoice("accounttype");
+        String temp[]=mySQLQueries.getIDForChoice("accounttype");
+        accountTypeIDList = Arrays.asList(temp);
+        cboAccountType.addItem("- Select -");
+        for(int i=0;i<str.length;i++)
+        	cboAccountType.addItem(str[i].toString());
     }
 }
