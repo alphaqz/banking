@@ -41,7 +41,6 @@ public class AccountUpdate extends JDialog {
 	private JLabel lblCustomer;
 	private JLabel lblStaff;
 	private JComboBox cboAccountType;
-	private JLabel lblAccountType;
 
 	/**
 	 * Launch the application.
@@ -67,7 +66,7 @@ public class AccountUpdate extends JDialog {
 			JPanel panel = new JPanel();
 			panel.setLayout(null);
 			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Update Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 511, 207);
+			panel.setBounds(10, 11, 511, 215);
 			getContentPane().add(panel);
 			{
 				JLabel lblNewLabel = new JLabel("Account ID:");
@@ -78,7 +77,7 @@ public class AccountUpdate extends JDialog {
 			{
 				JLabel lblEmail = new JLabel("Staff ID :");
 				lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblEmail.setBounds(10, 169, 101, 14);
+				lblEmail.setBounds(10, 177, 101, 14);
 				panel.add(lblEmail);
 			}
 			{
@@ -106,7 +105,7 @@ public class AccountUpdate extends JDialog {
 			
 			JLabel lblNewLabel_2 = new JLabel("Customer ID :");
 			lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblNewLabel_2.setBounds(10, 114, 101, 14);
+			lblNewLabel_2.setBounds(10, 75, 101, 14);
 			panel.add(lblNewLabel_2);
 			rdbtnFemale.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -115,36 +114,30 @@ public class AccountUpdate extends JDialog {
 			});
 			
 			lblCustomer = new JLabel("");
-			lblCustomer.setBounds(170, 105, 167, 23);
+			lblCustomer.setBounds(170, 75, 167, 23);
 			lblCustomer.setBorder(backline);
 			panel.add(lblCustomer);
 			
 			lblStaff = new JLabel("");
-			lblStaff.setBounds(170, 160, 167, 23);
+			lblStaff.setBounds(170, 177, 167, 23);
 			lblStaff.setBorder(backline);
 			panel.add(lblStaff);
 			
 			cboAccountType = new JComboBox();
 			cboAccountType.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(cboAccountType.getSelectedIndex()<=0)
-					{
-//				        clear();
-					}
-					else
-					{
-						lblAccountType.setText(cboAccountType.getSelectedItem().toString());
-					}
+//					if(cboAccountType.getSelectedIndex()<=0)
+//					{
+////				        clear();
+//					}
+//					else
+//					{
+//						lblAccountType.setText(cboAccountType.getSelectedItem().toString());
+//					}
 				}
 			});
 			cboAccountType.setBounds(170, 127, 167, 27);
 			panel.add(cboAccountType);
-			{
-				lblAccountType = new JLabel("");
-				lblAccountType.setBorder(backline);
-				lblAccountType.setBounds(363, 59, 138, 23);
-				panel.add(lblAccountType);
-			}
 		}
 		{
 			btnclose = new JButton("Close");
@@ -237,7 +230,7 @@ public class AccountUpdate extends JDialog {
    
         lblCustomer.setText(result[1]);
         String name=mySQLQueries.getAccountTypeName(result[2]);
-        lblAccountType.setText(name);
+//        lblAccountType.setText(name);
         int index =  accountTypeIDList.indexOf(result[2]);
         cboAccountType.setSelectedIndex(index+1); 
         lblStaff.setText(result[3]);
@@ -245,7 +238,7 @@ public class AccountUpdate extends JDialog {
     public void clear()
     {
         lblCustomer.setText("");
-        lblAccountType.setText("");
+//        lblAccountType.setText("");
         lblStaff.setText("");
         cboaccountid.requestFocus();
         cboaccountid.setSelectedIndex(0);

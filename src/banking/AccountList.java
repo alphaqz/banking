@@ -102,10 +102,10 @@ public class AccountList extends JDialog {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(cboAccNo.getSelectedIndex()==0) {
-	                JOptionPane.showMessageDialog(null,"Please choose Month");
+	                JOptionPane.showMessageDialog(null,"Please choose Account No");
 	                cboAccNo.requestFocus();
 	            } else {
-	            	tblaccount.removeAll();
+//	            	tblaccount.removeAll();
 	            	String str = "select id,balance,cusID,accTypeID,staffID from account where id='"+cboAccNo.getSelectedItem().toString()+"'";
 //	            	fillAccountForSelected();
 	            	fillAccount(str);
