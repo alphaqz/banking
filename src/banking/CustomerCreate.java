@@ -203,7 +203,9 @@ public class CustomerCreate extends JDialog {
 						st[6] = (String)txtEmail.getText();
 						
 			            boolean ee = mySQLQueries.isduplicate("customer", st);
-			            if(!ee)
+			            boolean ee1 = mySQLQueries.isduplicate1("customer", st);
+			            boolean ee2= mySQLQueries.isduplicate2("customer", st);
+			            if(!(ee && ee1 && ee2))
 			            {
 			                JOptionPane.showMessageDialog(null, "Duplicate Record!");
 			                txtcusname.requestFocus();

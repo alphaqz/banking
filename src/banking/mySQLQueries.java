@@ -216,9 +216,29 @@ public class mySQLQueries {
 	    }
 	    else if(tbName.equals("customer"))
 	    {
-	        query = "select * from customer where name ='"+data[0]+"'and gender ='"+data[1]+"'and phone ='"+data[2]+"'and address ='"+data[3]+"'and job ='"+data[4]+"'and nrc ='"+data[5]+"'and email ='"+data[6]+"'";
+	        query = "select * from customer where phone ='"+data[2]+"'";
 	    }
-	    	    
+	        	    
+	    try{
+	    	con=connect.getConnection();
+	        stmt = (Statement) con.createStatement();
+	        rs = stmt.executeQuery(query);
+	        if(rs.next())
+	            return false;
+	        else
+	            return true;
+	    }catch(SQLException e){
+	        JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+	}
+    public static boolean isduplicate1(String tbName , String []data)
+	{
+	    if(tbName.equals("customer"))
+	    {
+	        query = "select * from customer where nrc ='"+data[5]+"'";
+	    }
+	        	    
 	    try{
 	    	con=connect.getConnection();
 	        stmt = (Statement) con.createStatement();
@@ -233,6 +253,26 @@ public class mySQLQueries {
 	    }
 	}
 
+    public static boolean isduplicate2(String tbName , String []data)
+	{
+	    if(tbName.equals("customer"))
+	    {
+	        query = "select * from customer where email ='"+data[6]+"'";
+	    }
+	        	    
+	    try{
+	    	con=connect.getConnection();
+	        stmt = (Statement) con.createStatement();
+	        rs = stmt.executeQuery(query);
+	        if(rs.next())
+	            return false;
+	        else
+	            return true;
+	    }catch(SQLException e){
+	        JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+	}
     public static   String getAutoid(String field , String tabel , String prefix) throws ClassNotFoundException
     {
        

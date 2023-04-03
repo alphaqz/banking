@@ -1,32 +1,29 @@
 package banking;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import com.mysql.jdbc.Statement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 
-public class CustomerList extends JDialog {
+public class CustomerList1 extends JInternalFrame {
+
 	private JTable tblcustomer;
 	private JButton btnPrint;
 	private JButton btnClose;
@@ -37,40 +34,41 @@ public class CustomerList extends JDialog {
 	private JRadioButton rdoJob;
 	private JComboBox cboJob;
 	private JComboBox cboAddress;
-	private JTextField txtName;
-	private JTextField txtEmail;
-	private JRadioButton rdoBoth;
-
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try {
-			CustomerList dialog = new CustomerList();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CustomerList1 frame = new CustomerList1();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
-	 * Create the dialog.
+	 * Create the frame.
 	 */
-	public CustomerList() throws ClassNotFoundException {
+	public CustomerList1() {
+		setBounds(335, 121, 765, 555);
+
 		setTitle("Customer List");
-		setBounds(100, 100, 826, 476);
+		setBounds(100, 100, 719, 476);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Customer List", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 26, 790, 400);
+		panel.setBounds(10, 11, 683, 415);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 135, 770, 191);
+		scrollPane.setBounds(10, 108, 663, 252);
 		panel.add(scrollPane);
 		
 		tblcustomer = new JTable();
@@ -85,7 +83,7 @@ public class CustomerList extends JDialog {
 				}
 			}
 		});
-		btnClose.setBounds(671, 352, 89, 33);
+		btnClose.setBounds(584, 371, 89, 33);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -98,70 +96,41 @@ public class CustomerList extends JDialog {
 		        }
 			}
 		});
-		btnPrint.setBounds(560, 352, 89, 33);
+		btnPrint.setBounds(471, 371, 89, 33);
 		panel.add(btnPrint);
 		
 		cboAddress = new JComboBox();
-		cboAddress.setBounds(298, 98, 103, 22);
+		cboAddress.setBounds(10, 63, 103, 22);
 		panel.add(cboAddress);
 		
 		cboJob = new JComboBox();
-		cboJob.setBounds(411, 98, 109, 22);
+		cboJob.setBounds(150, 63, 109, 22);
 		panel.add(cboJob);
 		
 		rdoAddress = new JRadioButton("Address");
 		rdoAddress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(rdoAddress.isSelected()==false) {
-					cboAddress.setVisible(false);
-			        cboJob.setVisible(false);
-				}
-				else {
-					cboAddress.setVisible(true);
-			        cboJob.setVisible(false);
-				}
-				rdoJob.setSelected(false);
+				cboAddress.setVisible(true);
+		        cboJob.setVisible(false);
 			}
 		});
-		rdoAddress.setBounds(298, 61, 109, 23);
+		rdoAddress.setBounds(6, 22, 109, 23);
 		panel.add(rdoAddress);
 		
 		rdoJob = new JRadioButton("Job");
 		rdoJob.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        if(rdoJob.isSelected()==false) {
-					cboAddress.setVisible(false);
-			        cboJob.setVisible(false);
-				}
-				else {
-					cboAddress.setVisible(false);
-			        cboJob.setVisible(true);
-				}
-		        rdoAddress.setSelected(false);
+				cboAddress.setVisible(false);
+		        cboJob.setVisible(true);
 			}
 		});
-		rdoJob.setBounds(411, 58, 109, 23);
+		rdoJob.setBounds(150, 22, 109, 23);
 		panel.add(rdoJob);
 		
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (rdoAddress.isSelected() && rdoJob.isSelected()) {
-		        	System.out.println("both selected ");
-		            if(cboAddress.getSelectedIndex()==0) {
-		                JOptionPane.showMessageDialog(null,"Please choose Address");
-		                cboAddress.requestFocus();
-		            } else if(cboJob.getSelectedIndex()==0) {
-		            	JOptionPane.showMessageDialog(null,"Please choose Job");
-		                cboJob.requestFocus();
-		            } else {
-		            	String str = "select * from customer where address='"+cboAddress.getSelectedItem().toString()+"' and job='"+cboJob.getSelectedItem().toString()+"'";
-		                fillData(str);
-		            }
-		            
-		        }
-				else if(rdoAddress.isSelected()) {
-					System.out.println("address selected");
+				if(rdoAddress.isSelected()) {
 		            if(cboAddress.getSelectedIndex()==0) {
 		                JOptionPane.showMessageDialog(null,"Please choose Address");
 		                cboAddress.requestFocus();
@@ -180,64 +149,33 @@ public class CustomerList extends JDialog {
 		            	String str = "select * from customer where job='"+cboJob.getSelectedItem().toString()+"'";
 		            	fillData(str);
 		            }
+//		        } else if (rdoBoth.isSelected()) {
+//		        	
+//		            if(cboAddress.getSelectedIndex()==0) {
+//		                JOptionPane.showMessageDialog(null,"Please choose Month");
+//		                cboAddress.requestFocus();
+//		            } else if(cboJob.getSelectedIndex()==0) {
+//		            	JOptionPane.showMessageDialog(null,"Please choose Year");
+//		                cboJob.requestFocus();
+//		            } else {
+//		            	String str = "select * from transfer where Month(date)="+cbomonth.getSelectedIndex()+" and Year(date)="+cboyear.getSelectedItem().toString()+"";
+//		                fillData(str);
+//		            }
 		        }
-		        else if(!txtName.getText().isEmpty()) {
-		        	String str = "select * from customer where name LIKE '"+txtName.getText().toString()+"%'";
-	            	fillData(str);
-	            }
-		        else if(!txtEmail.getText().isEmpty()) {
-		        	String str = "select * from customer where email LIKE '"+txtEmail.getText().toString()+"%'";
-	            	fillData(str);
-	            }
 			}
 		});
-		btnSearch.setBounds(538, 98, 89, 23);
+		btnSearch.setBounds(296, 62, 89, 23);
 		panel.add(btnSearch);
 		
 		JButton btnShow = new JButton("Show All");
 		btnShow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-		        String str = "select * from customer";
-            	fillData(str);
+				cboAddress.setVisible(true);
+		        cboJob.setVisible(true);
 			}
 		});
-		btnShow.setBounds(659, 97, 89, 23);
+		btnShow.setBounds(296, 22, 89, 23);
 		panel.add(btnShow);
-		
-		txtName = new JTextField();
-		txtName.setBounds(10, 95, 96, 25);
-		panel.add(txtName);
-		txtName.setColumns(10);
-		
-		txtEmail = new JTextField();
-		txtEmail.setColumns(10);
-		txtEmail.setBounds(139, 95, 96, 25);
-		panel.add(txtEmail);
-		
-		JLabel lblNewLabel = new JLabel("Search Name");
-		lblNewLabel.setBounds(10, 62, 96, 19);
-		panel.add(lblNewLabel);
-		
-		JLabel lblSearchEmail = new JLabel("Search Email");
-		lblSearchEmail.setBounds(139, 62, 96, 19);
-		panel.add(lblSearchEmail);
-		
-		rdoBoth = new JRadioButton("Address & Job");
-		rdoBoth.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(rdoBoth.isSelected()==true) {
-		        	cboAddress.setVisible(true);
-			        cboJob.setVisible(true);
-		        }
-		        else {
-		        	cboAddress.setVisible(false);
-			        cboJob.setVisible(false);
-		        }
-			}
-		});
-		rdoBoth.setBounds(546, 59, 109, 27);
-		panel.add(rdoBoth);
 		
 		try{
 			clsDBConnection c=new clsDBConnection();
@@ -269,10 +207,10 @@ public class CustomerList extends JDialog {
        dtm.addColumn("NRC");
        dtm.addColumn("Email");
        tblcustomer.setModel(dtm);
-       setColumnWidth(0,50);
-       setColumnWidth(1,100);
-       setColumnWidth(2,35);
-       setColumnWidth(3,50);
+       setColumnWidth(0,40);
+       setColumnWidth(1,50);
+       setColumnWidth(2,100);
+       setColumnWidth(3,40);
        setColumnWidth(4,60);
 
    }
@@ -321,7 +259,6 @@ public class CustomerList extends JDialog {
             	dtm.removeRow(0);
             }
 //            String str = "select * from transfer";
-            System.out.println("sql :" + sql);
             ResultSet rs = ste.executeQuery(sql);
             while(rs.next())
             {
@@ -356,4 +293,5 @@ public class CustomerList extends JDialog {
 			cboJob.addItem(str[i].toString());
 		}
 	}
+
 }
