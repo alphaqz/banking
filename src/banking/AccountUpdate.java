@@ -101,7 +101,7 @@ public class AccountUpdate extends JDialog {
 			
 			JLabel lblJob = new JLabel("Account Type :");
 			lblJob.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblJob.setBounds(10, 65, 101, 14);
+			lblJob.setBounds(10, 133, 101, 14);
 			panel.add(lblJob);
 			
 			JLabel lblNewLabel_2 = new JLabel("Customer ID :");
@@ -137,7 +137,7 @@ public class AccountUpdate extends JDialog {
 					}
 				}
 			});
-			cboAccountType.setBounds(170, 59, 167, 27);
+			cboAccountType.setBounds(170, 127, 167, 27);
 			panel.add(cboAccountType);
 			{
 				lblAccountType = new JLabel("");
@@ -238,7 +238,8 @@ public class AccountUpdate extends JDialog {
         lblCustomer.setText(result[1]);
         String name=mySQLQueries.getAccountTypeName(result[2]);
         lblAccountType.setText(name);
-        
+        int index =  accountTypeIDList.indexOf(result[2]);
+        cboAccountType.setSelectedIndex(index+1); 
         lblStaff.setText(result[3]);
     }
     public void clear()

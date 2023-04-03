@@ -197,7 +197,6 @@ public class CustomerList extends JDialog {
 		JButton btnShow = new JButton("Show All");
 		btnShow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 		        String str = "select * from customer";
             	fillData(str);
 			}

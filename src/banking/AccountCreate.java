@@ -254,6 +254,7 @@ public class AccountCreate extends JDialog {
     }
 	public void AutoID() throws ClassNotFoundException
 	{
+		lblForID.setText((String.valueOf(mySQLQueries.getAutoid("id", "account", "AC-"))));
 	}
 }
 

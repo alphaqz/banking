@@ -103,8 +103,14 @@ public class TransferList extends JDialog {
 		rdomonth = new JRadioButton("Monthly");
 		rdomonth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        cbomonth.setVisible(true);
-		        cboyear.setVisible(false);
+		        if(rdomonth.isSelected()==true) {
+		        	cbomonth.setVisible(true);
+			        cboyear.setVisible(false);
+		        }
+		        else {
+		        	cbomonth.setVisible(false);
+			        cboyear.setVisible(false);
+		        }
 			}
 		});
 		rdomonth.setBounds(10, 42, 109, 27);
@@ -113,8 +119,15 @@ public class TransferList extends JDialog {
 		rdoyear = new JRadioButton("Yearly");
 		rdoyear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        cbomonth.setVisible(false);
-		        cboyear.setVisible(true);
+				if(rdoyear.isSelected()==true) {
+					cbomonth.setVisible(false);
+			        cboyear.setVisible(true);
+		        }
+		        else {
+		        	cbomonth.setVisible(false);
+			        cboyear.setVisible(false);
+		        }
+		        
 			}
 		});
 		rdoyear.setBounds(121, 42, 109, 27);
