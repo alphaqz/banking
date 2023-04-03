@@ -140,7 +140,7 @@ public class mySQLQueries {
 	         stmt = (Statement) con.createStatement();
 	         String str[];
 	         query = "select * from accounttype where id='"+id+"'";
-	         str = new String[2];
+	         str = new String[3];
 	         rs = stmt.executeQuery(query);
 	         if(rs.next())
 	         {
@@ -363,7 +363,7 @@ public class mySQLQueries {
         else if(tbName.equals("account"))
             query = "update account set accTypeID='"+data[0]+"' where id='"+id+"'";
         else if(tbName.equals("accounttype"))
-             query = "update accounttype set title='"+data[0]+"',interest='"+data[1]+"' where id='"+id+"'";
+             query = "update accounttype set title='"+data[0]+"',interest='"+data[1]+"',fixedPeriod="+Integer.parseInt( data[2])  +" where id='"+id+"'";
         else if(tbName.equals("type"))
              query = "update type set typename='"+data[0]+"' where typeid='"+id+"'";
         else if(tbName.equals("orderdetail"))

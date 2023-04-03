@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.JSpinner;
 
 public class AccountTypeUpdate extends JDialog {
 	private JTextField txtTitle;
@@ -32,6 +33,7 @@ public class AccountTypeUpdate extends JDialog {
 	private JRadioButton rdbtnFemale = new JRadioButton("Female");;
 	private String gender = "";
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JSpinner spinner;
 	
 	Border backline=BorderFactory.createLineBorder(Color.black);
 	private JTextField txtInterest;
@@ -60,7 +62,7 @@ public class AccountTypeUpdate extends JDialog {
 			JPanel panel = new JPanel();
 			panel.setLayout(null);
 			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Type Update Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(37, 63, 472, 190);
+			panel.setBounds(37, 63, 472, 246);
 			getContentPane().add(panel);
 			{
 				JLabel lblNewLabel = new JLabel("Account Type ID:");
@@ -108,6 +110,15 @@ public class AccountTypeUpdate extends JDialog {
 			txtInterest.setColumns(10);
 			txtInterest.setBounds(255, 155, 167, 20);
 			panel.add(txtInterest);
+			
+			JLabel lblFixedPeriod = new JLabel("Fixed period:");
+			lblFixedPeriod.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblFixedPeriod.setBounds(124, 202, 91, 14);
+			panel.add(lblFixedPeriod);
+			
+			spinner = new JSpinner();
+			spinner.setBounds(258, 199, 52, 20);
+			panel.add(spinner);
 			rdbtnFemale.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					gender = "male";
@@ -127,7 +138,7 @@ public class AccountTypeUpdate extends JDialog {
 					}
 				}
 			});
-			btnclose.setBounds(424, 279, 85, 39);
+			btnclose.setBounds(424, 326, 85, 39);
 			getContentPane().add(btnclose);
 		}
 		{
@@ -154,7 +165,7 @@ public class AccountTypeUpdate extends JDialog {
 
 				}
 			});
-			btnDelete.setBounds(329, 279, 85, 39);
+			btnDelete.setBounds(329, 326, 85, 39);
 			getContentPane().add(btnDelete);
 		}
 		{
@@ -173,11 +184,12 @@ public class AccountTypeUpdate extends JDialog {
 			        else{
 						 if(JOptionPane.showConfirmDialog(null, "Are you Sure Update?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION) 
 						 {
-							 String []st = new String[2];
+							 String []st = new String[3];
 						     String id = cboaccounttypeid.getSelectedItem().toString();						               
 						               
 						     st[0] = (String)txtTitle.getText();
 						     st[1] = (String)txtInterest.getText();
+						     st[2] = ""+spinner.getValue();
 						     							
 						     boolean save = mySQLQueries.updateRecord("accounttype", id, st);
 						     if(save) 
@@ -194,7 +206,7 @@ public class AccountTypeUpdate extends JDialog {
 			        }
 				}
 			});
-			btnUpdate.setBounds(240, 279, 79, 39);
+			btnUpdate.setBounds(240, 326, 79, 39);
 			getContentPane().add(btnUpdate);
 		}
 		fillAccountType();
@@ -214,11 +226,13 @@ public class AccountTypeUpdate extends JDialog {
         String result[]= mySQLQueries.getAccountTypeData(cboaccounttypeid.getSelectedItem().toString());
         txtTitle.setText(result[0]);
         txtInterest.setText(result[1]);
+        spinner.setValue(Integer.parseInt(result[2]));
     }
     public void clear()
     {
         txtTitle.setText("");
         txtInterest.setText("");
+        spinner.setValue(0);
         cboaccounttypeid.requestFocus();
         cboaccounttypeid.setSelectedIndex(0);
     }
