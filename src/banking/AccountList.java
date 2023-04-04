@@ -136,7 +136,9 @@ public class AccountList extends JDialog {
             e.printStackTrace();
         }
         createtable();
-        fillAccount("select id,balance,cusID,accTypeID,staffID from account");
+        fillAccount("select a.id as id,balance,cusID,at.title as accTypeID ,staffID from account a\r\n"
+        		+ "inner join accounttype at\r\n"
+        		+ "on a.accTypeID = at.id");
         fillAccountData();
 	}
 
@@ -144,12 +146,14 @@ public class AccountList extends JDialog {
    {
        dtm.addColumn("Account No");
        dtm.addColumn("Balance");
+       dtm.addColumn("Withdrawable");
        dtm.addColumn("Customer ID");
-       dtm.addColumn("Account Type ID");
+       dtm.addColumn("Account Type");
        dtm.addColumn("Staff ID");
 //       dtm.addColumn("Balance new");
        tblaccount.setModel(dtm);
        setColumnWidth(0,40);
+       setColumnWidth(1,50);
        setColumnWidth(1,50);
        setColumnWidth(2,100);
        setColumnWidth(3,40);
@@ -177,11 +181,13 @@ public class AccountList extends JDialog {
             ResultSet rs = ste.executeQuery(sql);
             while(rs.next())
             {
+            	int[] result = CalculateIntrest.something(rs.getString(1));
                 strdataitem[0]=rs.getString(1);
-                strdataitem[1]=CalculateIntrest.something(rs.getString(1))+"";
-                strdataitem[2]=rs.getString(3);
-                strdataitem[3]=rs.getString(4);
-                strdataitem[4]=rs.getString(5);
+                strdataitem[1]=result[0]+""; //total
+                strdataitem[2]=result[1]+"";// withdrawable total
+                strdataitem[3]=rs.getString(3);
+                strdataitem[4]=rs.getString(4);
+                strdataitem[5]=rs.getString(5);
                 //strdataitem[5] = ""+CalculateIntrest.something(rs.getString(1));
                 dtm.addRow(strdataitem);
             }

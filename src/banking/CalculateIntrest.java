@@ -19,16 +19,39 @@ public class CalculateIntrest {
 	static String query , query1;
 	static ResultSet rs;
 	static clsDBConnection connect = new clsDBConnection();
-	//private static int total = 0;  
-	//private static String id = "";
+	static String id = "";
+	static double currAmount=0.0;
+	
 	public static void main(String[] args) {
-	 int output =	something("ac-0000002");
+	 int output =	something("ac-0000002")[0];
 	 System.out.println(output);
 	}
-	public static int something(String accid) {
+	
+	static int changeTotal(String accid,int input) {
+		 if(id.startsWith("D")) {
+    		 //deposit
+    		 input+=currAmount;
+    	 }else if(id.startsWith("T")) {
+    		 
+    		try {
+				if(rs.getString("received").toLowerCase().equals(accid.toLowerCase())) {
+					 input+=currAmount;           			
+				}else {
+					input -=currAmount;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	 }else {
+    		 //withdraw
+    		 input -=currAmount;
+    	 }
+		 return input;
+	}
+	
+	public static int[] something(String accid) {
 		
-		int total = 0; 
-		int withDrawable = 0;
 		String str[] ;
 		  str = new String[3];
 		Date prevDate = null;
@@ -36,6 +59,8 @@ public class CalculateIntrest {
 		int todayTotal = 0;
 		double intrestTotal = 0.0;
 		double prevAmount = 0.0;
+		int total = 0;
+		int withdrawableAmount = 0;
 		String accountData[] = mySQLQueries.getAccountData(accid);
 		String accountTypeID = accountData[2];
 		int fixedPeriod = Integer.parseInt( mySQLQueries.getAccountTypeData("AT-0000002")[2]);
@@ -68,27 +93,15 @@ public class CalculateIntrest {
              {
             	 Date currDate = rs.getDate(3);
             	 
-            	 String id = rs.getString(1);
+            	  id = rs.getString(1);
             	 LocalDate currLocalDate = currDate.toLocalDate();
-            	 double currAmount = Integer.parseInt(rs.getString(2));
+            	  currAmount = Integer.parseInt(rs.getString(2));
             	 double currIntrest = getIntrest(currAmount);
             	if(accountTypeID.equals("AT-0000001") || currLocalDate.isBefore( LocalDate.now().minusMonths(fixedPeriod))) {
             		System.out.println("this is "+ fixedPeriod + "months before.");
-            		 if(id.startsWith("D")) {
-                		 //deposit
-                		 total+=currAmount;
-                	 }else if(id.startsWith("T")) {
-                		 
-                		if(rs.getString("received").toLowerCase().equals(accid.toLowerCase())) {
-                			 total+=currAmount;           			
-                		}else {
-                			total -=currAmount;
-                		}
-                	 }else {
-                		 //withdraw
-                		 total -=currAmount;
-                	 }
+            		withdrawableAmount = changeTotal(accid, withdrawableAmount);
             	}
+            	total = changeTotal(accid, total);
             	 
             
             	
@@ -99,14 +112,14 @@ public class CalculateIntrest {
             			 if(prevLocalDate.plusDays(1).getDayOfMonth() == 1) {
             				 System.out.println("@@@@@@   new month   @@@@@@");
             				 total += intrestTotal;
+            				 withdrawableAmount += intrestTotal;
             				 intrestTotal = 0;
             			 }
             			 intrestTotal+= getIntrest(total);
             			prevLocalDate =  prevLocalDate.plusDays(1);
             			 System.out.println(prevLocalDate + " 	balance:" + total +" 	intrest:" +intrestTotal);
             		 }
-            	 }
-            	    
+            	 }           	    
             	
             
             	 
@@ -125,6 +138,7 @@ public class CalculateIntrest {
 	    			 if(prevLocalDate.plusDays(1).getDayOfMonth() == 1) {
 	    				 System.out.println("@@@@@@   new month   @@@@@@");
 	    				 total += intrestTotal;
+	    				 withdrawableAmount += intrestTotal;
 	    				 intrestTotal = 0;
 	    			 }
 	    			 intrestTotal+= getIntrest(total);
@@ -132,14 +146,19 @@ public class CalculateIntrest {
 	    			 System.out.println(prevLocalDate + " 	balance:" + total +" 	intrest:" +intrestTotal);
 	    		 }
              }
-             System.out.println("total amount is : "+total);
+             
             // System.out.println("total intrest is : "+intrestTotal);
              
          }catch(SQLException e)
          {
              JOptionPane.showMessageDialog(null,e.getMessage());
          }
-		 return total;
+		 int[] result = new int[2];
+		 result[0] = total;
+		 result[1] = withdrawableAmount;
+		 System.out.println("total amount is : "+result[0]);
+         System.out.println("withdrawable amount is : "+result[1]);
+		 return result;
 	}
 	public static double getIntrest(double currAmount) {
 		return Math.floor( currAmount * 0.0001);

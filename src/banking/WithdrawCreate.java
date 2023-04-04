@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
 
 public class WithdrawCreate extends JDialog {
 
@@ -37,6 +38,8 @@ public class WithdrawCreate extends JDialog {
 	static String balance;
 	private JButton btnclose;
 	private JButton btnClear;
+	private JLabel lblWithdrawableBalance;
+	private JLabel lblForBalanceTotal;
 	/**
 	 * Launch the application.
 	 */
@@ -63,7 +66,8 @@ public class WithdrawCreate extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel lblAccID = new JLabel("ID:");
-		lblAccID.setBounds(103, 32, 46, 14);
+		lblAccID.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAccID.setBounds(126, 32, 46, 14);
 		contentPanel.add(lblAccID);
 		
 		lblForID = new JLabel("");
@@ -72,12 +76,13 @@ public class WithdrawCreate extends JDialog {
 		contentPanel.add(lblForID);
 		
 		JLabel lblAmount = new JLabel("Amount:");
-		lblAmount.setBounds(103, 104, 69, 14);
+		lblAmount.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAmount.setBounds(102, 117, 69, 14);
 		contentPanel.add(lblAmount);
 		
 		txtAmount = new JTextField();
 		txtAmount.setColumns(10);
-		txtAmount.setBounds(222, 101, 86, 20);
+		txtAmount.setBounds(221, 114, 86, 20);
 		contentPanel.add(txtAmount);
 		
 		cboAccount = new JComboBox();
@@ -85,9 +90,11 @@ public class WithdrawCreate extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if(cboAccount.getSelectedIndex() > 0) {
 					try {
-						String result = ""+CalculateIntrest.something((String)cboAccount.getSelectedItem() );
+						int[] arr = CalculateIntrest.something((String)cboAccount.getSelectedItem());
+						String result = ""+arr[1];
 
 						lblForBalance.setText(result);
+						lblForBalanceTotal.setText(arr[0]+"");
 						
 						System.out.println("balance is "+ result);		
 					} catch (Exception e2) {
@@ -98,29 +105,42 @@ public class WithdrawCreate extends JDialog {
 				}
 			}
 		});
-		cboAccount.setBounds(222, 143, 186, 22);
+		cboAccount.setBounds(221, 156, 186, 22);
 		contentPanel.add(cboAccount);
 		
 		JLabel lblAccount = new JLabel("Account:");
-		lblAccount.setBounds(103, 147, 69, 14);
+		lblAccount.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAccount.setBounds(102, 160, 69, 14);
 		contentPanel.add(lblAccount);
 		
 		JLabel lblStaff = new JLabel("Staff:");
-		lblStaff.setBounds(103, 180, 69, 14);
+		lblStaff.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblStaff.setBounds(102, 193, 69, 14);
 		contentPanel.add(lblStaff);
 		
 		cboStaff = new JComboBox();
-		cboStaff.setBounds(222, 176, 186, 22);
+		cboStaff.setBounds(221, 189, 186, 22);
 		contentPanel.add(cboStaff);
 		
-		JLabel lblBalance = new JLabel("Balance:");
-		lblBalance.setBounds(103, 64, 46, 14);
+		JLabel lblBalance = new JLabel("Withdrawable Balance:");
+		lblBalance.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblBalance.setBounds(60, 57, 112, 14);
 		contentPanel.add(lblBalance);
 		
 		lblForBalance = new JLabel("");
 		lblForBalance.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblForBalance.setBounds(222, 64, 86, 14);
+		lblForBalance.setBounds(222, 57, 86, 14);
 		contentPanel.add(lblForBalance);
+		
+		lblWithdrawableBalance = new JLabel("Total Balance:");
+		lblWithdrawableBalance.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblWithdrawableBalance.setBounds(60, 92, 110, 14);
+		contentPanel.add(lblWithdrawableBalance);
+		
+		lblForBalanceTotal = new JLabel("");
+		lblForBalanceTotal.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblForBalanceTotal.setBounds(220, 89, 86, 14);
+		contentPanel.add(lblForBalanceTotal);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

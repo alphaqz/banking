@@ -37,6 +37,7 @@ public class DepositCreate extends JDialog {
 	JLabel lblforcusname;
 	JLabel lblforacctype;
 	JLabel lblforbalanceNew;
+	JLabel lblforbalanceTotal;
 	List<String> staffIdList = new ArrayList<String>();  
 	List<String> AccountIdList = new ArrayList<String>(); 
 	/**
@@ -58,7 +59,7 @@ public class DepositCreate extends JDialog {
 	 */
 	public DepositCreate() throws ClassNotFoundException {
 		setTitle("Deposit Entry");
-		setBounds(100, 100, 450, 456);
+		setBounds(100, 100, 487, 456);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -89,11 +90,14 @@ public class DepositCreate extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if(cboAccount.getSelectedIndex()> 0) {	
 					String[] result = mySQLQueries.getAccountDataFordeposit((String)cboAccount.getSelectedItem());
+					int[] totalBalance = CalculateIntrest.something(result[0]);
 					lblforaccid.setText(result[0]);
 					lblforbalance.setText(result[1]);
 					lblforacctype.setText(result[2]);
 					lblforcusname.setText(result[3]);
-					lblforbalanceNew.setText(""+CalculateIntrest.something(result[0]));
+					lblforbalanceNew.setText(""+totalBalance[0]);
+					lblforbalanceTotal.setText(""+totalBalance[1]);
+					//lblfor
 					
 				}
 			}
@@ -118,7 +122,7 @@ public class DepositCreate extends JDialog {
 		JPanel contentPanel_1 = new JPanel();
 		contentPanel_1.setLayout(null);
 		contentPanel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Information", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		contentPanel_1.setBounds(0, 240, 434, 133);
+		contentPanel_1.setBounds(0, 240, 461, 133);
 		contentPanel.add(contentPanel_1);
 		
 		JLabel lblAccID = new JLabel("ID:");
@@ -128,12 +132,12 @@ public class DepositCreate extends JDialog {
 		
 		lblforaccid = new JLabel("");
 		lblforaccid.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforaccid.setBounds(224, 30, 86, 14);
+		lblforaccid.setBounds(218, 30, 86, 14);
 		contentPanel_1.add(lblforaccid);
 		
-		JLabel lblbalance = new JLabel("Balance:");
+		JLabel lblbalance = new JLabel("Withdrawable Balance:");
 		lblbalance.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblbalance.setBounds(105, 56, 74, 14);
+		lblbalance.setBounds(33, 56, 146, 14);
 		contentPanel_1.add(lblbalance);
 		
 	
@@ -149,7 +153,7 @@ public class DepositCreate extends JDialog {
 		
 		lblforacctype = new JLabel("");
 		lblforacctype.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforacctype.setBounds(224, 81, 164, 14);
+		lblforacctype.setBounds(218, 81, 164, 14);
 		contentPanel_1.add(lblforacctype);
 		
 		JLabel lblCustomerName = new JLabel("Customer Name:");
@@ -159,13 +163,23 @@ public class DepositCreate extends JDialog {
 	
 		lblforcusname = new JLabel("");
 		lblforcusname.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforcusname.setBounds(224, 106, 172, 14);
+		lblforcusname.setBounds(218, 106, 172, 14);
 		contentPanel_1.add(lblforcusname);
 		
 		lblforbalanceNew = new JLabel("");
 		lblforbalanceNew.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforbalanceNew.setBounds(224, 55, 86, 14);
+		lblforbalanceNew.setBounds(218, 55, 86, 14);
 		contentPanel_1.add(lblforbalanceNew);
+		
+		lblforbalanceTotal = new JLabel("");
+		lblforbalanceTotal.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblforbalanceTotal.setBounds(365, 56, 86, 14);
+		contentPanel_1.add(lblforbalanceTotal);
+		
+		JLabel lblTotal = new JLabel("total:");
+		lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTotal.setBounds(307, 56, 48, 14);
+		contentPanel_1.add(lblTotal);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
