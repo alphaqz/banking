@@ -86,7 +86,7 @@ public class AccountUpdate extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(cboaccountid.getSelectedIndex()<=0)
 						{
-					        clear();
+					        //clear();
 						}
 						else
 						{
@@ -235,14 +235,6 @@ public class AccountUpdate extends JDialog {
         cboAccountType.setSelectedIndex(index+1); 
         lblStaff.setText(result[3]);
     }
-    public void clear()
-    {
-        lblCustomer.setText("");
-//        lblAccountType.setText("");
-        lblStaff.setText("");
-        cboaccountid.requestFocus();
-        cboaccountid.setSelectedIndex(0);
-    }
     public void fillAccountType()
     {
         String str[]=mySQLQueries.getNameForChoice("accounttype");
@@ -252,4 +244,15 @@ public class AccountUpdate extends JDialog {
         for(int i=0;i<str.length;i++)
         	cboAccountType.addItem(str[i].toString());
     }
+    public void clear()
+    {
+        lblCustomer.setText("");
+//        lblAccountType.setText("");
+        lblStaff.setText("");
+        cboaccountid.requestFocus();
+        cboaccountid.setSelectedIndex(0);
+        cboAccountType.setSelectedIndex(0);
+//        cboAccountType.setSelectedItem(accountTypeIDList);
+    }
+ 
 }

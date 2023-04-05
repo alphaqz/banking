@@ -6,23 +6,23 @@ public class test {
 	public static void main(String[] args) {
 		String str ="15/mamata(N)004039";
 		String str1="09257111720";
-//		System.out.println(str.split("/")[0]);
-//		System.out.println(str.split("/")[1].split("\\(N\\)")[0]);
-//		System.out.println(str.split("/")[1].split("\\(N\\)")[1]);
+		System.out.println(str.split("/")[0]);
+		System.out.println(str.split("/")[1].split("\\(N\\)")[0]);
+		System.out.println(str.split("/")[1].split("\\(N\\)")[1]);
 		
-//		if(!checkNRC(str)) {
-//			System.out.println(false);
-//		}
-//		else {
-//			System.out.println(true);
-//		}
-		
-		if((str1.charAt(0)=='0') && (str1.charAt(1)=='9') && (str1.length()==11) && (IsAllDigit(str1))) {
-			System.out.println(true);
-		}
-		else {
+		if(!checkNRC(str)) {
 			System.out.println(false);
 		}
+		else {
+			System.out.println(true);
+		}
+		
+//		if((str1.charAt(0)=='0') && (str1.charAt(1)=='9') && (str1.length()==11) && (IsAllDigit(str1))) {
+//			System.out.println(true);
+//		}
+//		else {
+//			System.out.println(false);
+//		}
 	}
 	public static boolean checkNRC(String str) {
 		boolean b=false;

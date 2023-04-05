@@ -23,7 +23,7 @@ public class CalculateIntrest {
 	static double currAmount=0.0;
 	
 	public static void main(String[] args) {
-	 int output =	something("ac-0000001");
+	 int output =	something("ac-0000001")[0];
 	 System.out.println(output);
 	}
 	

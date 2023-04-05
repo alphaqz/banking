@@ -84,22 +84,22 @@ public class CustomerCreate extends JDialog {
 		lblcusid.setBounds(111, 23, 151, 14);
 		panel.add(lblcusid);
 		
-		txtcusname = new JTextField("");
+		txtcusname = new JTextField("asdfsa");
 		txtcusname.setBounds(111, 59, 167, 20);
 		panel.add(txtcusname);
 		txtcusname.setColumns(10);
 		
-		txtaddress = new JTextField("");
+		txtaddress = new JTextField("asdf");
 		txtaddress.setColumns(10);
 		txtaddress.setBounds(109, 130, 169, 20);
 		panel.add(txtaddress);
 		
-		txtphone = new JTextField("");
+		txtphone = new JTextField("09876543212");
 		txtphone.setColumns(10);
 		txtphone.setBounds(109, 174, 169, 20);
 		panel.add(txtphone);
 		
-		txtEmail = new JTextField("");
+		txtEmail = new JTextField("kaung@gmail.com");
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(111, 213, 167, 20);
 		panel.add(txtEmail);
@@ -168,7 +168,7 @@ public class CustomerCreate extends JDialog {
 		            txtphone.requestFocus();
 		            txtphone.selectAll();
 		        }
-		        else if(!Checking.IsAllDigit(txtphone.getText()) || !Checking.IsPhoneNoformat(txtphone.getText()))
+		        else if(!Checking.IsPhoneNoformat(txtphone.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null,"Please enter valid Phone Number. You must start with 09 and entered number after 09 must not be zero!");
 		            txtphone.requestFocus();

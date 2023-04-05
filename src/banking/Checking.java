@@ -57,7 +57,9 @@ public class Checking {
 //	Check NRC
 	public static boolean IsNRCformat(String str) {
 		boolean b = false;
-		
+		if(!str.contains("/") || !str.contains("(N)") ) {
+			return b;
+		}
 		String first=str.split("/")[0];
 		String second=str.split("/")[1].split("\\(N\\)")[0];
 		String third=str.split("/")[1].split("\\(N\\)")[1];
