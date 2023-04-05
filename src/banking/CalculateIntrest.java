@@ -23,7 +23,7 @@ public class CalculateIntrest {
 	static double currAmount=0.0;
 	
 	public static void main(String[] args) {
-	 int output =	something("ac-0000002")[0];
+	 int output =	something("ac-0000001");
 	 System.out.println(output);
 	}
 	
@@ -97,6 +97,8 @@ public class CalculateIntrest {
             	 LocalDate currLocalDate = currDate.toLocalDate();
             	  currAmount = Integer.parseInt(rs.getString(2));
             	 double currIntrest = getIntrest(currAmount);
+            	 System.out.println(currLocalDate);
+            	 System.out.println(currLocalDate.isBefore( LocalDate.now().minusMonths(fixedPeriod)));
             	if(accountTypeID.equals("AT-0000001") || currLocalDate.isBefore( LocalDate.now().minusMonths(fixedPeriod))) {
             		System.out.println("this is "+ fixedPeriod + "months before.");
             		withdrawableAmount = changeTotal(accid, withdrawableAmount);

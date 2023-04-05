@@ -150,7 +150,7 @@ public class CustomerCreate extends JDialog {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-		         if(Checking.IsValidName(txtcusname.getText()))
+		         if(Checking.IsValidName(txtcusname.getText()) || Checking.IsNull(txtcusname.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null, "Please enter VALID Name.");
 		            txtcusname.requestFocus();
@@ -168,9 +168,9 @@ public class CustomerCreate extends JDialog {
 		            txtphone.requestFocus();
 		            txtphone.selectAll();
 		        }
-		        else if(!Checking.IsAllDigit(txtphone.getText()))
+		        else if(!Checking.IsAllDigit(txtphone.getText()) || !Checking.IsPhoneNoformat(txtphone.getText()))
 		        {
-		            JOptionPane.showMessageDialog(null,"Please enter valid Phone Number.");
+		            JOptionPane.showMessageDialog(null,"Please enter valid Phone Number. You must start with 09 and entered number after 09 must not be zero!");
 		            txtphone.requestFocus();
 		            txtphone.selectAll();
 		        }
@@ -189,8 +189,18 @@ public class CustomerCreate extends JDialog {
 		         else if(rdoMale.isSelected()==false && rdoFemale.isSelected()==false)
 		         {
 		            JOptionPane.showMessageDialog(null, "Please select gender");
-		            
 		         }
+		         else if(Checking.IsNull(txtNrc.getText()) || !Checking.IsNRCformat(txtNrc.getText())) {
+		        	 System.out.println(txtNrc.getText());
+		        	 JOptionPane.showMessageDialog(null, "Invalid NRC No");
+		        	 
+		         }
+		         else if(Checking.IsNull(txtJob.getText()))
+			        {
+			            JOptionPane.showMessageDialog(null, "Please enter Job.");
+			            txtJob.requestFocus();
+			            txtJob.selectAll();
+			        }
 		         
 		         else{
 		        	 String st[] = new String[8];
