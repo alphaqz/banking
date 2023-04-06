@@ -126,14 +126,6 @@ public class AccountUpdate extends JDialog {
 			cboAccountType = new JComboBox();
 			cboAccountType.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					if(cboAccountType.getSelectedIndex()<=0)
-//					{
-////				        clear();
-//					}
-//					else
-//					{
-//						lblAccountType.setText(cboAccountType.getSelectedItem().toString());
-//					}
 				}
 			});
 			cboAccountType.setBounds(170, 127, 167, 27);
@@ -230,7 +222,6 @@ public class AccountUpdate extends JDialog {
    
         lblCustomer.setText(result[1]);
         String name=mySQLQueries.getAccountTypeName(result[2]);
-//        lblAccountType.setText(name);
         int index =  accountTypeIDList.indexOf(result[2]);
         cboAccountType.setSelectedIndex(index+1); 
         lblStaff.setText(result[3]);
@@ -247,12 +238,10 @@ public class AccountUpdate extends JDialog {
     public void clear()
     {
         lblCustomer.setText("");
-//        lblAccountType.setText("");
         lblStaff.setText("");
         cboaccountid.requestFocus();
         cboaccountid.setSelectedIndex(0);
         cboAccountType.setSelectedIndex(0);
-//        cboAccountType.setSelectedItem(accountTypeIDList);
     }
  
 }

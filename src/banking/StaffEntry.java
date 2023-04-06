@@ -122,24 +122,40 @@ public class StaffEntry extends JDialog {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-		         if(Checking.IsValidName(txtstaname.getText()))
+		         if(Checking.IsValidName(txtstaname.getText()) || Checking.IsNull(txtstaname.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null, "Please enter VALID Name.");
 		            txtstaname.requestFocus();
 		            txtstaname.selectAll();
 		        }
+		         
+//		         Check Gender
+		         else if(rdoMale.isSelected()==false && rdoFemale.isSelected()==false)
+		         {
+		            JOptionPane.showMessageDialog(null, "Please select gender");
+		         }
+		         
+//		         Check Phone
 		        else if(Checking.IsNull(txtphone.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null, "Please enter Phone.");
 		            txtphone.requestFocus();
 		            txtphone.selectAll();
-		        }
+		        }   
 		        else if(!Checking.IsAllDigit(txtphone.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null,"Please enter valid Phone Number.");
 		            txtphone.requestFocus();
 		            txtphone.selectAll();
 		        }
+		        else if(!Checking.IsPhoneNoformat(txtphone.getText()))
+		        {
+		            JOptionPane.showMessageDialog(null,"Phone Number must start with 09 and entered number after 09 must not be zero!");
+		            txtphone.requestFocus();
+		            txtphone.selectAll();
+		        }
+		         
+//		         Check Email
 		         else if(Checking.IsNull(txtEmail.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null, "Please enter Email.");

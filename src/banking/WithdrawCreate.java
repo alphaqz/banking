@@ -191,7 +191,6 @@ public class WithdrawCreate extends JDialog {
 					                try {
 										AutoID();
 									} catch (ClassNotFoundException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 					                clear();
@@ -202,7 +201,6 @@ public class WithdrawCreate extends JDialog {
 					                try {
 										AutoID();
 									} catch (ClassNotFoundException e1) {
-										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 					            }
@@ -242,7 +240,7 @@ public class WithdrawCreate extends JDialog {
 		AutoID();
 	}
 	public void fillBalance() {
-		String result = ""+CalculateIntrest.something((String)cboAccount.getSelectedItem() );
+		String result = ""+CalculateIntrest.something((String)cboAccount.getSelectedItem() )[1];
 		balance = result;
 	}
 	public void fillAccount()

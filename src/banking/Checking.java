@@ -81,7 +81,7 @@ public class Checking {
 	public static boolean IsPhoneNoformat(String str) {
 		boolean b=false;
 		
-		if((str.charAt(0)=='0') && (str.charAt(1)=='9') && (str.charAt(2)!='0') && (str.length()==11) && (IsAllDigit(str))) {
+		if((str.length()==11) && (str.charAt(0)=='0') && (str.charAt(1)=='9') && (str.charAt(2)!='0')) {
 			b=true;
 			return b;
 		}
