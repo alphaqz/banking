@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -24,7 +25,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-public class StaffList extends JDialog {
+public class StaffList extends JInternalFrame {
 	private JTable tblstaff;
 	private JButton btnPrint;
 	private JButton btnClose;
@@ -45,7 +46,7 @@ public class StaffList extends JDialog {
 	public static void main(String[] args) {
 		try {
 			StaffList dialog = new StaffList();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			//dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +58,7 @@ public class StaffList extends JDialog {
 	 */
 	public StaffList() throws ClassNotFoundException {
 		setTitle("Staff List");
-		setBounds(100, 100, 597, 476);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -120,11 +121,11 @@ public class StaffList extends JDialog {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!txtName.getText().isEmpty()) {
-		        	String str = "select * from staff where name LIKE '"+txtName.getText().toString()+"%'";
+		        	String str = "select * from staff where name LIKE '%"+txtName.getText().toString().trim()+"%'";
 	            	fillStaff(str);
 	            }
 		        else if(!txtEmail.getText().isEmpty()) {
-		        	String str = "select * from staff where email LIKE '"+txtEmail.getText().toString()+"%'";
+		        	String str = "select * from staff where email LIKE '%"+txtEmail.getText().toString().trim()+"%'";
 	            	fillStaff(str);
 	            }
 			}

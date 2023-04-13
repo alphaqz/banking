@@ -51,20 +51,21 @@ public class StaffList1 extends JInternalFrame {
 	 */
 	public StaffList1() throws PropertyVetoException {
 		setMaximum(true);
-		setBounds(100, 100, 450, 300);
+		//setBounds(100, 100, 450, 300);
 
 		setTitle("Staff List");
-		setBounds(100, 100, 597, 476);
+	
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Staff List", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 558, 415);
+		panel.setBounds(10, 11, 683, 428);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 128, 530, 232);
+		scrollPane.setBounds(10, 128, 663, 232);
 		panel.add(scrollPane);
 		
 		tblstaff = new JTable();
@@ -79,7 +80,7 @@ public class StaffList1 extends JInternalFrame {
 				}
 			}
 		});
-		btnClose.setBounds(451, 371, 89, 33);
+		btnClose.setBounds(564, 371, 89, 33);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -92,7 +93,7 @@ public class StaffList1 extends JInternalFrame {
 		        }
 			}
 		});
-		btnPrint.setBounds(338, 371, 89, 33);
+		btnPrint.setBounds(440, 371, 89, 33);
 		panel.add(btnPrint);
 		
 		try{

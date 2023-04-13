@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import com.mysql.jdbc.Statement;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class CustomerList1 extends JInternalFrame {
 
@@ -55,10 +57,10 @@ public class CustomerList1 extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CustomerList1() {
-		setBounds(335, 121, 765, 555);
+		//setBounds(335, 121, 765, 555);
 
 		setTitle("Customer List");
-		setBounds(100, 100, 719, 476);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -177,6 +179,15 @@ public class CustomerList1 extends JInternalFrame {
 		btnShow.setBounds(296, 22, 89, 23);
 		panel.add(btnShow);
 		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
+		menuBar.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
+		menuBar.add(mntmNewMenuItem_1);
+		
 		try{
 			clsDBConnection c=new clsDBConnection();
             con=c.getConnection();
@@ -293,5 +304,4 @@ public class CustomerList1 extends JInternalFrame {
 			cboJob.addItem(str[i].toString());
 		}
 	}
-
 }
