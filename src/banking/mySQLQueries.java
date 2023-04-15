@@ -38,7 +38,7 @@ public class mySQLQueries {
 	    }
 	    else if(tbName.equals("account"))
 	    {
-	        query = "insert into account(id,balance,cusID,accTypeID,staffID)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"','"+data[4]+"')";
+	        query = "insert into account(id,cusID,accTypeID,staffID)values ('"+data[0]+"','"+data[1]+"','"+data[2]+"','"+data[3]+"')";
 	    }
 
 	    else if(tbName.equals("staff"))
@@ -231,6 +231,23 @@ public class mySQLQueries {
 	            return false;
 	        else
 	            return true;
+	    }catch(SQLException e){
+	        JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+	}
+    
+    public static boolean isduplicateCustomerID(String cid, String typeid)
+	{	    
+	        query = "select * from account where cusID = '"+cid+"' and accTypeID = '" + typeid + "'";	    
+	        	 System.out.println(query);   
+	    try{
+	    	con=connect.getConnection();
+	        stmt = (Statement) con.createStatement();
+	        rs = stmt.executeQuery(query);
+	        System.out.println(rs);
+	       return  rs.next();
+	            
 	    }catch(SQLException e){
 	        JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
 	        return false;

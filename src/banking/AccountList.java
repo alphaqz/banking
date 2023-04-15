@@ -33,7 +33,11 @@ public class AccountList extends JDialog {
 	private JComboBox cboAccNo;
 	private JButton btnSearch;
 	private JButton btnShowAll;
-
+	private String selectAll = "select a.id as id,balance,c.name,at.title as accTypeID ,staffID from account a\r\n"
+    		+ "        		inner join accounttype at\r\n"
+    		+ "        		on a.accTypeID = at.id \r\n"
+    		+ "        		inner join customer c\r\n"
+    		+ "        		on a.cusID = c.id";
 
 	/**
 	 * Launch the application.
@@ -106,7 +110,9 @@ public class AccountList extends JDialog {
 	                cboAccNo.requestFocus();
 	            } else {
 //	            	tblaccount.removeAll();
-	            	String str = "select id,balance,cusID,accTypeID,staffID from account where id='"+cboAccNo.getSelectedItem().toString()+"'";
+	            	String str = "select a.id,a.balance,c.name,a.accTypeID,a.staffID from account a "
+	            			+ "inner join customer c on a.cusID = c.id "
+	            			+ "where a.id='"+cboAccNo.getSelectedItem().toString()+"'";
 //	            	fillAccountForSelected();
 	            	fillAccount(str);
 	            }
@@ -118,7 +124,7 @@ public class AccountList extends JDialog {
 		btnShowAll = new JButton("Show All");
 		btnShowAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fillAccount("select id,balance,cusID,accTypeID,staffID from account");
+				fillAccount(selectAll);
 			}
 		});
 		btnShowAll.setBounds(297, 42, 87, 27);
@@ -136,9 +142,7 @@ public class AccountList extends JDialog {
             e.printStackTrace();
         }
         createtable();
-        fillAccount("select a.id as id,balance,cusID,at.title as accTypeID ,staffID from account a\r\n"
-        		+ "inner join accounttype at\r\n"
-        		+ "on a.accTypeID = at.id");
+        fillAccount(selectAll);
         fillAccountData();
 	}
 
@@ -147,7 +151,7 @@ public class AccountList extends JDialog {
        dtm.addColumn("Account No");
        dtm.addColumn("Balance");
        dtm.addColumn("Withdrawable");
-       dtm.addColumn("Customer ID");
+       dtm.addColumn("Customer");
        dtm.addColumn("Account Type");
        dtm.addColumn("Staff ID");
 //       dtm.addColumn("Balance new");
@@ -155,8 +159,8 @@ public class AccountList extends JDialog {
        setColumnWidth(0,40);
        setColumnWidth(1,50);
        setColumnWidth(1,50);
-       setColumnWidth(2,100);
-       setColumnWidth(3,40);
+       setColumnWidth(2,130);
+       setColumnWidth(3,60);
        setColumnWidth(4,60);
 //       setColumnWidth(1,50);
 

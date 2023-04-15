@@ -37,7 +37,6 @@ public class AccountCreate extends JDialog {
 	private JComboBox cboStaff;
 	private JComboBox cboCustomer;
 	private JLabel lblForID;
-	private JTextField txtBalance;
 	private JLabel lblNewLabel;
 	/**
 	 * Launch the application.
@@ -65,7 +64,7 @@ public class AccountCreate extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
-		panel.setBounds(50, 37, 519, 369);
+		panel.setBounds(50, 37, 519, 335);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -77,38 +76,32 @@ public class AccountCreate extends JDialog {
 		lblForID.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lblForID.setBounds(268, 85, 186, 27);
 		panel.add(lblForID);
+	
 		
-		txtBalance = new JTextField();
-		txtBalance.setColumns(10);
-		txtBalance.setBounds(268, 139, 186, 20);
-		panel.add(txtBalance);
-		
-		JLabel lblBalance_1_1 = new JLabel("Balance:");
-		lblBalance_1_1.setBounds(131, 142, 86, 14);
-		panel.add(lblBalance_1_1);
+	
 		
 		JLabel lblCustomer_1_1 = new JLabel("Customer:");
 		lblCustomer_1_1.setBounds(-96, 91, 69, 14);
 		panel.add(lblCustomer_1_1);
 		
 		JLabel lblCustomer_1_2 = new JLabel("Customer:");
-		lblCustomer_1_2.setBounds(131, 191, 86, 14);
+		lblCustomer_1_2.setBounds(131, 149, 86, 14);
 		panel.add(lblCustomer_1_2);
 		
 		cboCustomer = new JComboBox();
-		cboCustomer.setBounds(268, 187, 186, 22);
+		cboCustomer.setBounds(268, 145, 186, 22);
 		panel.add(cboCustomer);
 		
 		JLabel lblAccountType_1_1 = new JLabel("Account Type:");
-		lblAccountType_1_1.setBounds(131, 241, 86, 14);
+		lblAccountType_1_1.setBounds(131, 199, 86, 14);
 		panel.add(lblAccountType_1_1);
 		
 		cboAccountType = new JComboBox();
-		cboAccountType.setBounds(268, 237, 186, 22);
+		cboAccountType.setBounds(268, 195, 186, 22);
 		panel.add(cboAccountType);
 		
 		cboStaff = new JComboBox();
-		cboStaff.setBounds(268, 292, 186, 22);
+		cboStaff.setBounds(268, 250, 186, 22);
 		panel.add(cboStaff);
 		
 		lblNewLabel = new JLabel("Create New Account");
@@ -117,7 +110,7 @@ public class AccountCreate extends JDialog {
 		panel.add(lblNewLabel);
 		
 		JLabel lblAccountType_1_1_1 = new JLabel("Staff :");
-		lblAccountType_1_1_1.setBounds(131, 296, 86, 14);
+		lblAccountType_1_1_1.setBounds(131, 254, 86, 14);
 		panel.add(lblAccountType_1_1_1);
 		{
 			JPanel buttonPane = new JPanel();
@@ -132,19 +125,7 @@ public class AccountCreate extends JDialog {
 				btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-				        if(Checking.IsNull(txtBalance.getText()))
-				        {
-				            JOptionPane.showMessageDialog(null, "Please enter Intrest.");
-				            txtBalance.requestFocus();
-				            txtBalance.selectAll();
-				        }
-				        else if(!Checking.IsAllDigit(txtBalance.getText()))
-				        {
-				            JOptionPane.showMessageDialog(null,"Please enter valid number.");
-				            txtBalance.requestFocus();
-				            txtBalance.selectAll();
-				        }
-				        else if(cboAccountType.getSelectedIndex()==0){
+				     if(cboAccountType.getSelectedIndex()==0){
 				        	JOptionPane.showMessageDialog(null, "Please choose Account Type");						
 				        }
 				        else if(cboCustomer.getSelectedIndex()==0){
@@ -153,35 +134,42 @@ public class AccountCreate extends JDialog {
 				        else if(cboStaff.getSelectedIndex()==0){
 				        	JOptionPane.showMessageDialog(null, "Please choose Staff");						
 				        }
+				        
 				        else {	
-				            String str[] = new String[8];
-				            str[0] = (String)lblForID.getText();						
-				            str[1] = (String)txtBalance.getText();
-				            str[2] = customerIDList.get(cboCustomer.getSelectedIndex()-1); 
-				            str[3] = accountTypeIDList.get(cboAccountType.getSelectedIndex()-1); 
-				            str[4] = staffIDList.get(cboStaff.getSelectedIndex()-1); 
-				            System.out.println("inserting into account :"  + str[2] + str[3] + str[4]);
+				        	boolean ee = mySQLQueries.isduplicateCustomerID(customerIDList.get(cboCustomer.getSelectedIndex()-1), 
+				        			accountTypeIDList.get(cboAccountType.getSelectedIndex()-1));
+				        	if(ee) {
+						    	 JOptionPane.showMessageDialog(null,"Can only have one account","Duplicate customer",JOptionPane.INFORMATION_MESSAGE);
+
+				        	}else {
+				        		String str[] = new String[8];
+					            str[0] = (String)lblForID.getText();	
+					            str[1] = customerIDList.get(cboCustomer.getSelectedIndex()-1); 
+					            str[2] = accountTypeIDList.get(cboAccountType.getSelectedIndex()-1); 
+					            str[3] = staffIDList.get(cboStaff.getSelectedIndex()-1); 
+					            
+					            boolean save = mySQLQueries.insertData("account", str);
+						        if(save)
+						        {
+						        	JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);
+						            try {
+									AutoID();
+								} catch (ClassNotFoundException e1) {
+									e1.printStackTrace();
+								}
+							        clear();
+							     }
+							     else
+							     {
+							    	 JOptionPane.showMessageDialog(null,"Failed to save new record","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
+							         try {
+							        	 AutoID();
+							         } catch (ClassNotFoundException e1) {
+										e1.printStackTrace();
+							         }
+							     }
+				        	}
 				            
-				            boolean save = mySQLQueries.insertData("account", str);
-					        if(save)
-					        {
-					        	JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);
-					            try {
-								AutoID();
-							} catch (ClassNotFoundException e1) {
-								e1.printStackTrace();
-							}
-					        clear();
-					     }
-					     else
-					     {
-					    	 JOptionPane.showMessageDialog(null,"Failed to save new record","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
-					         try {
-					        	 AutoID();
-					         } catch (ClassNotFoundException e1) {
-								e1.printStackTrace();
-					         }
-					     }
 					            
 				        }
 					}
@@ -224,6 +212,7 @@ public class AccountCreate extends JDialog {
 	}
 	public void fillCustomer()
     {
+		cboCustomer.addItem("----Select----");
         String str[]=mySQLQueries.getNameForChoice("customer");
         String temp[]=mySQLQueries.getIDForChoice("customer");
         customerIDList = Arrays.asList(temp);
@@ -232,6 +221,7 @@ public class AccountCreate extends JDialog {
     }
 	public void fillStaff()
     {
+		cboStaff.addItem("----Select----");
         String str[]=mySQLQueries.getNameForChoice("staff");
         String temp[]=mySQLQueries.getIDForChoice("staff");
         staffIDList = Arrays.asList(temp);
@@ -240,6 +230,7 @@ public class AccountCreate extends JDialog {
     }
 	public void fillAccountType()
     {
+		cboAccountType.addItem("----Select----");
         String str[]=mySQLQueries.getNameForChoice("accounttype");
         String temp[]=mySQLQueries.getIDForChoice("accounttype");
         accountTypeIDList = Arrays.asList(temp);
@@ -248,7 +239,6 @@ public class AccountCreate extends JDialog {
     }
 	public void clear()
     {      
-        txtBalance.setText("");
         cboAccountType.setSelectedIndex(0);
         cboCustomer.setSelectedIndex(0);
         cboStaff.setSelectedIndex(0);
