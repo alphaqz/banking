@@ -47,6 +47,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JCheckBox;
 
 public class Report extends JDialog {
 	private JButton btnSearch;
@@ -55,6 +56,8 @@ public class Report extends JDialog {
 	String strquery[]=new String[5];
 	private JTable tblReport;
 	private JScrollPane scrollPane;
+	private JCheckBox chkDeposit;
+	private JCheckBox chkWithdraw;
 	DefaultTableModel dtm = new DefaultTableModel();
 	Vector vid = new Vector();
 	Vector vamount = new Vector();
@@ -70,6 +73,8 @@ public class Report extends JDialog {
    private JComboBox cboAccountID;
    private JDateChooser dateChooserStart;
    private JDateChooser dateChooserEnd; 
+   private JCheckBox chkSend;
+   private JCheckBox chkReceived;
 
 
 
@@ -110,7 +115,7 @@ public class Report extends JDialog {
 			panel.setLayout(null);
 			{
 				JPanel search = new JPanel();
-				search.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				search.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Report filter:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				search.setBounds(20, 11, 725, 148);
 				panel.add(search);
 				search.setLayout(null);
@@ -119,16 +124,43 @@ public class Report extends JDialog {
 					btnSearch.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			 String sql =  "select * from deposit where accountno = '" + cboAccountID.getSelectedItem() 
-			 + "' and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
-			 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "' UNION " +
-			 "select * from withdraw where accountno = '" + cboAccountID.getSelectedItem() 
-			 + "' and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
-			 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "'" ;
-			 
-			 
-			 fillData(sql);
+						String sql;
+						if(cboAccountID.getSelectedIndex() < 1) {
+	                    	JOptionPane.showMessageDialog(null, "Please select an account.","Cannot search",JOptionPane.INFORMATION_MESSAGE);
+
 						}
+						else if(!chkDeposit.isSelected() && !chkWithdraw.isSelected() && !chkSend.isSelected() && !chkReceived.isSelected()){
+	                    	JOptionPane.showMessageDialog(null, "Please select at least one check box.","Cannot search",JOptionPane.INFORMATION_MESSAGE);
+
+						}						
+						else {
+							if(dateChooserStart.getDate() == null) {
+						
+							
+								  sql =  "select d.id, d.amount, d.date,d.accountno,d.accountno as filter,d.staffno from Deposit d where d.accountno = '" + cboAccountID.getSelectedItem() 
+								  + "' UNION " +
+								 "select w.id,w.amount,w.date,w.accountno as received,w.accountno as transfered,w.staffno from withdraw w where w.accountno = '" + cboAccountID.getSelectedItem() + "'" 
+								  + "                     UNION"
+				             		+ "(select * "
+				             		+ "from transfer t where receivedAccount = '"+cboAccountID.getSelectedItem()+"' or transferedAccount = '"+cboAccountID.getSelectedItem()+"')";
+							}else {
+								sql =  "select d.id, d.amount, d.date,d.accountno,d.accountno as filter,d.staffno from Deposit d  where accountno = '" + cboAccountID.getSelectedItem() 
+								 + "' and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
+								 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "' UNION "
+								 + "select  w.id,w.amount,w.date,w.accountno as received,w.accountno as transfered,w.staffno from withdraw w where accountno = '" + cboAccountID.getSelectedItem() 
+								 + "' and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
+								 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "'" 
+								  + "  UNION"
+				             		+ "(select * "
+				             		+ "from transfer t where receivedAccount = '"+cboAccountID.getSelectedItem()+"' or transferedAccount = '"+cboAccountID.getSelectedItem()+"'"
+				             		+ " and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
+									 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "')" ;
+							}
+				 
+								fillData(sql);
+							}
+						}
+						
 					});
 					btnSearch.setBounds(505, 114, 89, 23);
 					search.add(btnSearch);
@@ -137,8 +169,7 @@ public class Report extends JDialog {
 					btnShowAll = new JButton("Show All");
 					btnShowAll.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							 String str = "select id,amount,staffno,date from deposit";
-				            	fillData(str);
+				            	fillDeposit();
 						}
 					});
 					btnShowAll.setBounds(626, 114, 89, 23);
@@ -162,6 +193,26 @@ public class Report extends JDialog {
 				dateChooserEnd = new JDateChooser();
 				dateChooserEnd.setBounds(333, 78, 197, 20);
 				search.add(dateChooserEnd);
+				
+				chkDeposit = new JCheckBox("Deposit");
+				chkDeposit.setSelected(true);
+				chkDeposit.setBounds(34, 75, 97, 23);
+				search.add(chkDeposit);
+				
+				chkWithdraw = new JCheckBox("Withdraw");
+				chkWithdraw.setSelected(true);
+				chkWithdraw.setBounds(157, 75, 97, 23);
+				search.add(chkWithdraw);
+				
+				chkSend = new JCheckBox("Send");
+				chkSend.setSelected(true);
+				chkSend.setBounds(34, 103, 97, 23);
+				search.add(chkSend);
+				
+				chkReceived = new JCheckBox("Received");
+				chkReceived.setSelected(true);
+				chkReceived.setBounds(157, 103, 97, 23);
+				search.add(chkReceived);
 
 			}
 			scrollPane = new JScrollPane();
@@ -223,17 +274,19 @@ public class Report extends JDialog {
     {
          dtm.addColumn("Deposit ID");
         dtm.addColumn("Amount");
-        dtm.addColumn("Account No");
-        dtm.addColumn("Staff");
         dtm.addColumn("Date");
+        dtm.addColumn("Transfer acc");
+        dtm.addColumn("Received account");
+        dtm.addColumn("Staff");
         dtm.addColumn("Type");
         tblReport.setModel(dtm);
-        setColumnWidth(0,5);
-         setColumnWidth(1,60);
-         setColumnWidth(2,40);
+        setColumnWidth(0,40);
+         setColumnWidth(1,40);
+         setColumnWidth(2,80);
           setColumnWidth(3,40);
-           setColumnWidth(4,140);
+           setColumnWidth(4,60);
            setColumnWidth(5,40);
+           setColumnWidth(6,40);
     }
     public void deleteRow()
     {
@@ -246,10 +299,16 @@ public class Report extends JDialog {
     }
     public void fillDeposit()
     {
-        String strdataitem[]=new String[6];
+    	clear();
+        String strdataitem[]=new String[7];
         try{
             Statement ste = (Statement) con.createStatement();
-            String str = "select * from Deposit union select * from withdraw";
+            String str = "select  d.id, d.amount, d.date,d.accountno,d.accountno as filter,d.staffno from Deposit d union "
+            		+ "select w.id,w.amount,w.date,w.accountno as received,w.accountno as transfered,w.staffno from withdraw w"
+            		+ "  UNION "
+             		+ "(select * "
+             		+ "from transfer)"
+            		;
             ResultSet rs = ste.executeQuery(str);
             while(rs.next())
             {
@@ -258,9 +317,16 @@ public class Report extends JDialog {
                 strdataitem[2]=rs.getString(3);
                 strdataitem[3]=rs.getString(4);
                 strdataitem[4]=rs.getString(5);
-                strdataitem[5]=rs.getString(1).startsWith("D") ? "Deposit" : "Withdraw";
+                strdataitem[5]=rs.getString(6);
+                if(rs.getString(1).startsWith("D")) {
+                    strdataitem[6]= "Deposit" ;       
+                }else if(rs.getString(1).startsWith("W")) {
+                	 strdataitem[6]= "Withdraw" ;  
+                }else {
+                	 strdataitem[6]= "Transfer" ;  
+                }
+         
                 dtm.addRow(strdataitem);
-                
             }
             tblReport.setModel(dtm);
         }
@@ -290,13 +356,31 @@ public class Report extends JDialog {
             ResultSet rs = ste.executeQuery(sql);
             while(rs.next())
             {
-            	 strdataitem[0]=rs.getString(1);
-                 strdataitem[1]=rs.getString(2);
-                 strdataitem[2]=rs.getString(3);
-                 strdataitem[3]=rs.getString(4);
-                 strdataitem[4]=rs.getString(5);
-                 strdataitem[5]=rs.getString(1).startsWith("D") ? "Deposit" : "Withdraw";
-                 dtm.addRow(strdataitem);
+            	  strdataitem[0]=rs.getString(1);
+                  strdataitem[1]=rs.getString(2);
+                  strdataitem[2]=rs.getString(3);
+                  strdataitem[3]=rs.getString(4);
+                  strdataitem[4]=rs.getString(5);
+                  strdataitem[5]=rs.getString(6);
+                  if(rs.getString(1).startsWith("D")) {
+                      strdataitem[6]= "Deposit" ;       
+                  }else if(rs.getString(1).startsWith("W")) {
+                  	 strdataitem[6]= "Withdraw" ;  
+                  }else {
+                  	 strdataitem[6]= "Transfer" ;  
+                  }
+                  if(chkDeposit.isSelected() && rs.getString(1).startsWith("D")) {
+                	  dtm.addRow(strdataitem);                	  
+                  }
+                  if(chkWithdraw.isSelected() && rs.getString(1).startsWith("W") ) {
+                	  dtm.addRow(strdataitem);         
+                  }
+//                  if(chkSend.isSelected() && rs.getString(4).equals(cboAccountID.getSelectedItem())) {
+//                	  dtm.addRow(strdataitem);    
+//                  }
+                  if(chkReceived.isSelected() && rs.getString(5).equals(cboAccountID.getSelectedItem())) {
+                	  dtm.addRow(strdataitem);    
+                  }
             }
             tblReport.setModel(dtm);
         }
