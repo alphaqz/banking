@@ -161,6 +161,7 @@ public class AccountCreate extends JDialog {
 				            str[3] = accountTypeIDList.get(cboAccountType.getSelectedIndex()-1); 
 				            str[4] = staffIDList.get(cboStaff.getSelectedIndex()-1); 
 				            System.out.println("inserting into account :"  + str[2] + str[3] + str[4]);
+				            
 				            boolean save = mySQLQueries.insertData("account", str);
 					        if(save)
 					        {

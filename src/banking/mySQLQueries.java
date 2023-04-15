@@ -218,6 +218,10 @@ public class mySQLQueries {
 	    {
 	        query = "select * from customer where phone ='"+data[2]+"'";
 	    }
+	    else if(tbName.equals("account"))
+	    {
+	        query = "select * from account where cusID ='"+data[2]+"'";
+	    }
 	        	    
 	    try{
 	    	con=connect.getConnection();

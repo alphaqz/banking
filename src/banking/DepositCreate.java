@@ -24,12 +24,15 @@ import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class DepositCreate extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtAmount;
 	private JLabel lblForID;
+	private boolean isDeposit = true;
 	JComboBox cboAccount;
 	JComboBox cboStaff; 
 	JLabel lblforaccid;
@@ -40,6 +43,7 @@ public class DepositCreate extends JDialog {
 	JLabel lblforbalanceTotal;
 	List<String> staffIdList = new ArrayList<String>();  
 	List<String> AccountIdList = new ArrayList<String>(); 
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 	/**
 	 * Launch the application.
 	 */
@@ -122,7 +126,7 @@ public class DepositCreate extends JDialog {
 		JPanel contentPanel_1 = new JPanel();
 		contentPanel_1.setLayout(null);
 		contentPanel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Information", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		contentPanel_1.setBounds(0, 240, 461, 133);
+		contentPanel_1.setBounds(0, 240, 461, 144);
 		contentPanel.add(contentPanel_1);
 		
 		JLabel lblAccID = new JLabel("ID:");
@@ -180,6 +184,41 @@ public class DepositCreate extends JDialog {
 		lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTotal.setBounds(307, 56, 48, 14);
 		contentPanel_1.add(lblTotal);
+		
+		JRadioButton rdoDeposit = new JRadioButton("Deposit");
+		rdoDeposit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				isDeposit = true;
+				try {
+					AutoID();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		rdoDeposit.setSelected(true);
+		buttonGroup.add(rdoDeposit);
+		rdoDeposit.setBounds(103, 27, 109, 23);
+		contentPanel.add(rdoDeposit);
+		
+		JRadioButton rdoWithdraw = new JRadioButton("Withdraw");
+		rdoWithdraw.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Withdraw Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				isDeposit = false;
+				try {
+					AutoID();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		buttonGroup.add(rdoWithdraw);
+		rdoWithdraw.setBounds(249, 27, 109, 23);
+		contentPanel.add(rdoWithdraw);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -217,7 +256,12 @@ public class DepositCreate extends JDialog {
 				            	str[2] =  (String) cboAccount.getSelectedItem();
 				            	str[3] = staffIdList.get(cboStaff.getSelectedIndex()-1);
 				            	//System.out.println("inserting into deposit " + str[0] + str[1] + str[3]);
-				            	boolean save = mySQLQueries.insertData("deposit", str);
+				            	boolean save;
+				            	if(isDeposit) {
+				            		save = mySQLQueries.insertData("deposit", str);
+				            	}else {
+				            		save = mySQLQueries.insertData("withdraw", str);
+				            	}
 					            if(save)
 					            {					            	
 					                try {
@@ -281,13 +325,19 @@ public class DepositCreate extends JDialog {
 		lblforacctype.setText("");
 		lblforbalance.setText("");
 		lblforcusname.setText("");
+		lblforbalanceNew.setText("");
+		lblforbalanceTotal.setText("");
         txtAmount.setText("");
         cboAccount.setSelectedIndex(0);
         cboStaff.setSelectedIndex(0);
     }
 	public void AutoID() throws ClassNotFoundException
 	{
-		 lblForID.setText((String.valueOf(mySQLQueries.getAutoid("id", "deposit", "DE-"))));
+		if(isDeposit) {
+			lblForID.setText((String.valueOf(mySQLQueries.getAutoid("id", "deposit", "DE-"))));			
+		}else {
+			lblForID.setText((String.valueOf(mySQLQueries.getAutoid("id", "withdraw", "WD-"))));		
+		}
 	}
 }
 
