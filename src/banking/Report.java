@@ -73,7 +73,7 @@ public class Report extends JDialog {
    private JComboBox cboAccountID;
    private JDateChooser dateChooserStart;
    private JDateChooser dateChooserEnd; 
-   private JCheckBox chkSend;
+   private JCheckBox chkTransfer;
    private JCheckBox chkReceived;
 
 
@@ -129,7 +129,7 @@ public class Report extends JDialog {
 	                    	JOptionPane.showMessageDialog(null, "Please select an account.","Cannot search",JOptionPane.INFORMATION_MESSAGE);
 
 						}
-						else if(!chkDeposit.isSelected() && !chkWithdraw.isSelected() && !chkSend.isSelected() && !chkReceived.isSelected()){
+						else if(!chkDeposit.isSelected() && !chkWithdraw.isSelected() && !chkTransfer.isSelected() && !chkReceived.isSelected()){
 	                    	JOptionPane.showMessageDialog(null, "Please select at least one check box.","Cannot search",JOptionPane.INFORMATION_MESSAGE);
 
 						}						
@@ -140,7 +140,7 @@ public class Report extends JDialog {
 								  sql =  "select d.id, d.amount, d.date,d.accountno,d.accountno as filter,d.staffno from Deposit d where d.accountno = '" + cboAccountID.getSelectedItem() 
 								  + "' UNION " +
 								 "select w.id,w.amount,w.date,w.accountno as received,w.accountno as transfered,w.staffno from withdraw w where w.accountno = '" + cboAccountID.getSelectedItem() + "'" 
-								  + "                     UNION"
+								  + "             UNION"
 				             		+ "(select * "
 				             		+ "from transfer t where receivedAccount = '"+cboAccountID.getSelectedItem()+"' or transferedAccount = '"+cboAccountID.getSelectedItem()+"')";
 							}else {
@@ -204,15 +204,15 @@ public class Report extends JDialog {
 				chkWithdraw.setBounds(157, 75, 97, 23);
 				search.add(chkWithdraw);
 				
-				chkSend = new JCheckBox("Send");
-				chkSend.setSelected(true);
-				chkSend.setBounds(34, 103, 97, 23);
-				search.add(chkSend);
+				chkTransfer = new JCheckBox("Transfer");
+				chkTransfer.setSelected(true);
+				chkTransfer.setBounds(34, 103, 97, 23);
+				search.add(chkTransfer);
 				
 				chkReceived = new JCheckBox("Received");
 				chkReceived.setSelected(true);
 				chkReceived.setBounds(157, 103, 97, 23);
-				search.add(chkReceived);
+				//search.add(chkReceived);
 
 			}
 			scrollPane = new JScrollPane();
@@ -275,8 +275,8 @@ public class Report extends JDialog {
          dtm.addColumn("Deposit ID");
         dtm.addColumn("Amount");
         dtm.addColumn("Date");
-        dtm.addColumn("Transfer acc");
-        dtm.addColumn("Received account");
+        dtm.addColumn("Account");
+        dtm.addColumn("Account");
         dtm.addColumn("Staff");
         dtm.addColumn("Type");
         tblReport.setModel(dtm);
@@ -303,8 +303,8 @@ public class Report extends JDialog {
         String strdataitem[]=new String[7];
         try{
             Statement ste = (Statement) con.createStatement();
-            String str = "select  d.id, d.amount, d.date,d.accountno,d.accountno as filter,d.staffno from Deposit d union "
-            		+ "select w.id,w.amount,w.date,w.accountno as received,w.accountno as transfered,w.staffno from withdraw w"
+            String str = "select  d.id, d.amount, d.date,d.accountno,d.accountno,d.staffno from Deposit d union "
+            		+ "select w.id,w.amount,w.date,w.accountno as received,w.accountno,w.staffno from withdraw w"
             		+ "  UNION "
              		+ "(select * "
              		+ "from transfer)"
@@ -375,12 +375,15 @@ public class Report extends JDialog {
                   if(chkWithdraw.isSelected() && rs.getString(1).startsWith("W") ) {
                 	  dtm.addRow(strdataitem);         
                   }
+                  if(chkTransfer.isSelected() && rs.getString(1).startsWith("T") ) {
+                	  dtm.addRow(strdataitem);         
+                  }
 //                  if(chkSend.isSelected() && rs.getString(4).equals(cboAccountID.getSelectedItem())) {
 //                	  dtm.addRow(strdataitem);    
 //                  }
-                  if(chkReceived.isSelected() && rs.getString(5).equals(cboAccountID.getSelectedItem())) {
-                	  dtm.addRow(strdataitem);    
-                  }
+//                  if(chkReceived.isSelected() && rs.getString(5).equals(cboAccountID.getSelectedItem())) {
+//                	  dtm.addRow(strdataitem);    
+//                  }
             }
             tblReport.setModel(dtm);
         }
