@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +27,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-public class CustomerList extends JDialog {
+public class CustomerList extends JInternalFrame {
 	private JTable tblcustomer;
 	private JButton btnPrint;
 	private JButton btnClose;
@@ -60,17 +61,18 @@ public class CustomerList extends JDialog {
 	 */
 	public CustomerList() throws ClassNotFoundException {
 		setTitle("Customer List");
-		setBounds(100, 100, 826, 476);
+//		setBounds(100, 100, 826, 476);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Customer List", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 26, 790, 400);
+		panel.setBorder(null);
+		panel.setBounds(0, 26, 703, 400);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 135, 770, 191);
+		scrollPane.setBounds(10, 106, 657, 191);
 		panel.add(scrollPane);
 		
 		tblcustomer = new JTable();
@@ -85,7 +87,7 @@ public class CustomerList extends JDialog {
 				}
 			}
 		});
-		btnClose.setBounds(671, 352, 89, 33);
+		btnClose.setBounds(578, 312, 89, 33);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -98,15 +100,15 @@ public class CustomerList extends JDialog {
 		        }
 			}
 		});
-		btnPrint.setBounds(560, 352, 89, 33);
+		btnPrint.setBounds(479, 312, 89, 33);
 		panel.add(btnPrint);
 		
 		cboAddress = new JComboBox();
-		cboAddress.setBounds(298, 98, 103, 22);
+		cboAddress.setBounds(232, 49, 103, 22);
 		panel.add(cboAddress);
 		
 		cboJob = new JComboBox();
-		cboJob.setBounds(411, 98, 109, 22);
+		cboJob.setBounds(341, 49, 109, 22);
 		panel.add(cboJob);
 		
 		rdoAddress = new JRadioButton("Address");
@@ -123,7 +125,7 @@ public class CustomerList extends JDialog {
 				rdoJob.setSelected(false);
 			}
 		});
-		rdoAddress.setBounds(298, 61, 109, 23);
+		rdoAddress.setBounds(222, 13, 109, 23);
 		panel.add(rdoAddress);
 		
 		rdoJob = new JRadioButton("Job");
@@ -140,7 +142,7 @@ public class CustomerList extends JDialog {
 		        rdoAddress.setSelected(false);
 			}
 		});
-		rdoJob.setBounds(411, 58, 109, 23);
+		rdoJob.setBounds(341, 13, 109, 23);
 		panel.add(rdoJob);
 		
 		JButton btnSearch = new JButton("Search");
@@ -189,9 +191,17 @@ public class CustomerList extends JDialog {
 		        	String str = "select * from customer where email LIKE '"+txtEmail.getText().toString()+"%'";
 	            	fillData(str);
 	            }
+		        if(!(txtName.getText().isEmpty() && txtEmail.getText().isEmpty())) {
+		        	String str = "select * from customer where name LIKE '"+txtName.getText().toString()+"%' and email LIKE '"+txtEmail.getText().toString()+"%'";
+	            	fillData(str);
+	            }
+//		        if(!(txtName.getText().isEmpty() && txtEmail.getText().isEmpty()) && ) {
+//		        	String str = "select * from customer where name LIKE '"+txtName.getText().toString()+"%' and email LIKE '"+txtEmail.getText().toString()+"%'";
+//	            	fillData(str);
+//	            }
 			}
 		});
-		btnSearch.setBounds(538, 98, 89, 23);
+		btnSearch.setBounds(479, 49, 89, 23);
 		panel.add(btnSearch);
 		
 		JButton btnShow = new JButton("Show All");
@@ -201,25 +211,25 @@ public class CustomerList extends JDialog {
             	fillData(str);
 			}
 		});
-		btnShow.setBounds(659, 97, 89, 23);
+		btnShow.setBounds(578, 49, 89, 23);
 		panel.add(btnShow);
 		
 		txtName = new JTextField();
-		txtName.setBounds(10, 95, 96, 25);
+		txtName.setBounds(10, 48, 96, 25);
 		panel.add(txtName);
 		txtName.setColumns(10);
 		
 		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(139, 95, 96, 25);
+		txtEmail.setBounds(116, 48, 96, 25);
 		panel.add(txtEmail);
 		
 		JLabel lblNewLabel = new JLabel("Search Name");
-		lblNewLabel.setBounds(10, 62, 96, 19);
+		lblNewLabel.setBounds(10, 15, 96, 19);
 		panel.add(lblNewLabel);
 		
 		JLabel lblSearchEmail = new JLabel("Search Email");
-		lblSearchEmail.setBounds(139, 62, 96, 19);
+		lblSearchEmail.setBounds(116, 15, 96, 19);
 		panel.add(lblSearchEmail);
 		
 		rdoBoth = new JRadioButton("Address & Job");
@@ -235,7 +245,7 @@ public class CustomerList extends JDialog {
 		        }
 			}
 		});
-		rdoBoth.setBounds(546, 59, 109, 27);
+		rdoBoth.setBounds(479, 11, 109, 27);
 		panel.add(rdoBoth);
 		
 		try{

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
-public class AccountList extends JDialog {
+public class AccountList extends JInternalFrame {
 	private JTable tblaccount;
 	private JButton btnPrint;
 	private JButton btnClose;
@@ -57,7 +58,8 @@ public class AccountList extends JDialog {
 	 */
 	public AccountList() throws ClassNotFoundException {
 		setTitle("Account List");
-		setBounds(100, 100, 719, 476);
+//		setBounds(100, 100, 719, 476);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

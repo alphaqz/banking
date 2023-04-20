@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -27,7 +28,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
-public class DepositCreate extends JDialog {
+public class DepositCreate extends JInternalFrame {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtAmount;
@@ -62,8 +63,9 @@ public class DepositCreate extends JDialog {
 	 * @throws ClassNotFoundException 
 	 */
 	public DepositCreate() throws ClassNotFoundException {
-		setTitle("Deposit Entry");
-		setBounds(100, 100, 487, 456);
+		setTitle("Transaction Entry");
+//		setBounds(100, 100, 487, 456);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

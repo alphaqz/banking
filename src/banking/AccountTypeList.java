@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -22,7 +23,7 @@ import com.mysql.jdbc.Statement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class AccountTypeList extends JDialog {
+public class AccountTypeList extends JInternalFrame {
 	private JTable tblaccounttype;
 	private JButton btnPrint;
 	private JButton btnClose;
@@ -49,7 +50,8 @@ public class AccountTypeList extends JDialog {
 	 */
 	public AccountTypeList() throws ClassNotFoundException {
 		setTitle("Account List");
-		setBounds(100, 100, 719, 476);
+//		setBounds(100, 100, 719, 476);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

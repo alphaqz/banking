@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class AccountTypeCreate extends JDialog {
+public class AccountTypeCreate extends JInternalFrame {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtTitle;
@@ -43,7 +44,8 @@ public class AccountTypeCreate extends JDialog {
 	 */
 	public AccountTypeCreate() throws ClassNotFoundException {
 		setTitle("Account type Entry");
-		setBounds(100, 100, 450, 300);
+//		setBounds(100, 100, 450, 300);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Type Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

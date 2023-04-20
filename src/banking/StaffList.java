@@ -62,13 +62,13 @@ public class StaffList extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Staff List", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 558, 415);
+		panel.setBorder(null);
+		panel.setBounds(10, 11, 683, 415);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 128, 530, 232);
+		scrollPane.setBounds(20, 128, 615, 232);
 		panel.add(scrollPane);
 		
 		tblstaff = new JTable();
@@ -83,7 +83,7 @@ public class StaffList extends JInternalFrame {
 				}
 			}
 		});
-		btnClose.setBounds(451, 371, 89, 33);
+		btnClose.setBounds(546, 371, 89, 33);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -96,25 +96,25 @@ public class StaffList extends JInternalFrame {
 		        }
 			}
 		});
-		btnPrint.setBounds(338, 371, 89, 33);
+		btnPrint.setBounds(429, 371, 89, 33);
 		panel.add(btnPrint);
 		
 		txtName = new JTextField();
-		txtName.setBounds(10, 74, 96, 25);
+		txtName.setBounds(20, 74, 96, 25);
 		panel.add(txtName);
 		txtName.setColumns(10);
 		
 		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(146, 74, 96, 25);
+		txtEmail.setBounds(172, 74, 96, 25);
 		panel.add(txtEmail);
 		
 		lblNewLabel = new JLabel("Search Name");
-		lblNewLabel.setBounds(10, 34, 96, 19);
+		lblNewLabel.setBounds(20, 30, 96, 19);
 		panel.add(lblNewLabel);
 		
 		lblSearchEmail = new JLabel("Search Email");
-		lblSearchEmail.setBounds(146, 34, 96, 19);
+		lblSearchEmail.setBounds(172, 30, 96, 19);
 		panel.add(lblSearchEmail);
 		
 		btnSearch = new JButton("Search");
@@ -128,9 +128,13 @@ public class StaffList extends JInternalFrame {
 		        	String str = "select * from staff where email LIKE '%"+txtEmail.getText().toString().trim()+"%'";
 	            	fillStaff(str);
 	            }
+		        if(!(txtName.getText().isEmpty() && txtEmail.getText().isEmpty())) {
+		        	String str = "select * from staff where name LIKE '%"+txtName.getText().toString().trim()+"%' and email LIKE '%"+txtEmail.getText().toString().trim()+"%'";
+	            	fillStaff(str);
+	            }
 			}
 		});
-		btnSearch.setBounds(302, 73, 87, 27);
+		btnSearch.setBounds(338, 73, 87, 27);
 		panel.add(btnSearch);
 		
 		btnAll = new JButton("Show All");
@@ -140,7 +144,7 @@ public class StaffList extends JInternalFrame {
             	fillStaff(str);
 			}
 		});
-		btnAll.setBounds(302, 30, 87, 27);
+		btnAll.setBounds(337, 26, 87, 27);
 		panel.add(btnAll);
 		
 		try{

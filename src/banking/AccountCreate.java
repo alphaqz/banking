@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -26,7 +27,7 @@ import java.awt.Font;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
-public class AccountCreate extends JDialog {
+public class AccountCreate extends JInternalFrame {
 
 	private final JPanel contentPanel = new JPanel();
 	List<String> staffIDList = new ArrayList<>();
@@ -57,14 +58,15 @@ public class AccountCreate extends JDialog {
 	 */
 	public AccountCreate() throws ClassNotFoundException {
 		setTitle("Account Entry");
-		setBounds(100, 100, 632, 572);
+//		setBounds(100, 100, 632, 572);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
-		panel.setBounds(50, 37, 519, 335);
+		panel.setBounds(86, 15, 519, 335);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -114,7 +116,7 @@ public class AccountCreate extends JDialog {
 		panel.add(lblAccountType_1_1_1);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(152, 421, 338, 62);
+			buttonPane.setBounds(183, 349, 338, 62);
 			contentPanel.add(buttonPane);
 			{
 				JButton btnSave = new JButton("Save");

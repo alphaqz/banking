@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +24,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
 
-public class AccountTypeUpdate extends JDialog {
+public class AccountTypeUpdate extends JInternalFrame {
 	private JTextField txtTitle;
 	private JComboBox cboaccounttypeid;
 	private JButton btnDelete;
@@ -56,7 +57,8 @@ public class AccountTypeUpdate extends JDialog {
 	 */
 	public AccountTypeUpdate() {
 		setTitle("Account Type Update");
-		setBounds(100, 100, 579, 428);
+//		setBounds(100, 100, 579, 428);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
