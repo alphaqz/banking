@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -18,7 +19,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 
-public class StaffEntry extends JDialog {
+public class StaffEntry extends JInternalFrame {
 	private JLabel lblstaid;
 	private JTextField txtstaname;
 	private JTextField txtphone;
@@ -50,7 +51,8 @@ public class StaffEntry extends JDialog {
 	 */
 	public StaffEntry() throws ClassNotFoundException {
 		setTitle("Staff Entry");
-		setBounds(100, 100, 392, 454);
+//		setBounds(100, 100, 392, 454);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -20,7 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
-public class CustomerUpdate extends JDialog {
+public class CustomerUpdate extends JInternalFrame {
 	private JTextField txtname;
 	private JTextField txtaddress;
 	private JTextField txtphone;
@@ -54,7 +55,8 @@ public class CustomerUpdate extends JDialog {
 	 */
 	public CustomerUpdate() {
 		setTitle("Customer Update");
-		setBounds(100, 100, 360, 428);
+//		setBounds(100, 100, 360, 428);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
