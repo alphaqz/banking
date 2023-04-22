@@ -187,7 +187,7 @@ public class Report extends JDialog {
 					cboAccountID = new JComboBox();
 					cboAccountID.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							cbo
+							//cbo
 						}
 					});
 					cboAccountID.setBounds(97, 25, 197, 22);
