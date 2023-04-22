@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +27,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 
-public class TransferList extends JDialog {
+public class TransferList extends JInternalFrame {
 	private JTable tbltransfer;
 	private JButton btnPrint;
 	private JButton btnClose;
@@ -59,7 +60,8 @@ public class TransferList extends JDialog {
 	 */
 	public TransferList() throws ClassNotFoundException {
 		setTitle("Transfer List");
-		setBounds(100, 100, 642, 476);
+//		setBounds(100, 100, 642, 476);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

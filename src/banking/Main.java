@@ -30,7 +30,6 @@ public class Main extends JFrame {
 
 	private JPanel contentPane;
 	private JDesktopPane desktopPane;
-	private JButton btnTransaction;
 	private JLabel mnuAccount;
 	private JPanel navPanel;
 	private JLabel mnuDepoAndWith;
@@ -39,18 +38,26 @@ public class Main extends JFrame {
 	private JLabel mnuStaff;
 	private JPanel customerPanel;
 	private JButton btnCreateCustomer;
-	private JPanel transactionPanel;
 	private JPanel accountPanel;
 	private JButton btnAccountTypeCreate;
 	private JButton btnUpdateAccountTyep;
 	private JButton btnAccountTypeList;
 	private JButton btnAccountCreate;
-	private JButton btnAccountCreate_1;
+	private JButton btnAccountList;
 	private JPanel staffPanel;
 	private JButton btnCreateStaff;
 	private JButton btnUpdateStaff;
 	private JButton btnStaffList;
 	private JButton btnRemoveAll;
+	private JPanel transferPanel;
+	private JButton btnTransfer;
+	private JButton btnTransferList;
+	private JButton btnRemoveALl_2;
+	private JPanel transactionPanel;
+	private JButton btnDeposit;
+	private JButton btnWithdraw;
+	private JButton btnTransaction;
+	private JButton btnRemoveALl_1;
 	
 
 	/**
@@ -114,6 +121,65 @@ public class Main extends JFrame {
 		customerPanel = new JPanel();
 		customerPanel.hide();
 		
+		accountPanel = new JPanel();
+		accountPanel.hide();
+		
+		transferPanel = new JPanel();
+		transferPanel.hide();
+		transferPanel.setLayout(null);
+		transferPanel.setBackground(new Color(0, 0, 128));
+		transferPanel.setBounds(0, 0, 268, 449);
+		panel.add(transferPanel);
+		
+		btnTransfer = new JButton("Transfer Create");
+		btnTransfer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Transfer g;
+				try {
+					g = new Transfer();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
+					desktopPane.updateUI();
+				} catch ( ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnTransfer.setBorder(null);
+		btnTransfer.setBounds(64, 41, 140, 53);
+		transferPanel.add(btnTransfer);
+		
+		btnTransferList = new JButton("Transfer List");
+		btnTransferList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TransferList g;
+				try {
+					g = new TransferList();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
+					desktopPane.updateUI();
+				} catch ( ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnTransferList.setBorder(null);
+		btnTransferList.setBounds(64, 109, 140, 53);
+		transferPanel.add(btnTransferList);
+		
+		btnRemoveALl_2 = new JButton("Remove All");
+		btnRemoveALl_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				desktopPane.removeAll();
+				desktopPane.updateUI();
+			}
+		});
+		btnRemoveALl_2.setBorder(null);
+		btnRemoveALl_2.setBounds(64, 177, 140, 53);
+		transferPanel.add(btnRemoveALl_2);
+		
 		transactionPanel = new JPanel();
 		transactionPanel.hide();
 		transactionPanel.setLayout(null);
@@ -121,16 +187,16 @@ public class Main extends JFrame {
 		transactionPanel.setBounds(0, 0, 268, 449);
 		panel.add(transactionPanel);
 		
-		JButton btnDeposit = new JButton("Deposit List");
+		btnDeposit = new JButton("Deposit List");
 		btnDeposit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				desktopPane.removeAll();
-				DepositShow d;
+				DepositShow g;
 				try {
-					d = new DepositShow();
-					desktopPane.add(d).setVisible(true);
+					g = new DepositShow();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
 					desktopPane.updateUI();
-				} catch (ClassNotFoundException e1) {
+				} catch ( ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -140,16 +206,16 @@ public class Main extends JFrame {
 		btnDeposit.setBounds(64, 108, 140, 53);
 		transactionPanel.add(btnDeposit);
 		
-		JButton btnWithdraw = new JButton("Withdrawl List");
+		btnWithdraw = new JButton("Withdrawl List");
 		btnWithdraw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				desktopPane.removeAll();
-				WithdrawShow d;
+				WithdrawShow g;
 				try {
-					d = new WithdrawShow();
-					desktopPane.add(d).setVisible(true);
+					g = new WithdrawShow();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
 					desktopPane.updateUI();
-				} catch (ClassNotFoundException e1) {
+				} catch ( ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -160,32 +226,34 @@ public class Main extends JFrame {
 		transactionPanel.add(btnWithdraw);
 		
 		btnTransaction = new JButton("Transaction");
-		btnTransaction.setBounds(64, 35, 140, 53);
-		transactionPanel.add(btnTransaction);
 		btnTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				desktopPane.removeAll();
-				DepositCreate d;
+				DepositCreate g;
 				try {
-					d = new DepositCreate();
-					desktopPane.add(d).setVisible(true);
+					g = new DepositCreate();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
 					desktopPane.updateUI();
-				} catch (ClassNotFoundException e1) {
+				} catch ( ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
 			}
 		});
 		btnTransaction.setBorder(null);
+		btnTransaction.setBounds(64, 35, 140, 53);
+		transactionPanel.add(btnTransaction);
 		
-		JButton btnRemoveALl_1 = new JButton("Remove All");
+		btnRemoveALl_1 = new JButton("Remove All");
+		btnRemoveALl_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				desktopPane.removeAll();
+				desktopPane.updateUI();
+			}
+		});
+		btnRemoveALl_1.setBorder(null);
 		btnRemoveALl_1.setBounds(64, 244, 140, 53);
 		transactionPanel.add(btnRemoveALl_1);
-		btnRemoveALl_1.setBorder(null);
-		
-		accountPanel = new JPanel();
-		accountPanel.hide();
 		accountPanel.setLayout(null);
 		accountPanel.setBorder(null);
 		accountPanel.setBackground(new Color(0, 0, 128));
@@ -193,29 +261,94 @@ public class Main extends JFrame {
 		panel.add(accountPanel);
 		
 		btnAccountTypeCreate = new JButton("Create Account Type");
+		btnAccountTypeCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AccountTypeCreate g;
+				try {
+					g = new AccountTypeCreate();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
+					desktopPane.updateUI();
+				} catch ( ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnAccountTypeCreate.setBorder(null);
 		btnAccountTypeCreate.setBounds(74, 37, 140, 53);
 		accountPanel.add(btnAccountTypeCreate);
 		
 		btnUpdateAccountTyep = new JButton("Update Account Type");
+		btnUpdateAccountTyep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AccountTypeUpdate g;
+				g = new AccountTypeUpdate();
+				desktopPane.removeAll();
+				desktopPane.add(g).setVisible(true);
+				desktopPane.updateUI();
+			}
+		});
 		btnUpdateAccountTyep.setBorder(null);
 		btnUpdateAccountTyep.setBounds(74, 104, 140, 53);
 		accountPanel.add(btnUpdateAccountTyep);
 		
 		btnAccountTypeList = new JButton("Account Type List");
+		btnAccountTypeList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AccountTypeList g;
+				try {
+					g = new AccountTypeList();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
+					desktopPane.updateUI();
+				} catch ( ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnAccountTypeList.setBorder(null);
 		btnAccountTypeList.setBounds(74, 170, 140, 53);
 		accountPanel.add(btnAccountTypeList);
 		
 		btnAccountCreate = new JButton("Open Account");
+		btnAccountCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AccountCreate g;
+				try {
+					g = new AccountCreate();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
+					desktopPane.updateUI();
+				} catch ( ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnAccountCreate.setBorder(null);
 		btnAccountCreate.setBounds(74, 238, 140, 53);
 		accountPanel.add(btnAccountCreate);
 		
-		btnAccountCreate_1 = new JButton("Account List");
-		btnAccountCreate_1.setBorder(null);
-		btnAccountCreate_1.setBounds(74, 313, 140, 53);
-		accountPanel.add(btnAccountCreate_1);
+		btnAccountList = new JButton("Account List");
+		btnAccountList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AccountList g;
+				try {
+					g = new AccountList();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
+					desktopPane.updateUI();
+				} catch ( ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnAccountList.setBorder(null);
+		btnAccountList.setBounds(74, 313, 140, 53);
+		accountPanel.add(btnAccountList);
 		customerPanel.setBackground(new Color(0, 0, 128));
 		customerPanel.setBounds(22, 0, 268, 449);
 		panel.add(customerPanel);
@@ -293,21 +426,64 @@ public class Main extends JFrame {
 		panel.add(staffPanel);
 		
 		btnCreateStaff = new JButton("Create Staff");
+		btnCreateStaff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StaffEntry g;
+				try {
+					g = new StaffEntry();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
+					desktopPane.updateUI();
+				} catch ( ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnCreateStaff.setBorder(null);
 		btnCreateStaff.setBounds(63, 29, 140, 53);
 		staffPanel.add(btnCreateStaff);
 		
 		btnUpdateStaff = new JButton("Update Staff");
+		btnUpdateStaff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StaffUpdate g;
+				g = new StaffUpdate();
+				desktopPane.removeAll();
+				desktopPane.add(g).setVisible(true);
+				desktopPane.updateUI();
+			}
+		});
 		btnUpdateStaff.setBorder(null);
 		btnUpdateStaff.setBounds(64, 108, 140, 53);
 		staffPanel.add(btnUpdateStaff);
 		
 		btnStaffList = new JButton("Staff List");
+		btnStaffList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StaffList g;
+				try {
+					g = new StaffList();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
+					desktopPane.updateUI();
+				} catch ( ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnStaffList.setBorder(null);
 		btnStaffList.setBounds(64, 176, 140, 53);
 		staffPanel.add(btnStaffList);
 		
 		btnRemoveAll = new JButton("Remove All");
+		btnRemoveAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				desktopPane.removeAll();
+				desktopPane.updateUI();
+			}
+		});
 		btnRemoveAll.setBorder(null);
 		btnRemoveAll.setBounds(63, 257, 140, 53);
 		staffPanel.add(btnRemoveAll);
@@ -327,6 +503,7 @@ public class Main extends JFrame {
 				customerPanel.hide();
 				staffPanel.hide();
 				transactionPanel.hide();
+				transferPanel.hide();
 			}
 		});
 		mnuAccount.setBounds(10, 12, 85, 19);
@@ -346,6 +523,7 @@ public class Main extends JFrame {
 				accountPanel.hide();
 				customerPanel.hide();
 				staffPanel.hide();
+				transferPanel.hide();
 			}
 		});
 		mnuDepoAndWith.setForeground(Color.WHITE);
@@ -354,6 +532,16 @@ public class Main extends JFrame {
 		navPanel.add(mnuDepoAndWith);
 		
 		mnuTransfer = new JLabel("Transfer");
+		mnuTransfer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				transferPanel.show();
+				accountPanel.hide();
+				customerPanel.hide();
+				staffPanel.hide();
+				transactionPanel.hide();
+			}
+		});
 		mnuTransfer.setForeground(Color.WHITE);
 		mnuTransfer.setFont(new Font("Tahoma", Font.BOLD, 13));
 		mnuTransfer.setBounds(268, 13, 85, 19);
@@ -367,6 +555,7 @@ public class Main extends JFrame {
 				accountPanel.hide();
 				staffPanel.hide();
 				transactionPanel.hide();
+				transferPanel.hide();
 			}
 		});
 		mnuCustomer.setForeground(Color.WHITE);
@@ -382,6 +571,7 @@ public class Main extends JFrame {
 				accountPanel.hide();
 				customerPanel.hide();
 				transactionPanel.hide();
+				transferPanel.hide();
 			}
 		});
 		mnuStaff.setForeground(Color.WHITE);
