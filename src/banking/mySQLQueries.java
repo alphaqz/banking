@@ -253,11 +253,12 @@ public class mySQLQueries {
 	        return false;
 	    }
 	}
-    public static boolean isduplicate1(String tbName , String []data)
+    public static boolean isduplicateNRC(String tbName , String []data)
 	{
 	    if(tbName.equals("customer"))
 	    {
 	        query = "select * from customer where nrc ='"+data[5]+"'";
+	        System.out.println(query);
 	    }
 	        	    
 	    try{
@@ -274,7 +275,7 @@ public class mySQLQueries {
 	    }
 	}
 
-    public static boolean isduplicate2(String tbName , String []data)
+    public static boolean isduplicateEmail(String tbName , String []data)
 	{
 	    if(tbName.equals("customer"))
 	    {

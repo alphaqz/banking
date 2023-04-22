@@ -244,6 +244,7 @@ public class AccountCreate extends JInternalFrame {
         cboAccountType.setSelectedIndex(0);
         cboCustomer.setSelectedIndex(0);
         cboStaff.setSelectedIndex(0);
+        
     }
 	public void AutoID() throws ClassNotFoundException
 	{

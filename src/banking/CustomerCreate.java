@@ -96,12 +96,12 @@ public class CustomerCreate extends JInternalFrame {
 		txtaddress.setBounds(109, 130, 169, 20);
 		panel.add(txtaddress);
 		
-		txtphone = new JTextField("09876543212");
+		txtphone = new JTextField("09797246971");
 		txtphone.setColumns(10);
 		txtphone.setBounds(109, 174, 169, 20);
 		panel.add(txtphone);
 		
-		txtEmail = new JTextField("kaung@gmail.com");
+		txtEmail = new JTextField("eieihtay@gmail.com");
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(111, 213, 167, 20);
 		panel.add(txtEmail);
@@ -134,12 +134,12 @@ public class CustomerCreate extends JInternalFrame {
 		rdoFemale.setBounds(192, 83, 109, 23);
 		panel.add(rdoFemale);
 		
-		txtNrc = new JTextField("");
+		txtNrc = new JTextField("9/test(N)000000");
 		txtNrc.setColumns(10);
 		txtNrc.setBounds(111, 254, 167, 20);
 		panel.add(txtNrc);
 		
-		txtJob = new JTextField("");
+		txtJob = new JTextField("dev");
 		txtJob.setColumns(10);
 		txtJob.setBounds(111, 299, 167, 20);
 		panel.add(txtJob);
@@ -215,13 +215,21 @@ public class CustomerCreate extends JInternalFrame {
 						st[6] = (String)txtEmail.getText();
 						
 			            boolean ee = mySQLQueries.isduplicate("customer", st);
-			            boolean ee1 = mySQLQueries.isduplicate1("customer", st);
-			            boolean ee2= mySQLQueries.isduplicate2("customer", st);
-			            if(!(ee && ee1 && ee2))
+			            boolean ee1 = mySQLQueries.isduplicateNRC("customer", st);
+			            boolean ee2= mySQLQueries.isduplicateEmail("customer", st);
+			            if(!ee)
 			            {
-			                JOptionPane.showMessageDialog(null, "Duplicate Record!");
-			                txtcusname.requestFocus();
-			                txtcusname.selectAll();
+			                JOptionPane.showMessageDialog(null, "Duplicate Phone No!");
+			                txtphone.requestFocus();
+			                txtphone.selectAll();
+			            }else if(!ee1) {
+			            	JOptionPane.showMessageDialog(null, "Duplicate NRC!");
+			                txtNrc.requestFocus();
+			                txtNrc.selectAll();
+			            }else if(!ee2) {
+			            	JOptionPane.showMessageDialog(null, "Duplicate Email!");
+			                txtEmail.requestFocus();
+			                txtEmail.selectAll();
 			            }
 			            else
 						       {
@@ -298,6 +306,7 @@ public class CustomerCreate extends JInternalFrame {
 	        txtNrc.setText("");
 	        txtJob.setText("");
 	        txtcusname.requestFocus();
+	        buttonGroup.clearSelection();
 	    }
 
 		public void AutoID() throws ClassNotFoundException
