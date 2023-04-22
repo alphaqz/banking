@@ -238,6 +238,8 @@ public class CustomerList extends JInternalFrame {
 				if(rdoBoth.isSelected()==true) {
 		        	cboAddress.setVisible(true);
 			        cboJob.setVisible(true);
+			        rdoAddress.setSelected(true);
+			        rdoJob.setSelected(true);
 		        }
 		        else {
 		        	cboAddress.setVisible(false);

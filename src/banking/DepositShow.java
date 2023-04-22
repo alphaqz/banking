@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -42,7 +43,7 @@ import java.sql.SQLException;
 import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
 
-public class DepositShow extends JDialog {
+public class DepositShow extends JInternalFrame {
 	private JLabel lblforDepositID;
 	private JButton btndelete;
 	private JButton btnupdate;
@@ -90,8 +91,8 @@ public class DepositShow extends JDialog {
 	public DepositShow() throws ClassNotFoundException {
 		setTitle("Deposit Process");
 		Border blackline = BorderFactory.createLineBorder(Color.black);
-		setBounds(100, 100, 791, 685);
-		
+		setBounds(-100, -100, 791, 685);
+//		setBounds(0, 0, Constants.c_width, Constants.c_height);
 
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		 int centerX = (int) (screenDimension.getWidth() - getWidth()) / 2;
@@ -102,13 +103,13 @@ public class DepositShow extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 755, 499);
+			panel.setBounds(10, 11, 683, 408);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			{
 				JPanel panel_1 = new JPanel();
 				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_1.setBounds(20, 11, 725, 148);
+				panel_1.setBounds(20, 11, 658, 148);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
@@ -156,7 +157,7 @@ public class DepositShow extends JDialog {
 				{
 					JLabel lblNewLabel_2 = new JLabel("Amount:");
 					lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblNewLabel_2.setBounds(419, 33, 64, 14);
+					lblNewLabel_2.setBounds(353, 33, 64, 14);
 					panel_1.add(lblNewLabel_2);
 				}
 				{
@@ -188,7 +189,7 @@ public class DepositShow extends JDialog {
 
 						}
 					});
-					btndelete.setBounds(505, 114, 89, 23);
+					btndelete.setBounds(417, 114, 89, 23);
 					panel_1.add(btndelete);
 				}
 				{
@@ -208,7 +209,7 @@ public class DepositShow extends JDialog {
 			                }
 						}
 					});
-					btnupdate.setBounds(626, 114, 89, 23);
+					btnupdate.setBounds(538, 114, 89, 23);
 					panel_1.add(btnupdate);
 				}
 				{
@@ -224,25 +225,25 @@ public class DepositShow extends JDialog {
 				{
 					lblForDate = new JLabel("");
 					lblForDate.setBorder(new LineBorder(new Color(0, 0, 0)));
-					lblForDate.setBounds(496, 66, 197, 22);
+					lblForDate.setBounds(430, 66, 197, 22);
 					panel_1.add(lblForDate);
 				}
 				{
 					lblDate = new JLabel("Date:");
 					lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblDate.setBounds(398, 70, 85, 14);
+					lblDate.setBounds(332, 70, 85, 14);
 					panel_1.add(lblDate);
 				}
 				
 				txtamount = new JLabel("");
 				txtamount.setBorder(new LineBorder(new Color(0, 0, 0)));
-				txtamount.setBounds(496, 25, 197, 22);
+				txtamount.setBounds(430, 25, 197, 22);
 				panel_1.add(txtamount);
 			}
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setLayout(null);
-			panel_1.setBounds(219, 398, 290, 49);
+			panel_1.setBounds(215, 346, 290, 49);
 			panel.add(panel_1);
 			
 			JButton btnSave = new JButton("Save");
@@ -272,7 +273,7 @@ public class DepositShow extends JDialog {
 
 				}
 			});
-			scrollPane.setBounds(30, 170, 703, 192);
+			scrollPane.setBounds(20, 170, 653, 148);
 			panel.add(scrollPane);
 			
 			tblpurchase = new JTable();

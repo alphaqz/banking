@@ -120,7 +120,11 @@ public class StaffList extends JInternalFrame {
 		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!txtName.getText().isEmpty()) {
+				if(!(txtName.getText().isEmpty() && txtEmail.getText().isEmpty())) {
+		        	String str = "select * from staff where name LIKE '%"+txtName.getText().toString().trim()+"%' and email LIKE '%"+txtEmail.getText().toString().trim()+"%'";
+	            	fillStaff(str);
+	            }
+				else if(!txtName.getText().isEmpty()) {
 		        	String str = "select * from staff where name LIKE '%"+txtName.getText().toString().trim()+"%'";
 	            	fillStaff(str);
 	            }
@@ -128,10 +132,7 @@ public class StaffList extends JInternalFrame {
 		        	String str = "select * from staff where email LIKE '%"+txtEmail.getText().toString().trim()+"%'";
 	            	fillStaff(str);
 	            }
-		        if(!(txtName.getText().isEmpty() && txtEmail.getText().isEmpty())) {
-		        	String str = "select * from staff where name LIKE '%"+txtName.getText().toString().trim()+"%' and email LIKE '%"+txtEmail.getText().toString().trim()+"%'";
-	            	fillStaff(str);
-	            }
+		        
 			}
 		});
 		btnSearch.setBounds(338, 73, 87, 27);

@@ -158,6 +158,10 @@ public class CustomerCreate extends JInternalFrame {
 		            txtcusname.requestFocus();
 		            txtcusname.selectAll();
 		        }
+		         else if(rdoMale.isSelected()==false && rdoFemale.isSelected()==false)
+		         {
+		            JOptionPane.showMessageDialog(null, "Please select gender");
+		         }
 		        else if(Checking.IsNull(txtaddress.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null,"Please enter Address.");;
@@ -188,11 +192,12 @@ public class CustomerCreate extends JInternalFrame {
 		            txtEmail.requestFocus();
 		            txtEmail.selectAll();
 		         }
-		         else if(rdoMale.isSelected()==false && rdoFemale.isSelected()==false)
-		         {
-		            JOptionPane.showMessageDialog(null, "Please select gender");
+		         else if(Checking.IsNull(txtNrc.getText())) {
+		        	 JOptionPane.showMessageDialog(null, "Please enter NRC No.");
+			         txtNrc.requestFocus();
+			         txtNrc.selectAll();
 		         }
-		         else if(Checking.IsNull(txtNrc.getText()) || !Checking.IsNRCformat(txtNrc.getText())) {
+		         else if(!Checking.IsNRCformat(txtNrc.getText())) {
 		        	 System.out.println(txtNrc.getText());
 		        	 JOptionPane.showMessageDialog(null, "Invalid NRC No");
 		        	 

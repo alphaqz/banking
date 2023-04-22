@@ -201,7 +201,7 @@ public class AccountList extends JInternalFrame {
         }
         catch(SQLException sqle)
         {
-            System.out.println(sqle);
+            System.out.println("1"+sqle);
         }
     }
     public void fillAccountForSelected()
@@ -225,7 +225,7 @@ public class AccountList extends JInternalFrame {
         }
         catch(SQLException sqle)
         {
-            System.out.println(sqle);
+            System.out.println("a2 "+sqle);
         }
     }
     public void fillAccountData()

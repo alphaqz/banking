@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -44,7 +45,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 
-public class WithdrawShow extends JDialog {
+public class WithdrawShow extends JInternalFrame {
 	private JLabel lblforWithdrawID;
 	private JButton btndelete;
 	private JButton btnupdate;
@@ -99,8 +100,8 @@ public class WithdrawShow extends JDialog {
 	public WithdrawShow() throws ClassNotFoundException {
 		setTitle("Withdraw Process");
 		Border blackline = BorderFactory.createLineBorder(Color.black);
-		setBounds(100, 100, 791, 685);
-		
+//		setBounds(0, 0, 708, 484);
+		setBounds(0, 0, 719, 462);
 
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		 int centerX = (int) (screenDimension.getWidth() - getWidth()) / 2;
@@ -111,7 +112,7 @@ public class WithdrawShow extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 755, 620);
+			panel.setBounds(10, 11, 680, 419);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			{
@@ -165,7 +166,7 @@ public class WithdrawShow extends JDialog {
 				{
 					JLabel lblNewLabel_2 = new JLabel("Amount:");
 					lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblNewLabel_2.setBounds(398, 33, 85, 14);
+					lblNewLabel_2.setBounds(338, 33, 85, 14);
 					panel_1.add(lblNewLabel_2);
 				}
 				{
@@ -197,7 +198,7 @@ public class WithdrawShow extends JDialog {
 
 						}
 					});
-					btndelete.setBounds(496, 114, 89, 23);
+					btndelete.setBounds(436, 114, 89, 23);
 					panel_1.add(btndelete);
 				}
 				{
@@ -217,7 +218,7 @@ public class WithdrawShow extends JDialog {
 			                }
 						}
 					});
-					btnupdate.setBounds(604, 114, 89, 23);
+					btnupdate.setBounds(544, 114, 89, 23);
 					panel_1.add(btnupdate);
 				}
 				{
@@ -233,25 +234,25 @@ public class WithdrawShow extends JDialog {
 				{
 					lblForDate = new JLabel("");
 					lblForDate.setBorder(new LineBorder(new Color(0, 0, 0)));
-					lblForDate.setBounds(496, 66, 197, 22);
+					lblForDate.setBounds(436, 66, 197, 22);
 					panel_1.add(lblForDate);
 				}
 				{
 					lblDate = new JLabel("Date:");
 					lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblDate.setBounds(398, 70, 85, 14);
+					lblDate.setBounds(338, 70, 85, 14);
 					panel_1.add(lblDate);
 				}
 				
 				txtamount = new JLabel("");
 				txtamount.setBorder(new LineBorder(new Color(0, 0, 0)));
-				txtamount.setBounds(496, 25, 197, 22);
+				txtamount.setBounds(436, 25, 197, 22);
 				panel_1.add(txtamount);
 			}
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setLayout(null);
-			panel_1.setBounds(219, 556, 290, 49);
+			panel_1.setBounds(194, 365, 290, 49);
 			panel.add(panel_1);
 			
 			JButton btnSave = new JButton("Save");
@@ -281,7 +282,7 @@ public class WithdrawShow extends JDialog {
 
 				}
 			});
-			scrollPane.setBounds(20, 327, 703, 192);
+			scrollPane.setBounds(20, 230, 648, 112);
 			panel.add(scrollPane);
 			
 			tblwithdraw = new JTable();
@@ -306,7 +307,7 @@ public class WithdrawShow extends JDialog {
 			        cboyear.setVisible(true);
 				}
 			});
-			rboyear.setBounds(156, 199, 109, 27);
+			rboyear.setBounds(156, 164, 109, 27);
 			panel.add(rboyear);
 			
 			rbomonth = new JRadioButton("Month");
@@ -316,7 +317,7 @@ public class WithdrawShow extends JDialog {
 			        cboyear.setVisible(false);
 				}
 			});
-			rbomonth.setBounds(20, 199, 109, 27);
+			rbomonth.setBounds(20, 164, 109, 27);
 			panel.add(rbomonth);
 			
 			rboBoth = new JRadioButton("Year & Month");
@@ -326,16 +327,16 @@ public class WithdrawShow extends JDialog {
 			        cboyear.setVisible(true);
 				}
 			});
-			rboBoth.setBounds(290, 199, 109, 27);
+			rboBoth.setBounds(290, 164, 109, 27);
 			panel.add(rboBoth);
 			
 			cboyear = new JComboBox();
-			cboyear.setBounds(156, 246, 109, 27);
+			cboyear.setBounds(156, 191, 109, 27);
 			panel.add(cboyear);
 			
 			cbomonth = new JComboBox();
 			cbomonth.setModel(new DefaultComboBoxModel(new String[] { "-Selected-", "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-			cbomonth.setBounds(20, 246, 109, 27);
+			cbomonth.setBounds(20, 191, 109, 27);
 			panel.add(cbomonth);
 			
 			btnSearch = new JButton("Search");
@@ -376,7 +377,7 @@ public class WithdrawShow extends JDialog {
 				}
 			});
 			btnSearch.setMnemonic('S');
-			btnSearch.setBounds(290, 246, 87, 27);
+			btnSearch.setBounds(290, 191, 87, 27);
 			panel.add(btnSearch);
 			
 			btnBoth = new JButton("Show All");
@@ -388,7 +389,7 @@ public class WithdrawShow extends JDialog {
 				}
 			});
 			btnBoth.setMnemonic('A');
-			btnBoth.setBounds(398, 246, 87, 27);
+			btnBoth.setBounds(398, 191, 87, 27);
 			panel.add(btnBoth);
 		}
 		try{
