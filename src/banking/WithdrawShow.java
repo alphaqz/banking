@@ -101,35 +101,36 @@ public class WithdrawShow extends JInternalFrame {
 		setTitle("Withdraw Process");
 		Border blackline = BorderFactory.createLineBorder(Color.black);
 //		setBounds(0, 0, 708, 484);
-		setBounds(0, 0, 719, 462);
+//		setBounds(-100, -500, 791, 685);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 
-		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
-		 int centerX = (int) (screenDimension.getWidth() - getWidth()) / 2;
-	     int centerY = (int) (screenDimension.getHeight() - getHeight()) / 2;
-	     setLocation(centerX, centerY);
-	     
+//		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
+//		 int centerX = (int) (screenDimension.getWidth() - getWidth()) / 2;
+//	     int centerY = (int) (screenDimension.getHeight() - getHeight()) / 2;
+//	     setLocation(centerX, centerY);
+//	     
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 680, 419);
+			panel.setBounds(10, 11, 680, 435);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			{
 				JPanel panel_1 = new JPanel();
 				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Withdraw Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_1.setBounds(20, 11, 725, 148);
+				panel_1.setBounds(20, 11, 650, 167);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
 					JLabel lblstaffId = new JLabel("Staff ID:");
-					lblstaffId.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblstaffId.setBounds(10, 70, 58, 14);
+					lblstaffId.setHorizontalAlignment(SwingConstants.LEFT);
+					lblstaffId.setBounds(8, 81, 85, 14);
 					panel_1.add(lblstaffId);
 				}
 				{
 					JLabel lblDepositID = new JLabel("Withdraw ID:");
-					lblDepositID.setBounds(10, 25, 85, 14);
+					lblDepositID.setBounds(8, 36, 85, 14);
 					panel_1.add(lblDepositID);
 				}
 				{
@@ -154,19 +155,19 @@ public class WithdrawShow extends JInternalFrame {
 
 						}
 					});
-					cboStaffID.setBounds(87, 66, 197, 22);
+					cboStaffID.setBounds(100, 77, 197, 22);
 					panel_1.add(cboStaffID);
 				}
 				{
 					lblforWithdrawID = new JLabel("");
-					lblforWithdrawID.setBounds(87, 25, 197, 22);
+					lblforWithdrawID.setBounds(100, 36, 197, 22);
 					lblforWithdrawID.setBorder(blackline);
 					panel_1.add(lblforWithdrawID);
 				}
 				{
 					JLabel lblNewLabel_2 = new JLabel("Amount:");
 					lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblNewLabel_2.setBounds(338, 33, 85, 14);
+					lblNewLabel_2.setBounds(338, 45, 85, 14);
 					panel_1.add(lblNewLabel_2);
 				}
 				{
@@ -198,7 +199,7 @@ public class WithdrawShow extends JInternalFrame {
 
 						}
 					});
-					btndelete.setBounds(436, 114, 89, 23);
+					btndelete.setBounds(436, 126, 89, 23);
 					panel_1.add(btndelete);
 				}
 				{
@@ -218,41 +219,41 @@ public class WithdrawShow extends JInternalFrame {
 			                }
 						}
 					});
-					btnupdate.setBounds(544, 114, 89, 23);
+					btnupdate.setBounds(544, 126, 89, 23);
 					panel_1.add(btnupdate);
 				}
 				{
 					lblAccountId = new JLabel("Account ID:");
-					lblAccountId.setBounds(10, 119, 58, 14);
+					lblAccountId.setBounds(10, 131, 85, 14);
 					panel_1.add(lblAccountId);
 				}
 				{
 					cboAccountID = new JComboBox();
-					cboAccountID.setBounds(87, 115, 197, 22);
+					cboAccountID.setBounds(100, 126, 197, 22);
 					panel_1.add(cboAccountID);
 				}
 				{
 					lblForDate = new JLabel("");
 					lblForDate.setBorder(new LineBorder(new Color(0, 0, 0)));
-					lblForDate.setBounds(436, 66, 197, 22);
+					lblForDate.setBounds(436, 78, 197, 22);
 					panel_1.add(lblForDate);
 				}
 				{
 					lblDate = new JLabel("Date:");
 					lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblDate.setBounds(338, 70, 85, 14);
+					lblDate.setBounds(338, 82, 85, 14);
 					panel_1.add(lblDate);
 				}
 				
 				txtamount = new JLabel("");
 				txtamount.setBorder(new LineBorder(new Color(0, 0, 0)));
-				txtamount.setBounds(436, 25, 197, 22);
+				txtamount.setBounds(436, 37, 197, 22);
 				panel_1.add(txtamount);
 			}
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setLayout(null);
-			panel_1.setBounds(194, 365, 290, 49);
+			panel_1.setBounds(194, 371, 290, 49);
 			panel.add(panel_1);
 			
 			JButton btnSave = new JButton("Save");
@@ -282,7 +283,7 @@ public class WithdrawShow extends JInternalFrame {
 
 				}
 			});
-			scrollPane.setBounds(20, 230, 648, 112);
+			scrollPane.setBounds(20, 244, 648, 112);
 			panel.add(scrollPane);
 			
 			tblwithdraw = new JTable();
@@ -307,7 +308,7 @@ public class WithdrawShow extends JInternalFrame {
 			        cboyear.setVisible(true);
 				}
 			});
-			rboyear.setBounds(156, 164, 109, 27);
+			rboyear.setBounds(156, 178, 109, 27);
 			panel.add(rboyear);
 			
 			rbomonth = new JRadioButton("Month");
@@ -317,7 +318,7 @@ public class WithdrawShow extends JInternalFrame {
 			        cboyear.setVisible(false);
 				}
 			});
-			rbomonth.setBounds(20, 164, 109, 27);
+			rbomonth.setBounds(20, 178, 109, 27);
 			panel.add(rbomonth);
 			
 			rboBoth = new JRadioButton("Year & Month");
@@ -325,18 +326,21 @@ public class WithdrawShow extends JInternalFrame {
 				public void actionPerformed(ActionEvent e) {
 					cbomonth.setVisible(true);
 			        cboyear.setVisible(true);
+			        rbomonth.setSelected(true);
+			        rboyear.setSelected(true);
 				}
 			});
-			rboBoth.setBounds(290, 164, 109, 27);
+			rboBoth.setBounds(290, 178, 109, 27);
 			panel.add(rboBoth);
 			
 			cboyear = new JComboBox();
-			cboyear.setBounds(156, 191, 109, 27);
+			cboyear.setModel(new DefaultComboBoxModel(new String[] {"-Selected-"}));
+			cboyear.setBounds(156, 205, 109, 27);
 			panel.add(cboyear);
 			
 			cbomonth = new JComboBox();
-			cbomonth.setModel(new DefaultComboBoxModel(new String[] { "-Selected-", "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-			cbomonth.setBounds(20, 191, 109, 27);
+			cbomonth.setModel(new DefaultComboBoxModel(new String[] {"-Selected-", "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}));
+			cbomonth.setBounds(20, 205, 109, 27);
 			panel.add(cbomonth);
 			
 			btnSearch = new JButton("Search");
@@ -377,7 +381,7 @@ public class WithdrawShow extends JInternalFrame {
 				}
 			});
 			btnSearch.setMnemonic('S');
-			btnSearch.setBounds(290, 191, 87, 27);
+			btnSearch.setBounds(290, 205, 87, 27);
 			panel.add(btnSearch);
 			
 			btnBoth = new JButton("Show All");
@@ -389,7 +393,7 @@ public class WithdrawShow extends JInternalFrame {
 				}
 			});
 			btnBoth.setMnemonic('A');
-			btnBoth.setBounds(398, 191, 87, 27);
+			btnBoth.setBounds(398, 205, 87, 27);
 			panel.add(btnBoth);
 		}
 		try{
