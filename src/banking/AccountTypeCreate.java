@@ -17,16 +17,13 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
-import javax.swing.border.BevelBorder;
-import javax.swing.SwingConstants;
 
 public class AccountTypeCreate extends JInternalFrame {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtTitle;
 	private JTextField txtIntrest;
-	private JLabel lblTitle;
+	private JLabel lblForID;
 
 	/**
 	 * Launch the application.
@@ -50,63 +47,47 @@ public class AccountTypeCreate extends JInternalFrame {
 //		setBounds(100, 100, 450, 300);
 		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(null);
+		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Type Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
-		panel.setBounds(86, 15, 519, 335);
-		contentPanel.add(panel);
-		panel.setLayout(null);
-		
-		lblTitle = new JLabel("Title:");
-		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTitle.setBounds(137, 140, 69, 19);
-		panel.add(lblTitle);
+		{
+			JLabel lblTitle = new JLabel("Title:");
+			lblTitle.setBounds(103, 99, 46, 14);
+			contentPanel.add(lblTitle);
+		}
 		
 		txtTitle = new JTextField();
-		txtTitle.setBounds(248, 137, 96, 25);
+		txtTitle.setBounds(222, 96, 86, 20);
+		contentPanel.add(txtTitle);
 		txtTitle.setColumns(10);
-		panel.add(txtTitle);
 		
 		JLabel lblAccTypeID = new JLabel("ID:");
-		lblAccTypeID.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAccTypeID.setBounds(157, 97, 48, 19);
-		panel.add(lblAccTypeID);
+		lblAccTypeID.setBounds(103, 57, 46, 14);
+		contentPanel.add(lblAccTypeID);
 		
-		JLabel lblForID = new JLabel("AT-0000004");
-		lblForID.setBounds(248, 96, 96, 21);
+		lblForID = new JLabel("");
 		lblForID.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.add(lblForID);
+		lblForID.setBounds(222, 57, 86, 14);
+		contentPanel.add(lblForID);
 		
 		JLabel lblIntrest = new JLabel("Intrest Rate:");
-		lblIntrest.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblIntrest.setBounds(132, 191, 74, 19);
-		panel.add(lblIntrest);
+		lblIntrest.setBounds(103, 152, 69, 14);
+		contentPanel.add(lblIntrest);
 		
 		txtIntrest = new JTextField();
-		txtIntrest.setBounds(248, 188, 96, 25);
 		txtIntrest.setColumns(10);
-		panel.add(txtIntrest);
+		txtIntrest.setBounds(225, 149, 86, 20);
+		contentPanel.add(txtIntrest);
 		
 		JLabel lblKsPer = new JLabel("kyat per 1 year");
-		lblKsPer.setBounds(349, 191, 96, 19);
-		panel.add(lblKsPer);
-		
-		JLabel lblTitle_1 = new JLabel("Create Account Type");
-		lblTitle_1.setBounds(185, 35, 149, 30);
-		lblTitle_1.setFont(new Font("Pyidaungsu", Font.BOLD, 17));
-		panel.add(lblTitle_1);
+		lblKsPer.setBounds(321, 152, 86, 14);
+		contentPanel.add(lblKsPer);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(0, 365, 703, 66);
-			contentPanel.add(buttonPane);
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnSave = new JButton("Save");
-				btnSave.setForeground(Color.WHITE);
-				btnSave.setBackground(new Color(0, 128, 0));
-				btnSave.setBounds(418, 5, 79, 39);
 				btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(Checking.IsNull(txtTitle.getText()))
@@ -169,20 +150,12 @@ public class AccountTypeCreate extends JInternalFrame {
 				        }
 					}
 				});
-				buttonPane.setLayout(null);
 				btnSave.setActionCommand("OK");
 				buttonPane.add(btnSave);
 				getRootPane().setDefaultButton(btnSave);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setBackground(new Color(255, 204, 51));
-				cancelButton.setForeground(Color.WHITE);
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				cancelButton.setBounds(518, 5, 79, 39);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -196,6 +169,7 @@ public class AccountTypeCreate extends JInternalFrame {
     }
 	public void AutoID() throws ClassNotFoundException
 	{
+		 lblForID.setText((String.valueOf(mySQLQueries.getAutoid("id", "accounttype", "AT-"))));
 	}
 }
 
