@@ -114,7 +114,7 @@ public class mySQLQueries {
        	 con=connect.getConnection();
             stmt = (Statement) con.createStatement();
             String str[];
-            query = "select balance,cusID,accTypeID,staffID from account where id='"+id+"'";
+            query = "select cusID,cusID,accTypeID,staffID from account where id='"+id+"'";
             str = new String[4];
             rs = stmt.executeQuery(query);
             if(rs.next())
@@ -517,7 +517,7 @@ public class mySQLQueries {
        	 con=connect.getConnection();
             stmt = (Statement) con.createStatement();
             String str[];
-            query = "select a.id, a.balance, t.title as 'account type title', c.name as 'customer name'\r\n"
+            query = "select a.id, a.id, t.title as 'account type title', c.name as 'customer name'\r\n"
             		+ "from account a \r\n"
             		+ "join accounttype t\r\n"
             		+ "on a.accTypeID = t.id\r\n"
