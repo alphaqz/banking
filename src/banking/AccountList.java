@@ -187,21 +187,22 @@ public class AccountList extends JInternalFrame {
             ResultSet rs = ste.executeQuery(sql);
             while(rs.next())
             {
+            	
             	int[] result = CalculateIntrest.something(rs.getString(1));
                 strdataitem[0]=rs.getString(1);
                 strdataitem[1]=result[0]+""; //total
                 strdataitem[2]=result[1]+"";// withdrawable total
                 strdataitem[3]=rs.getString(3);
-                strdataitem[4]=rs.getString(5);
-//                strdataitem[4]=rs.getString(4);
-                strdataitem[4] = ""+CalculateIntrest.something(rs.getString(1));
+                strdataitem[4]=rs.getString(4);
+                strdataitem[5]=rs.getString(5);
+                //strdataitem[5] = ""+CalculateIntrest.something(rs.getString(1));
                 dtm.addRow(strdataitem);
             }
             tblaccount.setModel(dtm);
         }
         catch(SQLException sqle)
         {
-            System.out.println(sqle);
+            System.out.println("at fillAccount: " +sqle);
         }
     }
     public void fillAccountForSelected()
@@ -213,19 +214,20 @@ public class AccountList extends JInternalFrame {
             ResultSet rs = ste.executeQuery(str);
             while(rs.next())
             {
+                
                 strdataitem[0]=rs.getString(1);
                 strdataitem[1]=rs.getString(2);
                 strdataitem[2]=rs.getString(3);
                 strdataitem[3]=rs.getString(4);
                 strdataitem[4]=rs.getString(5);
-                strdataitem[5] = ""+CalculateIntrest.something(rs.getString(1));
+                //strdataitem[5] = ""+CalculateIntrest.something(rs.getString(1));
                 dtm.addRow(strdataitem);
             }
             tblaccount.setModel(dtm);
         }
         catch(SQLException sqle)
         {
-            System.out.println(sqle);
+            System.out.println("at fillAccountForSelected "+sqle);
         }
     }
     public void fillAccountData()
