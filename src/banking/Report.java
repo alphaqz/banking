@@ -75,6 +75,9 @@ public class Report extends JDialog {
    private JDateChooser dateChooserEnd; 
    private JCheckBox chkTransfer;
    private JCheckBox chkReceived;
+   private JLabel lblforName;
+   private JLabel lblForEmail;
+   private JLabel lblforGender;
 
 
 
@@ -110,13 +113,13 @@ public class Report extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 755, 499);
+			panel.setBounds(10, 11, 755, 600);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			{
 				JPanel search = new JPanel();
 				search.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Report filter:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				search.setBounds(20, 11, 725, 148);
+				search.setBounds(20, 11, 725, 204);
 				panel.add(search);
 				search.setLayout(null);
 				{
@@ -162,7 +165,7 @@ public class Report extends JDialog {
 						}
 						
 					});
-					btnSearch.setBounds(505, 114, 89, 23);
+					btnSearch.setBounds(34, 170, 89, 23);
 					search.add(btnSearch);
 				}
 				{
@@ -170,44 +173,98 @@ public class Report extends JDialog {
 					btnShowAll.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 				            	fillDeposit();
+				            	lblForEmail.setText("");
+				            	lblforGender.setText("");
+				            	lblforName.setText("");
+				            	dateChooserStart.setCalendar(null);
+				            	dateChooserEnd.setCalendar(null);
+				            	
+				            	
 						}
 					});
-					btnShowAll.setBounds(626, 114, 89, 23);
+					btnShowAll.setBounds(185, 170, 89, 23);
 					search.add(btnShowAll);
 				}
 				{
 					lblAccountId = new JLabel("Account ID:");
-					lblAccountId.setBounds(20, 29, 58, 14);
+					lblAccountId.setHorizontalAlignment(SwingConstants.RIGHT);
+					lblAccountId.setBounds(10, 29, 68, 14);
 					search.add(lblAccountId);
 				}
 				{
 					cboAccountID = new JComboBox();
+					cboAccountID.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							
+							if(cboAccountID.getSelectedIndex()> 0) {	
+								String[] result = mySQLQueries.getAccountDataForReport((String)cboAccountID.getSelectedItem());
+								lblforName.setText(result[1]);
+								lblforGender.setText(result[2]);
+								lblForEmail.setText(result[3]);
+							}
+							
+						}
+					});
 					cboAccountID.setBounds(97, 25, 197, 22);
 					search.add(cboAccountID);
 				}
 				
 				 dateChooserStart = new JDateChooser();
-				dateChooserStart.setBounds(333, 29, 197, 20);
+				dateChooserStart.setBounds(20, 96, 197, 20);
 				search.add(dateChooserStart);
 				
 				dateChooserEnd = new JDateChooser();
-				dateChooserEnd.setBounds(333, 78, 197, 20);
+				dateChooserEnd.setBounds(20, 127, 197, 20);
 				search.add(dateChooserEnd);
 				
 				chkDeposit = new JCheckBox("Deposit");
 				chkDeposit.setSelected(true);
-				chkDeposit.setBounds(34, 75, 97, 23);
+				chkDeposit.setBounds(20, 66, 73, 23);
 				search.add(chkDeposit);
 				
 				chkWithdraw = new JCheckBox("Withdraw");
 				chkWithdraw.setSelected(true);
-				chkWithdraw.setBounds(157, 75, 97, 23);
+				chkWithdraw.setBounds(106, 66, 83, 23);
 				search.add(chkWithdraw);
 				
 				chkTransfer = new JCheckBox("Transfer");
 				chkTransfer.setSelected(true);
-				chkTransfer.setBounds(34, 103, 97, 23);
+				chkTransfer.setBounds(201, 66, 89, 23);
 				search.add(chkTransfer);
+				
+				JLabel lblNewLabel = new JLabel("Account Information");
+				lblNewLabel.setBounds(368, 29, 135, 14);
+				search.add(lblNewLabel);
+				
+				JLabel lblCustomerName = new JLabel("Customer name:");
+				lblCustomerName.setHorizontalAlignment(SwingConstants.RIGHT);
+				lblCustomerName.setBounds(329, 57, 118, 14);
+				search.add(lblCustomerName);
+				
+				JLabel lblNewLabel_2 = new JLabel("email:");
+				lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+				lblNewLabel_2.setBounds(401, 93, 46, 14);
+				search.add(lblNewLabel_2);
+				
+				JLabel lblNewLabel_3 = new JLabel("Gender:");
+				lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
+				lblNewLabel_3.setBounds(401, 133, 46, 14);
+				search.add(lblNewLabel_3);
+				
+				lblforName = new JLabel("");
+				lblforName.setBorder(new LineBorder(new Color(0, 0, 0)));
+				lblforName.setBounds(487, 57, 140, 14);
+				search.add(lblforName);
+				
+				lblForEmail = new JLabel("");
+				lblForEmail.setBorder(new LineBorder(new Color(0, 0, 0)));
+				lblForEmail.setBounds(487, 93, 183, 14);
+				search.add(lblForEmail);
+				
+				lblforGender = new JLabel("");
+				lblforGender.setBorder(new LineBorder(new Color(0, 0, 0)));
+				lblforGender.setBounds(487, 133, 67, 14);
+				search.add(lblforGender);
 				
 				chkReceived = new JCheckBox("Received");
 				chkReceived.setSelected(true);
@@ -225,7 +282,7 @@ public class Report extends JDialog {
 
 				}
 			});
-			scrollPane.setBounds(30, 170, 703, 305);
+			scrollPane.setBounds(20, 238, 703, 305);
 			panel.add(scrollPane);
 			
 			tblReport = new JTable();
@@ -275,8 +332,8 @@ public class Report extends JDialog {
          dtm.addColumn("Deposit ID");
         dtm.addColumn("Amount");
         dtm.addColumn("Date");
-        dtm.addColumn("Account");
-        dtm.addColumn("Account");
+        dtm.addColumn("Received Account");
+        dtm.addColumn("Send Account");
         dtm.addColumn("Staff");
         dtm.addColumn("Type");
         tblReport.setModel(dtm);
@@ -396,6 +453,7 @@ public class Report extends JDialog {
     {
         while(dtm.getRowCount()>0)
             dtm.removeRow(0);
+        
         tblReport.setModel(dtm);
         vid.removeAllElements();
         vamount.removeAllElements();

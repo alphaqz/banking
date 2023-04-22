@@ -152,17 +152,17 @@ public class TransferUpdate extends JDialog {
 //				            System.out.println(r_amt);
 //				            System.out.println(t_amt);
 				            
-				            boolean success=mySQLQueries.updateAmount("transfer", str[1], String.valueOf(r_amt));						
-							boolean success1=mySQLQueries.updateAmount("transfer", str[2],String.valueOf(t_amt));
-							boolean update=mySQLQueries.updateAmount("transferUpdate", cboTID.getSelectedItem().toString(), String.valueOf(str[0]));
-							
-							if(update && success && success1) {
-			            		JOptionPane.showMessageDialog(null, "Successfully transfered amount!","Save Record.",JOptionPane.INFORMATION_MESSAGE);					            		
-			            	}  
-							else
-				            {
-				                JOptionPane.showMessageDialog(null,"Failed to update account balance.","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
-				            }
+//				            boolean success=mySQLQueries.updateAmount("transfer", str[1], String.valueOf(r_amt));						
+//							boolean success1=mySQLQueries.updateAmount("transfer", str[2],String.valueOf(t_amt));
+//							boolean update=mySQLQueries.updateAmount("transferUpdate", cboTID.getSelectedItem().toString(), String.valueOf(str[0]));
+//							
+//							if(update && success && success1) {
+//			            		JOptionPane.showMessageDialog(null, "Successfully transfered amount!","Save Record.",JOptionPane.INFORMATION_MESSAGE);					            		
+//			            	}  
+//							else
+//				            {
+//				                JOptionPane.showMessageDialog(null,"Failed to update account balance.","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
+//				            }
 			            }
 			            
 			            

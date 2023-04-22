@@ -205,10 +205,10 @@ public class Transfer extends JInternalFrame {
 		            	saveAmount+=total_amount-t_amount;
 		            	int r_amount=Integer.parseInt(mySQLQueries.getAmount(r_id));	
 						r_amount+=t_amount;
-						boolean success=mySQLQueries.updateAmount("transfer", r_id, String.valueOf(r_amount));						
-						boolean success1=mySQLQueries.updateAmount("transfer", t_id,String.valueOf(saveAmount));
+//						boolean success=mySQLQueries.updateAmount("transfer", r_id, String.valueOf(r_amount));						
+//						boolean success1=mySQLQueries.updateAmount("transfer", t_id,String.valueOf(saveAmount));
 						
-						if(save && success && success1) {
+						if(save) {
 			           		JOptionPane.showMessageDialog(null, "Successfully transfered amount!","Save Record.",JOptionPane.INFORMATION_MESSAGE);	
 			           		try {
 								AutoID();
