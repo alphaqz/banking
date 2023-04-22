@@ -34,7 +34,7 @@ public class AccountList extends JInternalFrame {
 	private JComboBox cboAccNo;
 	private JButton btnSearch;
 	private JButton btnShowAll;
-	private String selectAll = "select a.id as id,balance,c.name,at.title as accTypeID ,staffID from account a\r\n"
+	private String selectAll = "select a.id as id,c.name,at.title as accTypeID ,staffID from account a\r\n"
     		+ "        		inner join accounttype at\r\n"
     		+ "        		on a.accTypeID = at.id \r\n"
     		+ "        		inner join customer c\r\n"
@@ -112,7 +112,7 @@ public class AccountList extends JInternalFrame {
 	                cboAccNo.requestFocus();
 	            } else {
 //	            	tblaccount.removeAll();
-	            	String str = "select a.id,a.balance,c.name,a.accTypeID,a.staffID from account a "
+	            	String str = "select a.id,c.name,a.accTypeID,a.staffID from account a "
 	            			+ "inner join customer c on a.cusID = c.id "
 	            			+ "where a.id='"+cboAccNo.getSelectedItem().toString()+"'";
 //	            	fillAccountForSelected();
@@ -151,7 +151,7 @@ public class AccountList extends JInternalFrame {
     public void createtable()
    {
        dtm.addColumn("Account No");
-       dtm.addColumn("Balance");
+//       dtm.addColumn("Balance");
        dtm.addColumn("Withdrawable");
        dtm.addColumn("Customer");
        dtm.addColumn("Account Type");
@@ -178,7 +178,7 @@ public class AccountList extends JInternalFrame {
 
     public void fillAccount(String sql)
     {
-        String strdataitem[]=new String[8];
+        String strdataitem[]=new String[5];
         try{
             Statement ste = (Statement) con.createStatement();
             while(dtm.getRowCount()>0) {
@@ -192,9 +192,9 @@ public class AccountList extends JInternalFrame {
                 strdataitem[1]=result[0]+""; //total
                 strdataitem[2]=result[1]+"";// withdrawable total
                 strdataitem[3]=rs.getString(3);
-                strdataitem[4]=rs.getString(4);
-                strdataitem[5]=rs.getString(5);
-                //strdataitem[5] = ""+CalculateIntrest.something(rs.getString(1));
+                strdataitem[4]=rs.getString(5);
+//                strdataitem[4]=rs.getString(4);
+                strdataitem[4] = ""+CalculateIntrest.something(rs.getString(1));
                 dtm.addRow(strdataitem);
             }
             tblaccount.setModel(dtm);
@@ -209,7 +209,7 @@ public class AccountList extends JInternalFrame {
         String strdataitem[]=new String[8];
         try{
             Statement ste = (Statement) con.createStatement();
-            String str = "select id,balance,cusID,accTypeID,staffID from account where id='"+cboAccNo.getSelectedItem().toString()+"'";
+            String str = "select id,cusID,accTypeID,staffID from account where id='"+cboAccNo.getSelectedItem().toString()+"'";
             ResultSet rs = ste.executeQuery(str);
             while(rs.next())
             {
@@ -218,7 +218,7 @@ public class AccountList extends JInternalFrame {
                 strdataitem[2]=rs.getString(3);
                 strdataitem[3]=rs.getString(4);
                 strdataitem[4]=rs.getString(5);
-                //strdataitem[5] = ""+CalculateIntrest.something(rs.getString(1));
+                strdataitem[5] = ""+CalculateIntrest.something(rs.getString(1));
                 dtm.addRow(strdataitem);
             }
             tblaccount.setModel(dtm);
