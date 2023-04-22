@@ -23,6 +23,8 @@ import javax.swing.JRadioButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
+import javax.swing.border.BevelBorder;
+import java.awt.Font;
 
 public class AccountTypeUpdate extends JInternalFrame {
 	private JTextField txtTitle;
@@ -38,6 +40,7 @@ public class AccountTypeUpdate extends JInternalFrame {
 	
 	Border backline=BorderFactory.createLineBorder(Color.black);
 	private JTextField txtInterest;
+	private JLabel lblTitle;
 
 	/**
 	 * Launch the application.
@@ -63,25 +66,25 @@ public class AccountTypeUpdate extends JInternalFrame {
 		{
 			JPanel panel = new JPanel();
 			panel.setLayout(null);
-			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Type Update Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(37, 63, 472, 246);
+			panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
+			panel.setBounds(86, 15, 519, 335);
 			getContentPane().add(panel);
 			{
 				JLabel lblNewLabel = new JLabel("Account Type ID:");
 				lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblNewLabel.setBounds(102, 47, 113, 14);
+				lblNewLabel.setBounds(102, 119, 113, 14);
 				panel.add(lblNewLabel);
 			}
 			{
 				JLabel lblCusto = new JLabel("Title :");
 				lblCusto.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblCusto.setBounds(163, 103, 52, 14);
+				lblCusto.setBounds(163, 175, 52, 14);
 				panel.add(lblCusto);
 			}
 			{
 				txtTitle = new JTextField();
 				txtTitle.setColumns(10);
-				txtTitle.setBounds(255, 100, 167, 20);
+				txtTitle.setBounds(255, 172, 167, 20);
 				panel.add(txtTitle);
 			}
 			{
@@ -99,28 +102,34 @@ public class AccountTypeUpdate extends JInternalFrame {
 						}
 					}
 				});
-				cboaccounttypeid.setBounds(255, 43, 167, 22);
+				cboaccounttypeid.setBounds(255, 115, 167, 22);
 				panel.add(cboaccounttypeid);
 			}
 			
 			JLabel lblJob = new JLabel("Interest :");
 			lblJob.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblJob.setBounds(124, 158, 91, 14);
+			lblJob.setBounds(124, 230, 91, 14);
 			panel.add(lblJob);
 			
 			txtInterest = new JTextField();
 			txtInterest.setColumns(10);
-			txtInterest.setBounds(255, 155, 167, 20);
+			txtInterest.setBounds(255, 227, 167, 20);
 			panel.add(txtInterest);
 			
 			JLabel lblFixedPeriod = new JLabel("Fixed period:");
 			lblFixedPeriod.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblFixedPeriod.setBounds(124, 202, 91, 14);
+			lblFixedPeriod.setBounds(124, 274, 91, 14);
 			panel.add(lblFixedPeriod);
 			
 			spinner = new JSpinner();
-			spinner.setBounds(258, 199, 52, 20);
+			spinner.setBounds(258, 271, 52, 20);
 			panel.add(spinner);
+			{
+				lblTitle = new JLabel("Modify Account Type Info");
+				lblTitle.setFont(new Font("Pyidaungsu", Font.BOLD, 17));
+				lblTitle.setBounds(163, 47, 213, 19);
+				panel.add(lblTitle);
+			}
 			rdbtnFemale.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					gender = "male";
@@ -140,7 +149,7 @@ public class AccountTypeUpdate extends JInternalFrame {
 					}
 				}
 			});
-			btnclose.setBounds(424, 326, 85, 39);
+			btnclose.setBounds(520, 376, 85, 39);
 			getContentPane().add(btnclose);
 		}
 		{
@@ -167,7 +176,7 @@ public class AccountTypeUpdate extends JInternalFrame {
 
 				}
 			});
-			btnDelete.setBounds(329, 326, 85, 39);
+			btnDelete.setBounds(414, 376, 85, 39);
 			getContentPane().add(btnDelete);
 		}
 		{
@@ -208,7 +217,7 @@ public class AccountTypeUpdate extends JInternalFrame {
 			        }
 				}
 			});
-			btnUpdate.setBounds(240, 326, 79, 39);
+			btnUpdate.setBounds(314, 376, 79, 39);
 			getContentPane().add(btnUpdate);
 		}
 		fillAccountType();

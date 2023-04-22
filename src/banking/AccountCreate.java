@@ -116,13 +116,13 @@ public class AccountCreate extends JInternalFrame {
 		panel.add(lblAccountType_1_1_1);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(183, 349, 338, 62);
+			buttonPane.setBounds(183, 349, 338, 82);
 			contentPanel.add(buttonPane);
 			{
 				JButton btnSave = new JButton("Save");
 				btnSave.setForeground(Color.WHITE);
 				btnSave.setBackground(new Color(0, 153, 0));
-				btnSave.setBounds(30, 20, 76, 27);
+				btnSave.setBounds(30, 20, 79, 39);
 				btnSave.setMnemonic('S');
 				btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -182,7 +182,9 @@ public class AccountCreate extends JInternalFrame {
 				getRootPane().setDefaultButton(btnSave);
 				
 				JButton btnClear = new JButton("Clear");
-				btnClear.setBounds(133, 20, 76, 27);
+				btnClear.setForeground(Color.WHITE);
+				btnClear.setBackground(Color.RED);
+				btnClear.setBounds(133, 20, 79, 39);
 				btnClear.setMnemonic('C');
 				btnClear.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -193,7 +195,9 @@ public class AccountCreate extends JInternalFrame {
 			}
 			{
 				btnClose = new JButton("Close");
-				btnClose.setBounds(232, 20, 72, 27);
+				btnClose.setBackground(Color.GRAY);
+				btnClose.setForeground(Color.WHITE);
+				btnClose.setBounds(232, 20, 79, 39);
 				btnClose.setMnemonic('L');
 				btnClose.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
