@@ -101,8 +101,8 @@ public class DepositCreate extends JInternalFrame {
 					lblforbalance.setText(result[1]);
 					lblforacctype.setText(result[2]);
 					lblforcusname.setText(result[3]);
-					lblforbalanceNew.setText(""+totalBalance[0]);
-					lblforbalanceTotal.setText(""+totalBalance[1]);
+					lblforbalanceTotal.setText(""+totalBalance[0]);
+					lblforbalanceNew.setText(""+totalBalance[1]);
 					//lblfor
 					
 				}
@@ -249,7 +249,14 @@ public class DepositCreate extends JInternalFrame {
 				            JOptionPane.showMessageDialog(null,"Please enter valid number.");
 				            txtAmount.requestFocus();
 				            txtAmount.selectAll();
-				        }else {							
+				        }
+				        else if(Integer.parseInt((String)txtAmount.getText()) <= 0){
+				        	JOptionPane.showMessageDialog(null,"Please enter valid amount");
+				            txtAmount.requestFocus();
+				            txtAmount.selectAll();
+				        }
+				       
+				        else {							
 							
 				            	String str[] = new String[8];
 				            	str[0] = (String)lblForID.getText();						
@@ -258,11 +265,19 @@ public class DepositCreate extends JInternalFrame {
 				            	str[2] =  (String) cboAccount.getSelectedItem();
 				            	str[3] = staffIdList.get(cboStaff.getSelectedIndex()-1);
 				            	//System.out.println("inserting into deposit " + str[0] + str[1] + str[3]);
-				            	boolean save;
+				            	boolean save = false;
 				            	if(isDeposit) {
 				            		save = mySQLQueries.insertData("deposit", str);
+				            		JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);
 				            	}else {
-				            		save = mySQLQueries.insertData("withdraw", str);
+				            		if(Integer.parseInt((String)txtAmount.getText()) > Integer.parseInt(lblforbalanceNew.getText()) ){
+							        	JOptionPane.showMessageDialog(null,"You don't have enough balance");
+							            txtAmount.requestFocus();
+							            txtAmount.selectAll();
+							        }else {
+							        	save = mySQLQueries.insertData("withdraw", str);
+							        	JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);
+							        }
 				            	}
 					            if(save)
 					            {					            	
