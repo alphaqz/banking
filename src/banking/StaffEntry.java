@@ -144,12 +144,7 @@ public class StaffEntry extends JInternalFrame {
 		            txtphone.requestFocus();
 		            txtphone.selectAll();
 		        }   
-		        else if(!Checking.IsAllDigit(txtphone.getText()))
-		        {
-		            JOptionPane.showMessageDialog(null,"Please enter valid Phone Number.");
-		            txtphone.requestFocus();
-		            txtphone.selectAll();
-		        }
+
 		        else if(!Checking.IsPhoneNoformat(txtphone.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null,"Phone Number must start with 09 and entered number after 09 must not be zero!");
@@ -170,6 +165,10 @@ public class StaffEntry extends JInternalFrame {
 		            txtEmail.requestFocus();
 		            txtEmail.selectAll();
 		         }
+		         else if(rdoMale.isSelected()==false && rdoFemale.isSelected()==false)
+		         {
+		            JOptionPane.showMessageDialog(null, "Please select gender");
+		         }
 		         
 		         else{
 		        	 String st[] = new String[5];
@@ -179,11 +178,17 @@ public class StaffEntry extends JInternalFrame {
 						st[3] = (String)txtEmail.getText();					
 						
 			            boolean ee = mySQLQueries.isduplicate("staff", st);
+			            boolean ee1= mySQLQueries.isduplicateEmailForStaff("staff", st);
 			            if(!ee)
 			            {
 			                JOptionPane.showMessageDialog(null, "Duplicate Record!");
 			                txtstaname.requestFocus();
 			                txtstaname.selectAll();
+			            }
+			            else if(!ee1) {
+			            	JOptionPane.showMessageDialog(null, "Duplicate Email!");
+			            	txtEmail.requestFocus();
+			            	txtEmail.selectAll();
 			            }
 			            else
 						       {

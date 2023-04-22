@@ -212,7 +212,7 @@ public class mySQLQueries {
 
 	    else if(tbName.equals("staff"))
 	    {
-	        query = "select * from staff where name ='"+data[0]+"'and phone ='"+data[1]+"'and email ='"+data[2]+"'";
+	        query = "select * from staff where phone ='"+data[2]+"'";
 	    }
 	    else if(tbName.equals("customer"))
 	    {
@@ -280,6 +280,26 @@ public class mySQLQueries {
 	    if(tbName.equals("customer"))
 	    {
 	        query = "select * from customer where email ='"+data[6]+"'";
+	    }
+	        	    
+	    try{
+	    	con=connect.getConnection();
+	        stmt = (Statement) con.createStatement();
+	        rs = stmt.executeQuery(query);
+	        if(rs.next())
+	            return false;
+	        else
+	            return true;
+	    }catch(SQLException e){
+	        JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+	}
+    public static boolean isduplicateEmailForStaff(String tbName , String []data)
+	{
+	    if(tbName.equals("staff"))
+	    {
+	        query = "select * from staff where email ='"+data[3]+"'";
 	    }
 	        	    
 	    try{
