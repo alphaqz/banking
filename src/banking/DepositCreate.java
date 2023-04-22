@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -28,7 +29,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
-public class DepositCreate extends JInternalFrame {
+public class DepositCreate extends JFrame {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtAmount;
