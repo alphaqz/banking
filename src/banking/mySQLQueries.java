@@ -114,8 +114,8 @@ public class mySQLQueries {
        	 con=connect.getConnection();
             stmt = (Statement) con.createStatement();
             String str[];
-            query = "select cusID,accTypeID,staffID from account where id='"+id+"'";
-            str = new String[3];
+            query = "select balance,cusID,accTypeID,staffID from account where id='"+id+"'";
+            str = new String[4];
             rs = stmt.executeQuery(query);
             if(rs.next())
             {
