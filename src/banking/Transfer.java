@@ -213,9 +213,9 @@ public class Transfer extends JInternalFrame {
 		            }
 		            else {
 		            	boolean save = mySQLQueries.insertData("transfer", str);
-		            	saveAmount+=total_amount-t_amount;
-		            	int r_amount=Integer.parseInt(mySQLQueries.getAmount(r_id));	
-						r_amount+=t_amount;
+//		            	saveAmount+=total_amount-t_amount;
+//		            	int r_amount=Integer.parseInt(mySQLQueries.getAmount(r_id));	
+//						r_amount+=t_amount;
 //						boolean success=mySQLQueries.updateAmount("transfer", r_id, String.valueOf(r_amount));						
 //						boolean success1=mySQLQueries.updateAmount("transfer", t_id,String.valueOf(saveAmount));
 						
