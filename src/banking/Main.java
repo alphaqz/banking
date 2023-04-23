@@ -61,6 +61,9 @@ public class Main extends JFrame {
 	private JPanel imgPanel;
 	private JLabel lblimg;
 	private JButton btnReport;
+	private JPanel imgLeftPanel;
+	private JLabel lblLeftImg;
+	private JButton btnRemoveALl_3;
 	
 
 	/**
@@ -102,7 +105,7 @@ public class Main extends JFrame {
 		imgPanel.setLayout(null);
 		
 		lblimg = new JLabel("");
-		lblimg.setIcon(new ImageIcon("C:\\Users\\Probook 440 G6\\Documents\\GitHub\\banking\\images\\bank1.jpg"));
+		lblimg.setIcon(new ImageIcon("C:\\Users\\Probook 440 G6\\Documents\\GitHub\\banking\\images\\bank-bg1.jpg"));
 		lblimg.setBounds(0, 1, 719, 476);
 		imgPanel.add(lblimg);
 		
@@ -113,7 +116,7 @@ public class Main extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 39, 300, 693);
+		panel.setBounds(0, 39, 300, 666);
 		panel.setBackground(new Color(0, 0, 128));
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -139,12 +142,23 @@ public class Main extends JFrame {
 		
 		transferPanel = new JPanel();
 		transferPanel.hide();
-		transferPanel.setLayout(null);
+		
+		imgLeftPanel = new JPanel();
+		imgLeftPanel.setBackground(new Color(0, 0, 128));
+		imgLeftPanel.setBounds(0, 0, 300, 666);
+		panel.add(imgLeftPanel);
+		imgLeftPanel.setLayout(null);
+		
+		lblLeftImg = new JLabel("");
+		lblLeftImg.setBounds(0, 0, 300, 666);
+		lblLeftImg.setIcon(new ImageIcon("C:\\Users\\Probook 440 G6\\Documents\\GitHub\\banking\\images\\walk.png"));
+		imgLeftPanel.add(lblLeftImg);
 		transferPanel.setBackground(new Color(0, 0, 128));
-		transferPanel.setBounds(0, 0, 268, 449);
+		transferPanel.setBounds(0, 0, 300, 666);
 		panel.add(transferPanel);
 		
 		btnTransfer = new JButton("Transfer Create");
+		btnTransfer.setBounds(64, 41, 140, 53);
 		btnTransfer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Transfer g;
@@ -159,11 +173,12 @@ public class Main extends JFrame {
 				}
 			}
 		});
+		transferPanel.setLayout(null);
 		btnTransfer.setBorder(null);
-		btnTransfer.setBounds(64, 41, 140, 53);
 		transferPanel.add(btnTransfer);
 		
 		btnTransferList = new JButton("Transfer List");
+		btnTransferList.setBounds(64, 109, 140, 53);
 		btnTransferList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TransferList g;
@@ -179,25 +194,25 @@ public class Main extends JFrame {
 			}
 		});
 		btnTransferList.setBorder(null);
-		btnTransferList.setBounds(64, 109, 140, 53);
 		transferPanel.add(btnTransferList);
 		
 		btnRemoveALl_2 = new JButton("Remove All");
+		btnRemoveALl_2.setBounds(64, 177, 140, 53);
 		btnRemoveALl_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				desktopPane.removeAll();
+				desktopPane.add(imgPanel);
 				desktopPane.updateUI();
 			}
 		});
 		btnRemoveALl_2.setBorder(null);
-		btnRemoveALl_2.setBounds(64, 177, 140, 53);
 		transferPanel.add(btnRemoveALl_2);
 		
 		transactionPanel = new JPanel();
 		transactionPanel.hide();
 		transactionPanel.setLayout(null);
 		transactionPanel.setBackground(new Color(0, 0, 128));
-		transactionPanel.setBounds(0, 0, 268, 449);
+		transactionPanel.setBounds(0, 0, 300, 666);
 		panel.add(transactionPanel);
 		
 		btnDeposit = new JButton("Deposit List");
@@ -261,8 +276,8 @@ public class Main extends JFrame {
 		btnRemoveALl_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				desktopPane.removeAll();
+				desktopPane.add(imgPanel);
 				desktopPane.updateUI();
-				lblimg.show();
 			}
 		});
 		
@@ -291,7 +306,7 @@ public class Main extends JFrame {
 		accountPanel.setLayout(null);
 		accountPanel.setBorder(null);
 		accountPanel.setBackground(new Color(0, 0, 128));
-		accountPanel.setBounds(0, 0, 268, 461);
+		accountPanel.setBounds(0, 0, 300, 666);
 		panel.add(accountPanel);
 		
 		btnAccountTypeCreate = new JButton("Create Account Type");
@@ -383,8 +398,20 @@ public class Main extends JFrame {
 		btnAccountList.setBorder(null);
 		btnAccountList.setBounds(74, 313, 140, 53);
 		accountPanel.add(btnAccountList);
+		
+		btnRemoveALl_3 = new JButton("Remove All");
+		btnRemoveALl_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				desktopPane.removeAll();
+				desktopPane.add(imgPanel);
+				desktopPane.updateUI();
+			}
+		});
+		btnRemoveALl_3.setBorder(null);
+		btnRemoveALl_3.setBounds(74, 385, 140, 53);
+		accountPanel.add(btnRemoveALl_3);
 		customerPanel.setBackground(new Color(0, 0, 128));
-		customerPanel.setBounds(22, 0, 268, 449);
+		customerPanel.setBounds(0, 0, 300, 666);
 		panel.add(customerPanel);
 		customerPanel.setLayout(null);
 		
@@ -446,8 +473,8 @@ public class Main extends JFrame {
 		btnRemoveALl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				desktopPane.removeAll();
+				desktopPane.add(imgPanel);
 				desktopPane.updateUI();
-				
 			}
 		});
 		btnRemoveALl.setBorder(null);
@@ -456,7 +483,7 @@ public class Main extends JFrame {
 		staffPanel.hide();
 		staffPanel.setLayout(null);
 		staffPanel.setBackground(new Color(0, 0, 128));
-		staffPanel.setBounds(0, 0, 268, 449);
+		staffPanel.setBounds(0, 0, 300, 666);
 		panel.add(staffPanel);
 		
 		btnCreateStaff = new JButton("Create Staff");
@@ -515,6 +542,7 @@ public class Main extends JFrame {
 		btnRemoveAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				desktopPane.removeAll();
+				desktopPane.add(imgPanel);
 				desktopPane.updateUI();
 			}
 		});
@@ -539,6 +567,7 @@ public class Main extends JFrame {
 				staffPanel.hide();
 				transactionPanel.hide();
 				transferPanel.hide();
+				imgLeftPanel.hide();
 			}
 		});
 		mnuAccount.setBounds(10, 12, 85, 19);
@@ -560,6 +589,7 @@ public class Main extends JFrame {
 				customerPanel.hide();
 				staffPanel.hide();
 				transferPanel.hide();
+				imgLeftPanel.hide();
 			}
 		});
 		mnuDepoAndWith.setForeground(Color.WHITE);
@@ -576,6 +606,7 @@ public class Main extends JFrame {
 				customerPanel.hide();
 				staffPanel.hide();
 				transactionPanel.hide();
+				imgLeftPanel.hide();
 			}
 		});
 		mnuTransfer.setForeground(Color.WHITE);
@@ -592,6 +623,7 @@ public class Main extends JFrame {
 				staffPanel.hide();
 				transactionPanel.hide();
 				transferPanel.hide();
+				imgLeftPanel.hide();
 			}
 		});
 		mnuCustomer.setForeground(Color.WHITE);
@@ -608,6 +640,7 @@ public class Main extends JFrame {
 				customerPanel.hide();
 				transactionPanel.hide();
 				transferPanel.hide();
+				imgLeftPanel.hide();
 			}
 		});
 		mnuStaff.setForeground(Color.WHITE);
