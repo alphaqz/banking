@@ -161,21 +161,20 @@ public class StaffEntry extends JInternalFrame {
 		            txtphone.requestFocus();
 		            txtphone.selectAll();
 		        }   
-
-		        else if(!Checking.IsPhoneNoformat(txtphone.getText()))
-		        {
-		            JOptionPane.showMessageDialog(null,"Phone Number must start with 09 and entered number after 09 must not be zero!");
-		            txtphone.requestFocus();
-		            txtphone.selectAll();
-		        }
-		         
-//		         Check Email
-		         else if(Checking.IsNull(txtEmail.getText()))
+		        else if(Checking.IsNull(txtEmail.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null, "Please enter Email.");
 		            txtEmail.requestFocus();
 		            txtEmail.selectAll();
 		        }
+		        else if(!Checking.IsPhoneNoformat(txtphone.getText()))
+		        {
+		            JOptionPane.showMessageDialog(null,"Phone Number must start with 09 and entered number after 09 must not be zero!");
+		            txtphone.requestFocus();
+		            txtphone.selectAll();
+		        }		         
+//		         Check Email
+		        
 		         else if(!Checking.IsEformat(txtEmail.getText()))
 		         {
 		            JOptionPane.showMessageDialog(null, "Invalid Email Format.Please reenter!");

@@ -467,6 +467,9 @@ public class mySQLQueries {
                 else{
                     JOptionPane.showMessageDialog(null,"The table does not contain the specified ID.","Update Fail",JOptionPane.ERROR_MESSAGE);
                     return false;}
+            }catch (SQLIntegrityConstraintViolationException e) {
+            	JOptionPane.showMessageDialog(null, "Duplicate entry", "Duplicate", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
             catch(SQLException e)
             {

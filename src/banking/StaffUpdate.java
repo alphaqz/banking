@@ -232,6 +232,9 @@ public class StaffUpdate extends JInternalFrame {
 							st[2] = (String)txtphone.getText();
 							st[3] = (String)txtemail.getText();
 //							st[4] = (String)
+							 boolean ee = mySQLQueries.isduplicate("staff", st);
+					         boolean ee1= mySQLQueries.isduplicateEmailForStaff("staff", st);
+					            
 						    boolean save = mySQLQueries.updateRecord("staff", id, st);
 						    if(save) 
 						    {
