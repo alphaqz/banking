@@ -84,7 +84,7 @@ public class Main extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 974, 531);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(176, 224, 230));
+		contentPane.setBackground(Color.decode("#3949ab"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -510,7 +510,8 @@ public class Main extends JFrame {
 		contentPane.add(mnuAccount);
 		
 		navPanel = new JPanel();
-		navPanel.setBackground(Color.BLUE);
+		
+		navPanel.setBackground(Color.decode("#5262C5"));
 		navPanel.setBounds(0, 0, 10000, 39);
 		contentPane.add(navPanel);
 		navPanel.setLayout(null);

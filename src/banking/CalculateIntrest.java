@@ -21,7 +21,7 @@ public class CalculateIntrest {
 	static clsDBConnection connect = new clsDBConnection();
 	static String id = "";
 	static double currAmount=0.0;
-	
+	static double intrest = 0;
 	public static void main(String[] args) {
 	 int output =	something("ac-0000001")[0];
 	 System.out.println(output);
@@ -63,7 +63,14 @@ public class CalculateIntrest {
 		int withdrawableAmount = 0;
 		String accountData[] = mySQLQueries.getAccountData(accid);
 		String accountTypeID = accountData[2];
-		int fixedPeriod = Integer.parseInt( mySQLQueries.getAccountTypeData("AT-0000002")[2]);
+		int fixedPeriod = Integer.parseInt( mySQLQueries.getAccountTypeData(accountTypeID)[2]);
+//		
+//		System.out.println("xxxxxxx");
+//		System.out.println(mySQLQueries.getAccountTypeData(accountTypeID)[0]);
+		intrest = Double.parseDouble( mySQLQueries.getAccountTypeData(accountTypeID)[1] );
+//		System.out.println("intrest is "+intrest );
+//		System.out.println(mySQLQueries.getAccountTypeData(accountTypeID)[2]);
+//		System.out.println("xxxxxxx");
 		//AT-0000001
 		if(accountTypeID.equals("AT-0000001")) {
 			System.out.println("normal saving acc");
@@ -163,7 +170,7 @@ public class CalculateIntrest {
 		 return result;
 	}
 	public static double getIntrest(double currAmount) {
-		return Math.floor( currAmount * 0.0001);
+		return Math.floor( (currAmount * intrest *  0.01)/365);
 	}
 	
 
