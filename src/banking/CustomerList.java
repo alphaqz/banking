@@ -67,12 +67,12 @@ public class CustomerList extends JInternalFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
-		panel.setBounds(0, 26, 703, 400);
+		panel.setBounds(0, 15, 703, 411);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 106, 657, 191);
+		scrollPane.setBounds(10, 114, 683, 222);
 		panel.add(scrollPane);
 		
 		tblcustomer = new JTable();
@@ -87,7 +87,7 @@ public class CustomerList extends JInternalFrame {
 				}
 			}
 		});
-		btnClose.setBounds(578, 312, 89, 33);
+		btnClose.setBounds(370, 360, 90, 35);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -100,7 +100,7 @@ public class CustomerList extends JInternalFrame {
 		        }
 			}
 		});
-		btnPrint.setBounds(479, 312, 89, 33);
+		btnPrint.setBounds(271, 360, 90, 35);
 		panel.add(btnPrint);
 		
 		cboAddress = new JComboBox();

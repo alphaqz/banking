@@ -27,6 +27,8 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.border.BevelBorder;
+import java.awt.Font;
 
 public class DepositCreate extends JInternalFrame {
 
@@ -67,31 +69,32 @@ public class DepositCreate extends JInternalFrame {
 //		setBounds(100, 100, 487, 456);
 		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		contentPanel.setBorder(null);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JLabel lblDepositID = new JLabel("ID:");
+		lblDepositID.setBounds(232, 113, 46, 14);
 		lblDepositID.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDepositID.setBounds(126, 57, 46, 14);
 		contentPanel.add(lblDepositID);
 		
 		lblForID = new JLabel("");
+		lblForID.setBounds(332, 113, 86, 20);
 		lblForID.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblForID.setBounds(222, 57, 86, 14);
 		contentPanel.add(lblForID);
 		
 		JLabel lblAmount = new JLabel("Amount:");
+		lblAmount.setBounds(213, 142, 69, 14);
 		lblAmount.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAmount.setBounds(103, 104, 69, 14);
 		contentPanel.add(lblAmount);
 		
 		txtAmount = new JTextField();
+		txtAmount.setBounds(332, 139, 86, 20);
 		txtAmount.setColumns(10);
-		txtAmount.setBounds(222, 101, 86, 20);
 		contentPanel.add(txtAmount);
 		
 		cboAccount = new JComboBox();
+		cboAccount.setBounds(332, 173, 186, 22);
 		cboAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(cboAccount.getSelectedIndex()> 0) {	
@@ -108,86 +111,29 @@ public class DepositCreate extends JInternalFrame {
 				}
 			}
 		});
-		cboAccount.setBounds(222, 143, 186, 22);
 		contentPanel.add(cboAccount);
 		
 		JLabel lblAccount = new JLabel("Account:");
+		lblAccount.setBounds(213, 177, 69, 14);
 		lblAccount.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAccount.setBounds(103, 147, 69, 14);
 		contentPanel.add(lblAccount);
 		
 		JLabel lblStaff = new JLabel("Staff:");
+		lblStaff.setBounds(210, 210, 69, 14);
 		lblStaff.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblStaff.setBounds(103, 180, 69, 14);
 		contentPanel.add(lblStaff);
 		
 		cboStaff = new JComboBox();
-		cboStaff.setBounds(222, 176, 186, 22);
+		cboStaff.setBounds(332, 206, 186, 22);
 		contentPanel.add(cboStaff);
-		
-		JPanel contentPanel_1 = new JPanel();
-		contentPanel_1.setLayout(null);
-		contentPanel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Information", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		contentPanel_1.setBounds(0, 240, 461, 144);
-		contentPanel.add(contentPanel_1);
-		
-		JLabel lblAccID = new JLabel("ID:");
-		lblAccID.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAccID.setBounds(105, 30, 74, 14);
-		contentPanel_1.add(lblAccID);
-		
-		lblforaccid = new JLabel("");
-		lblforaccid.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforaccid.setBounds(218, 30, 86, 14);
-		contentPanel_1.add(lblforaccid);
-		
-		JLabel lblbalance = new JLabel("Withdrawable Balance:");
-		lblbalance.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblbalance.setBounds(33, 56, 146, 14);
-		contentPanel_1.add(lblbalance);
 		
 	
 		lblforbalance = new JLabel("");
 		lblforbalance.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lblforbalance.setBounds(224, 56, 86, 14);
-		//contentPanel_1.add(lblforbalance);
-		
-		JLabel lblCust = new JLabel("Account type:");
-		lblCust.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCust.setBounds(93, 81, 86, 14);
-		contentPanel_1.add(lblCust);
-		
-		lblforacctype = new JLabel("");
-		lblforacctype.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforacctype.setBounds(218, 81, 164, 14);
-		contentPanel_1.add(lblforacctype);
-		
-		JLabel lblCustomerName = new JLabel("Customer Name:");
-		lblCustomerName.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCustomerName.setBounds(49, 106, 130, 14);
-		contentPanel_1.add(lblCustomerName);
-	
-		lblforcusname = new JLabel("");
-		lblforcusname.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforcusname.setBounds(218, 106, 172, 14);
-		contentPanel_1.add(lblforcusname);
-		
-		lblforbalanceNew = new JLabel("");
-		lblforbalanceNew.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforbalanceNew.setBounds(218, 55, 86, 14);
-		contentPanel_1.add(lblforbalanceNew);
-		
-		lblforbalanceTotal = new JLabel("");
-		lblforbalanceTotal.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblforbalanceTotal.setBounds(365, 56, 86, 14);
-		contentPanel_1.add(lblforbalanceTotal);
-		
-		JLabel lblTotal = new JLabel("total:");
-		lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTotal.setBounds(307, 56, 48, 14);
-		contentPanel_1.add(lblTotal);
 		
 		JRadioButton rdoDeposit = new JRadioButton("Deposit");
+		rdoDeposit.setBounds(213, 77, 109, 23);
 		rdoDeposit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -202,10 +148,10 @@ public class DepositCreate extends JInternalFrame {
 		});
 		rdoDeposit.setSelected(true);
 		buttonGroup.add(rdoDeposit);
-		rdoDeposit.setBounds(103, 27, 109, 23);
 		contentPanel.add(rdoDeposit);
 		
 		JRadioButton rdoWithdraw = new JRadioButton("Withdraw");
+		rdoWithdraw.setBounds(325, 77, 109, 23);
 		rdoWithdraw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Withdraw Entry", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -219,14 +165,85 @@ public class DepositCreate extends JInternalFrame {
 			}
 		});
 		buttonGroup.add(rdoWithdraw);
-		rdoWithdraw.setBounds(249, 27, 109, 23);
 		contentPanel.add(rdoWithdraw);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
+		panel.setBounds(86, 15, 519, 379);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		JPanel contentPanel_1 = new JPanel();
+		contentPanel_1.setBounds(21, 223, 474, 144);
+		panel.add(contentPanel_1);
+		contentPanel_1.setLayout(null);
+		contentPanel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Information", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
+		JLabel lblAccID = new JLabel("ID:");
+		lblAccID.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAccID.setBounds(105, 22, 74, 23);
+		contentPanel_1.add(lblAccID);
+		
+		lblforaccid = new JLabel("");
+		lblforaccid.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblforaccid.setBounds(218, 22, 86, 23);
+		contentPanel_1.add(lblforaccid);
+		
+		JLabel lblbalance = new JLabel("Withdrawable Balance:");
+		lblbalance.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblbalance.setBounds(33, 52, 146, 21);
+		contentPanel_1.add(lblbalance);
+		//contentPanel_1.add(lblforbalance);
+		
+		JLabel lblCust = new JLabel("Account type:");
+		lblCust.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCust.setBounds(93, 81, 86, 21);
+		contentPanel_1.add(lblCust);
+		
+		lblforacctype = new JLabel("");
+		lblforacctype.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblforacctype.setBounds(218, 81, 164, 21);
+		contentPanel_1.add(lblforacctype);
+		
+		JLabel lblCustomerName = new JLabel("Customer Name:");
+		lblCustomerName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCustomerName.setBounds(49, 110, 130, 20);
+		contentPanel_1.add(lblCustomerName);
+		
+			lblforcusname = new JLabel("");
+			lblforcusname.setBorder(new LineBorder(new Color(0, 0, 0)));
+			lblforcusname.setBounds(218, 110, 172, 20);
+			contentPanel_1.add(lblforcusname);
+			
+			lblforbalanceNew = new JLabel("");
+			lblforbalanceNew.setBorder(new LineBorder(new Color(0, 0, 0)));
+			lblforbalanceNew.setBounds(218, 51, 86, 22);
+			contentPanel_1.add(lblforbalanceNew);
+			
+			lblforbalanceTotal = new JLabel("");
+			lblforbalanceTotal.setBorder(new LineBorder(new Color(0, 0, 0)));
+			lblforbalanceTotal.setBounds(365, 52, 86, 21);
+			contentPanel_1.add(lblforbalanceTotal);
+			
+			JLabel lblTotal = new JLabel("total:");
+			lblTotal.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblTotal.setBounds(307, 52, 48, 21);
+			contentPanel_1.add(lblTotal);
+			
+			JLabel lblNewLabel = new JLabel("Deposit Or Withdraw Operation");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setFont(new Font("Pyidaungsu", Font.BOLD, 17));
+			lblNewLabel.setBounds(88, 15, 319, 19);
+			panel.add(lblNewLabel);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			buttonPane.setBounds(182, 396, 346, 50);
+			contentPanel.add(buttonPane);
 			{
 				JButton btnSave = new JButton("Save");
+				btnSave.setForeground(new Color(255, 255, 255));
+				btnSave.setBackground(new Color(0, 128, 0));
+				btnSave.setBounds(10, 5, 90, 35);
 				btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -303,15 +320,28 @@ public class DepositCreate extends JInternalFrame {
 				        }
 					}
 				});
+				buttonPane.setLayout(null);
 				
-				JButton btnClear = new JButton("Clear");
-				buttonPane.add(btnClear);
+				JButton btnCancle = new JButton("Cancel");
+				btnCancle.setBackground(new Color(255, 215, 0));
+				btnCancle.setForeground(new Color(255, 255, 255));
+				btnCancle.setBounds(131, 5, 90, 35);
+				buttonPane.add(btnCancle);
 				btnSave.setActionCommand("OK");
 				buttonPane.add(btnSave);
 				getRootPane().setDefaultButton(btnSave);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Close");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if(JOptionPane.showConfirmDialog(null,"Are you sure you want to exit?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
+						{	
+							dispose();
+						}
+					}
+				});
+				cancelButton.setBounds(246, 5, 90, 35);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

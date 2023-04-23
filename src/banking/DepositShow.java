@@ -111,25 +111,25 @@ public class DepositShow extends JInternalFrame {
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+			panel.setBorder(null);
 			panel.setBounds(10, 11, 683, 435);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			{
 				JPanel panel_1 = new JPanel();
-				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_1.setBounds(20, 11, 658, 148);
+				panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deposit Info:", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panel_1.setBounds(20, 0, 658, 159);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
 					JLabel lblstaffId = new JLabel("Staff ID:");
 					lblstaffId.setHorizontalAlignment(SwingConstants.LEFT);
-					lblstaffId.setBounds(10, 70, 85, 14);
+					lblstaffId.setBounds(10, 84, 85, 14);
 					panel_1.add(lblstaffId);
 				}
 				{
 					JLabel lblDepositID = new JLabel("Deposit ID:");
-					lblDepositID.setBounds(10, 25, 85, 14);
+					lblDepositID.setBounds(10, 41, 85, 14);
 					panel_1.add(lblDepositID);
 				}
 				{
@@ -154,19 +154,19 @@ public class DepositShow extends JInternalFrame {
 
 						}
 					});
-					cboStaffID.setBounds(120, 66, 197, 22);
+					cboStaffID.setBounds(120, 80, 197, 22);
 					panel_1.add(cboStaffID);
 				}
 				{
 					lblforDepositID = new JLabel("");
-					lblforDepositID.setBounds(120, 25, 197, 22);
+					lblforDepositID.setBounds(120, 41, 197, 22);
 					lblforDepositID.setBorder(blackline);
 					panel_1.add(lblforDepositID);
 				}
 				{
 					JLabel lblNewLabel_2 = new JLabel("Amount:");
 					lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblNewLabel_2.setBounds(353, 33, 64, 14);
+					lblNewLabel_2.setBounds(353, 53, 64, 14);
 					panel_1.add(lblNewLabel_2);
 				}
 				{
@@ -198,7 +198,7 @@ public class DepositShow extends JInternalFrame {
 
 						}
 					});
-					btndelete.setBounds(417, 114, 89, 23);
+					btndelete.setBounds(430, 118, 89, 23);
 					panel_1.add(btndelete);
 				}
 				{
@@ -218,7 +218,7 @@ public class DepositShow extends JInternalFrame {
 			                }
 						}
 					});
-					btnupdate.setBounds(538, 114, 89, 23);
+					btnupdate.setBounds(538, 118, 89, 23);
 					panel_1.add(btnupdate);
 				}
 				{
@@ -234,30 +234,32 @@ public class DepositShow extends JInternalFrame {
 				{
 					lblForDate = new JLabel("");
 					lblForDate.setBorder(new LineBorder(new Color(0, 0, 0)));
-					lblForDate.setBounds(430, 66, 197, 22);
+					lblForDate.setBounds(430, 86, 197, 22);
 					panel_1.add(lblForDate);
 				}
 				{
 					lblDate = new JLabel("Date:");
 					lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblDate.setBounds(332, 70, 85, 14);
+					lblDate.setBounds(332, 90, 85, 14);
 					panel_1.add(lblDate);
 				}
 				
 				txtamount = new JLabel("");
 				txtamount.setBorder(new LineBorder(new Color(0, 0, 0)));
-				txtamount.setBounds(430, 25, 197, 22);
+				txtamount.setBounds(430, 45, 197, 22);
 				panel_1.add(txtamount);
 			}
 			
 			JPanel panel_1 = new JPanel();
 			panel_1.setLayout(null);
-			panel_1.setBounds(219, 386, 290, 49);
+			panel_1.setBounds(219, 388, 290, 42);
 			panel.add(panel_1);
 			
 			JButton btnSave = new JButton("Save");
+			btnSave.setForeground(new Color(255, 255, 255));
+			btnSave.setBackground(new Color(0, 128, 0));
 		
-			btnSave.setBounds(31, 11, 89, 27);
+			btnSave.setBounds(31, 3, 90, 35);
 			panel_1.add(btnSave);
 			
 			JButton btnClose = new JButton("Close");
@@ -269,7 +271,7 @@ public class DepositShow extends JInternalFrame {
 					}
 				}
 			});
-			btnClose.setBounds(159, 11, 89, 27);
+			btnClose.setBounds(159, 3, 90, 35);
 			panel_1.add(btnClose);
 			
 			scrollPane = new JScrollPane();
@@ -282,7 +284,7 @@ public class DepositShow extends JInternalFrame {
 
 				}
 			});
-			scrollPane.setBounds(20, 227, 653, 148);
+			scrollPane.setBounds(20, 246, 653, 131);
 			panel.add(scrollPane);
 			
 			tbldeposit = new JTable();
@@ -322,7 +324,7 @@ public class DepositShow extends JInternalFrame {
 					}
 				}
 			});
-			rdoMonth.setBounds(20, 160, 109, 27);
+			rdoMonth.setBounds(20, 174, 109, 27);
 			panel.add(rdoMonth);
 			
 			rdoYear = new JRadioButton("Year");
@@ -347,7 +349,7 @@ public class DepositShow extends JInternalFrame {
 					}
 				}
 			});
-			rdoYear.setBounds(131, 160, 109, 27);
+			rdoYear.setBounds(131, 174, 109, 27);
 			panel.add(rdoYear);
 			
 			rdoBoth = new JRadioButton("Year & Month");
@@ -367,7 +369,7 @@ public class DepositShow extends JInternalFrame {
 					}
 				}
 			});
-			rdoBoth.setBounds(271, 160, 109, 27);
+			rdoBoth.setBounds(271, 174, 109, 27);
 			panel.add(rdoBoth);
 			
 			btnSearch = new JButton("Search");
@@ -407,7 +409,7 @@ public class DepositShow extends JInternalFrame {
 			        }
 				}
 			});
-			btnSearch.setBounds(278, 191, 87, 27);
+			btnSearch.setBounds(276, 205, 87, 27);
 			panel.add(btnSearch);
 			
 			btnShowAll = new JButton("Show All");
@@ -418,17 +420,17 @@ public class DepositShow extends JInternalFrame {
 				    cboYear.setSelectedIndex(0);
 				}
 			});
-			btnShowAll.setBounds(391, 191, 87, 27);
+			btnShowAll.setBounds(391, 205, 87, 27);
 			panel.add(btnShowAll);
 			
 			cboMonth = new JComboBox();
 			cboMonth.setModel(new DefaultComboBoxModel(new String[] {"-Selected-", "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}));
-			cboMonth.setBounds(25, 191, 96, 27);
+			cboMonth.setBounds(25, 205, 96, 27);
 			panel.add(cboMonth);
 			
 			cboYear = new JComboBox();
 			cboYear.setModel(new DefaultComboBoxModel(new String[] {"-Selected-"}));
-			cboYear.setBounds(131, 191, 109, 27);
+			cboYear.setBounds(131, 205, 109, 27);
 			panel.add(cboYear);
 		}
 		try{

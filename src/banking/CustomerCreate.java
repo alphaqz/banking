@@ -16,6 +16,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class CustomerCreate extends JInternalFrame {
 	private JLabel lblcusid;
@@ -32,6 +36,7 @@ public class CustomerCreate extends JInternalFrame {
 	private String gender = "";
 	private JRadioButton rdoMale;
 	private JRadioButton rdoFemale;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -57,98 +62,114 @@ public class CustomerCreate extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Customer Info:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 317, 359);
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
+		panel.setBounds(86, 15, 519, 372);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Customer ID:");
-		lblNewLabel.setBounds(20, 23, 81, 14);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setBounds(120, 95, 81, 14);
 		panel.add(lblNewLabel);
 		
 		JLabel lblCusto = new JLabel("Customer Name:");
-		lblCusto.setBounds(10, 62, 109, 14);
+		lblCusto.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCusto.setBounds(82, 130, 120, 14);
 		panel.add(lblCusto);
 		
 		JLabel lblNewLabel_2 = new JLabel("Address:");
-		lblNewLabel_2.setBounds(43, 133, 56, 14);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_2.setBounds(144, 196, 56, 14);
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblPhoneNp = new JLabel("Phone no:");
-		lblPhoneNp.setBounds(38, 177, 79, 14);
+		lblPhoneNp.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPhoneNp.setBounds(136, 231, 63, 14);
 		panel.add(lblPhoneNp);
 		
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(60, 216, 46, 14);
+		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEmail.setBounds(149, 263, 46, 14);
 		panel.add(lblEmail);
 		
 		lblcusid = new JLabel("");
-		lblcusid.setBounds(111, 23, 151, 14);
+		lblcusid.setBounds(230, 95, 151, 14);
 		panel.add(lblcusid);
 		
 		txtcusname = new JTextField("asdfsa");
-		txtcusname.setBounds(111, 59, 167, 20);
+		txtcusname.setBounds(230, 127, 167, 20);
 		panel.add(txtcusname);
 		txtcusname.setColumns(10);
 		
 		txtaddress = new JTextField("asdf");
+		txtaddress.setBounds(228, 190, 169, 20);
 		txtaddress.setColumns(10);
-		txtaddress.setBounds(109, 130, 169, 20);
 		panel.add(txtaddress);
 		
 		txtphone = new JTextField("09797246971");
+		txtphone.setBounds(228, 227, 169, 20);
 		txtphone.setColumns(10);
-		txtphone.setBounds(109, 174, 169, 20);
 		panel.add(txtphone);
 		
 		txtEmail = new JTextField("eieihtay@gmail.com");
+		txtEmail.setBounds(230, 260, 167, 20);
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(111, 213, 167, 20);
 		panel.add(txtEmail);
 		
 		JLabel lblGender = new JLabel("Gender:");
-		lblGender.setBounds(45, 87, 46, 14);
+		lblGender.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblGender.setBounds(150, 163, 46, 14);
 		panel.add(lblGender);
 		
 		JLabel lblNrc = new JLabel("Nrc:");
-		lblNrc.setBounds(55, 257, 46, 14);
+		lblNrc.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNrc.setBounds(148, 300, 46, 14);
 		panel.add(lblNrc);
 		
 		rdoMale = new JRadioButton("Male");
+		rdoMale.setBounds(230, 157, 81, 23);
 		rdoMale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gender = "male";
 			}
 		});
 		buttonGroup.add(rdoMale);
-		rdoMale.setBounds(101, 83, 81, 23);
 		panel.add(rdoMale);
 		
 		rdoFemale = new JRadioButton("Female");
+		rdoFemale.setBounds(337, 157, 109, 23);
 		rdoFemale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gender = "female";
 			}
 		});
 		buttonGroup.add(rdoFemale);
-		rdoFemale.setBounds(192, 83, 109, 23);
 		panel.add(rdoFemale);
 		
 		txtNrc = new JTextField("9/test(N)000000");
+		txtNrc.setBounds(230, 295, 167, 20);
 		txtNrc.setColumns(10);
-		txtNrc.setBounds(111, 254, 167, 20);
 		panel.add(txtNrc);
 		
 		txtJob = new JTextField("dev");
+		txtJob.setBounds(230, 333, 167, 20);
 		txtJob.setColumns(10);
-		txtJob.setBounds(111, 299, 167, 20);
 		panel.add(txtJob);
 		
 		JLabel lblJob = new JLabel("Job:");
-		lblJob.setBounds(55, 302, 46, 14);
+		lblJob.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblJob.setBounds(148, 336, 46, 14);
 		panel.add(lblJob);
 		
+		lblNewLabel_1 = new JLabel("Create New Customer");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Pyidaungsu", Font.BOLD, 17));
+		lblNewLabel_1.setBounds(120, 34, 289, 19);
+		panel.add(lblNewLabel_1);
+		
 		btnSave = new JButton("Save");
+		btnSave.setForeground(new Color(255, 255, 255));
+		btnSave.setBackground(new Color(0, 128, 0));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -277,16 +298,18 @@ public class CustomerCreate extends JInternalFrame {
 		         		}
 				}
 		});
-		btnSave.setBounds(10, 381, 79, 23);
+		btnSave.setBounds(199, 402, 90, 35);
 		getContentPane().add(btnSave);
 		
 		btnCancel = new JButton("Cancel");
+		btnCancel.setForeground(new Color(255, 255, 255));
+		btnCancel.setBackground(new Color(255, 215, 0));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clear();
 			}
 		});
-		btnCancel.setBounds(126, 381, 85, 23);
+		btnCancel.setBounds(315, 402, 90, 35);
 		getContentPane().add(btnCancel);
 		
 		btnclose = new JButton("Close");
@@ -298,7 +321,7 @@ public class CustomerCreate extends JInternalFrame {
 				}
 			}
 		});
-		btnclose.setBounds(242, 381, 85, 23);
+		btnclose.setBounds(431, 402, 90, 35);
 		getContentPane().add(btnclose);
 		AutoID();
 	}

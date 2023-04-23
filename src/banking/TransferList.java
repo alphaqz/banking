@@ -59,19 +59,19 @@ public class TransferList extends JInternalFrame {
 	 * Create the dialog.
 	 */
 	public TransferList() throws ClassNotFoundException {
-		setTitle("Transfer List");
+		setTitle("Transfer Info List");
 //		setBounds(100, 100, 642, 476);
 		setBounds(0, 0, Constants.c_width, Constants.c_height);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Transfer List", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 606, 415);
+		panel.setBorder(null);
+		panel.setBounds(10, 11, 683, 415);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 139, 586, 217);
+		scrollPane.setBounds(10, 139, 663, 217);
 		panel.add(scrollPane);
 		
 		tbltransfer = new JTable();
@@ -86,7 +86,7 @@ public class TransferList extends JInternalFrame {
 				}
 			}
 		});
-		btnClose.setBounds(451, 371, 89, 33);
+		btnClose.setBounds(345, 371, 90, 35);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -99,7 +99,7 @@ public class TransferList extends JInternalFrame {
 		        }
 			}
 		});
-		btnPrint.setBounds(338, 371, 89, 33);
+		btnPrint.setBounds(232, 371, 90, 35);
 		panel.add(btnPrint);
 		
 		rdomonth = new JRadioButton("Monthly");

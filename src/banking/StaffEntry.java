@@ -18,6 +18,9 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class StaffEntry extends JInternalFrame {
 	private JLabel lblstaid;
@@ -31,6 +34,7 @@ public class StaffEntry extends JInternalFrame {
 	private JTextField txtEmail;
 	private JRadioButton rdoMale;
 	private JRadioButton rdoFemale;
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -56,71 +60,84 @@ public class StaffEntry extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Staff Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 317, 253);
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
+		panel.setBounds(75, 15, 519, 335);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Staff ID:");
-		lblNewLabel.setBounds(10, 23, 81, 14);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setBounds(101, 89, 81, 14);
 		panel.add(lblNewLabel);
 		
 		JLabel lblCusto = new JLabel("Staff Name:");
-		lblCusto.setBounds(10, 62, 109, 14);
+		lblCusto.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCusto.setBounds(91, 128, 91, 14);
 		panel.add(lblCusto);
 		
 		JLabel lblPhoneNp = new JLabel("Phone no:");
-		lblPhoneNp.setBounds(12, 155, 79, 14);
+		lblPhoneNp.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPhoneNp.setBounds(100, 221, 79, 14);
 		panel.add(lblPhoneNp);
 		
 		lblstaid = new JLabel("");
-		lblstaid.setBounds(111, 23, 151, 14);
+		lblstaid.setBounds(221, 89, 151, 14);
 		panel.add(lblstaid);
 		
 		txtstaname = new JTextField("Kaung Thu Han");
-		txtstaname.setBounds(111, 59, 167, 20);
+		txtstaname.setBounds(221, 125, 167, 20);
 		panel.add(txtstaname);
 		txtstaname.setColumns(10);
 		
 		txtphone = new JTextField("09797246971");
+		txtphone.setBounds(219, 218, 169, 20);
 		txtphone.setColumns(10);
-		txtphone.setBounds(109, 152, 169, 20);
 		panel.add(txtphone);
 		
 		JLabel lblGender = new JLabel("Gender:");
-		lblGender.setBounds(10, 111, 46, 14);
+		lblGender.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblGender.setBounds(102, 176, 75, 14);
 		panel.add(lblGender);
 		
 		rdoMale = new JRadioButton("Male");
+		rdoMale.setBounds(219, 169, 81, 23);
 		rdoMale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gender = "male";
 			}
 		});
 		buttonGroup.add(rdoMale);
-		rdoMale.setBounds(109, 103, 81, 23);
 		panel.add(rdoMale);
 		
 		rdoFemale = new JRadioButton("Female");
+		rdoFemale.setBounds(302, 169, 109, 23);
 		rdoFemale.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gender = "female";
 			}
 		});
 		buttonGroup.add(rdoFemale);
-		rdoFemale.setBounds(192, 103, 109, 23);
 		panel.add(rdoFemale);
 		
 		JLabel lblEmail = new JLabel("Email :");
-		lblEmail.setBounds(12, 211, 79, 14);
+		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEmail.setBounds(99, 277, 79, 14);
 		panel.add(lblEmail);
 		
 		txtEmail = new JTextField("");
+		txtEmail.setBounds(221, 272, 169, 20);
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(111, 206, 169, 20);
 		panel.add(txtEmail);
 		
+		lblNewLabel_1 = new JLabel("Create New Staff");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Pyidaungsu", Font.BOLD, 17));
+		lblNewLabel_1.setBounds(120, 24, 268, 19);
+		panel.add(lblNewLabel_1);
+		
 		btnSave = new JButton("Save");
+		btnSave.setForeground(new Color(255, 255, 255));
+		btnSave.setBackground(new Color(0, 128, 0));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -229,16 +246,18 @@ public class StaffEntry extends JInternalFrame {
 		         		}
 				}
 		});
-		btnSave.setBounds(10, 279, 79, 23);
+		btnSave.setBounds(202, 393, 90, 35);
 		getContentPane().add(btnSave);
 		
 		btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(new Color(255, 215, 0));
+		btnCancel.setForeground(new Color(255, 255, 255));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clear();
 			}
 		});
-		btnCancel.setBounds(112, 279, 85, 23);
+		btnCancel.setBounds(310, 393, 90, 35);
 		getContentPane().add(btnCancel);
 		
 		btnclose = new JButton("Close");
@@ -250,7 +269,7 @@ public class StaffEntry extends JInternalFrame {
 				}
 			}
 		});
-		btnclose.setBounds(228, 279, 85, 23);
+		btnclose.setBounds(420, 393, 90, 35);
 		getContentPane().add(btnclose);
 		AutoID();
 		clear();

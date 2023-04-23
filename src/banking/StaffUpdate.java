@@ -20,19 +20,22 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.border.BevelBorder;
+import java.awt.Font;
 
 public class StaffUpdate extends JInternalFrame {
 	private JTextField txtname;
 	private JTextField txtphone;
 	private JTextField txtemail;
 	private JComboBox cboSID;
-	private JButton btnDelete;
+	private JButton btnCancel;
 	private JButton btnUpdate;
 	private JButton btnclose;
 	private JRadioButton rdbtnMale = new JRadioButton("male");;
 	private JRadioButton rdbtnFemale = new JRadioButton("Female");;
 	private String gender = "";
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JLabel lblNewLabel_1;
 
 	/**
 	 * Launch the application.
@@ -58,45 +61,49 @@ public class StaffUpdate extends JInternalFrame {
 		{
 			JPanel panel = new JPanel();
 			panel.setLayout(null);
-			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Staff Update Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 325, 218);
+			panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
+			panel.setBounds(86, 15, 519, 335);
 			getContentPane().add(panel);
 			{
 				JLabel lblNewLabel = new JLabel("Staff ID:");
-				lblNewLabel.setBounds(10, 23, 81, 14);
+				lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+				lblNewLabel.setBounds(111, 122, 81, 14);
 				panel.add(lblNewLabel);
 			}
 			{
 				JLabel lblCusto = new JLabel("Staff Name:");
-				lblCusto.setBounds(10, 62, 81, 14);
+				lblCusto.setHorizontalAlignment(SwingConstants.RIGHT);
+				lblCusto.setBounds(111, 161, 81, 14);
 				panel.add(lblCusto);
 			}
 			{
 				JLabel lblPhoneNp = new JLabel("Phone No:");
-				lblPhoneNp.setBounds(10, 132, 81, 14);
+				lblPhoneNp.setHorizontalAlignment(SwingConstants.RIGHT);
+				lblPhoneNp.setBounds(111, 231, 81, 14);
 				panel.add(lblPhoneNp);
 			}
 			{
 				JLabel lblEmail = new JLabel("Email:");
-				lblEmail.setBounds(10, 173, 81, 14);
+				lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
+				lblEmail.setBounds(111, 272, 81, 14);
 				panel.add(lblEmail);
 			}
 			{
 				txtname = new JTextField();
 				txtname.setColumns(10);
-				txtname.setBounds(111, 59, 167, 20);
+				txtname.setBounds(232, 158, 167, 20);
 				panel.add(txtname);
 			}
 			{
 				txtphone = new JTextField();
 				txtphone.setColumns(10);
-				txtphone.setBounds(109, 129, 169, 20);
+				txtphone.setBounds(230, 228, 169, 20);
 				panel.add(txtphone);
 			}
 			{
 				txtemail = new JTextField();
 				txtemail.setColumns(10);
-				txtemail.setBounds(111, 170, 167, 20);
+				txtemail.setBounds(232, 269, 167, 20);
 				panel.add(txtemail);
 			}
 			{
@@ -118,13 +125,13 @@ public class StaffUpdate extends JInternalFrame {
 						
 					}
 				});
-				cboSID.setBounds(111, 19, 167, 22);
+				cboSID.setBounds(232, 118, 167, 22);
 				panel.add(cboSID);
 			}
 			
 			JLabel lblGender = new JLabel("Gender:");
-			lblGender.setHorizontalAlignment(SwingConstants.LEFT);
-			lblGender.setBounds(10, 90, 81, 14);
+			lblGender.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblGender.setBounds(111, 189, 81, 14);
 			panel.add(lblGender);
 			
 			rdbtnMale = new JRadioButton("Male");
@@ -134,7 +141,7 @@ public class StaffUpdate extends JInternalFrame {
 				}
 			});
 			buttonGroup.add(rdbtnMale);
-			rdbtnMale.setBounds(121, 86, 56, 23);
+			rdbtnMale.setBounds(229, 185, 56, 23);
 			panel.add(rdbtnMale);
 			
 			rdbtnFemale = new JRadioButton("Female");
@@ -144,8 +151,15 @@ public class StaffUpdate extends JInternalFrame {
 				}
 			});
 			buttonGroup.add(rdbtnFemale);
-			rdbtnFemale.setBounds(195, 86, 83, 23);
+			rdbtnFemale.setBounds(316, 185, 83, 23);
 			panel.add(rdbtnFemale);
+			{
+				lblNewLabel_1 = new JLabel("Update Staff Info:");
+				lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+				lblNewLabel_1.setFont(new Font("Pyidaungsu", Font.BOLD, 17));
+				lblNewLabel_1.setBounds(129, 40, 270, 19);
+				panel.add(lblNewLabel_1);
+			}
 		}
 		{
 			btnclose = new JButton("Close");
@@ -157,12 +171,14 @@ public class StaffUpdate extends JInternalFrame {
 					}
 				}
 			});
-			btnclose.setBounds(218, 260, 85, 23);
+			btnclose.setBounds(429, 381, 90, 35);
 			getContentPane().add(btnclose);
 		}
 		{
-			btnDelete = new JButton("Delete");
-			btnDelete.addActionListener(new ActionListener() {
+			btnCancel = new JButton("Cancel");
+			btnCancel.setForeground(new Color(255, 255, 255));
+			btnCancel.setBackground(new Color(255, 215, 0));
+			btnCancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
 	                    String id = cboSID.getSelectedItem().toString();
@@ -181,11 +197,13 @@ public class StaffUpdate extends JInternalFrame {
 
 				}
 			});
-			btnDelete.setBounds(123, 260, 85, 23);
-			getContentPane().add(btnDelete);
+			btnCancel.setBounds(327, 381, 90, 35);
+			getContentPane().add(btnCancel);
 		}
 		{
 			btnUpdate = new JButton("Update");
+			btnUpdate.setForeground(new Color(255, 255, 255));
+			btnUpdate.setBackground(new Color(0, 128, 0));
 			btnUpdate.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -242,7 +260,7 @@ public class StaffUpdate extends JInternalFrame {
 			        }
 				}
 			});
-			btnUpdate.setBounds(34, 260, 79, 23);
+			btnUpdate.setBounds(225, 381, 90, 35);
 			getContentPane().add(btnUpdate);
 		}
 		fillStaff();

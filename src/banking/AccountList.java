@@ -63,7 +63,7 @@ public class AccountList extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Account List", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(null);
 		panel.setBounds(10, 11, 683, 415);
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -84,7 +84,7 @@ public class AccountList extends JInternalFrame {
 				}
 			}
 		});
-		btnClose.setBounds(584, 371, 89, 33);
+		btnClose.setBounds(584, 371, 90, 35);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -97,7 +97,7 @@ public class AccountList extends JInternalFrame {
 		        }
 			}
 		});
-		btnPrint.setBounds(471, 371, 89, 33);
+		btnPrint.setBounds(471, 371, 90, 35);
 		panel.add(btnPrint);
 		
 		cboAccNo = new JComboBox();

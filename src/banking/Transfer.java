@@ -25,6 +25,9 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.BevelBorder;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class Transfer extends JInternalFrame {
 
@@ -69,45 +72,52 @@ public class Transfer extends JInternalFrame {
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Transfer Process Transaction :", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 15, 414, 332);
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
+		panel.setBounds(86, 15, 519, 360);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Transfer ID :");
-		lblNewLabel.setBounds(10, 47, 90, 19);
+		lblNewLabel.setBounds(116, 86, 90, 19);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblNewLabel);
 		
 		JLabel lblDate = new JLabel("Amount :");
-		lblDate.setBounds(10, 96, 90, 19);
+		lblDate.setBounds(116, 127, 90, 19);
+		lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblDate);
 		
 		JLabel lblDatelabel = new JLabel("Date :");
-		lblDatelabel.setBounds(10, 143, 90, 19);
+		lblDatelabel.setBounds(116, 167, 90, 19);
+		lblDatelabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblDatelabel);
 		
 		JLabel lblReceivedAccountNo = new JLabel("Received Account No :");
-		lblReceivedAccountNo.setBounds(10, 233, 148, 19);
+		lblReceivedAccountNo.setBounds(58, 255, 148, 19);
+		lblReceivedAccountNo.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblReceivedAccountNo);
 		
 		JLabel lblTransferedAccountNo = new JLabel("Transfered Account No :");
-		lblTransferedAccountNo.setBounds(10, 187, 148, 19);
+		lblTransferedAccountNo.setBounds(58, 209, 148, 19);
+		lblTransferedAccountNo.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblTransferedAccountNo);
 		
 		JLabel lblStaffId = new JLabel("Staff ID :");
-		lblStaffId.setBounds(10, 283, 90, 19);
+		lblStaffId.setBounds(116, 305, 90, 19);
+		lblStaffId.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblStaffId);
 		
 		lblTID = new JLabel("");
-		lblTID.setBounds(206, 47, 96, 19);
+		lblTID.setBounds(254, 86, 96, 19);
 		panel.add(lblTID);
 		
 		txtAmount = new JTextField();
-		txtAmount.setBounds(206, 93, 157, 25);
+		txtAmount.setBounds(254, 124, 157, 25);
 		panel.add(txtAmount);
 		txtAmount.setColumns(10);
 		
 		cboReceive = new JComboBox();
+		cboReceive.setBounds(254, 251, 157, 27);
 		cboReceive.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				if(cboReceive.getSelectedIndex()==0) {
@@ -120,10 +130,10 @@ public class Transfer extends JInternalFrame {
 //				}
 			}
 		});
-		cboReceive.setBounds(206, 229, 157, 27);
 		panel.add(cboReceive);
 		
 		cboTransfer = new JComboBox();
+		cboTransfer.setBounds(254, 205, 157, 27);
 		cboTransfer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(cboTransfer.getSelectedIndex()==0) {
@@ -136,20 +146,21 @@ public class Transfer extends JInternalFrame {
 				}
 			}
 		});
-		cboTransfer.setBounds(206, 183, 157, 27);
 		panel.add(cboTransfer);
 		
 		cboStaff = new JComboBox();
-		cboStaff.setBounds(206, 279, 157, 27);
+		cboStaff.setBounds(254, 301, 157, 27);
 		panel.add(cboStaff);
 		
 		Border backline=BorderFactory.createLineBorder(Color.black);
 		JLabel lbldate = new JLabel("");
-		lbldate.setBounds(206, 143, 157, 19);
+		lbldate.setBounds(254, 165, 157, 19);
 		lbldate.setBorder(backline);
 		panel.add(lbldate);
 		
 		btnSave = new JButton("Save");
+		btnSave.setForeground(new Color(255, 255, 255));
+		btnSave.setBackground(new Color(0, 128, 0));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Checking.IsNull(txtAmount.getText()))
@@ -226,18 +237,18 @@ public class Transfer extends JInternalFrame {
 		        }
 			}	
 		});
-		btnSave.setMnemonic('S');
-		btnSave.setBounds(107, 390, 87, 27);
+		btnSave.setBounds(200, 390, 90, 35);
 		contentPanel.add(btnSave);
 		
 		btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(new Color(255, 215, 0));
+		btnCancel.setForeground(new Color(255, 255, 255));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clear();
 			}
 		});
-		btnCancel.setMnemonic('C');
-		btnCancel.setBounds(221, 390, 87, 27);
+		btnCancel.setBounds(314, 390, 90, 35);
 		contentPanel.add(btnCancel);
 		
 		btnClose = new JButton("Close");
@@ -249,8 +260,7 @@ public class Transfer extends JInternalFrame {
 				}
 			}
 		});
-		btnClose.setMnemonic('L');
-		btnClose.setBounds(337, 390, 87, 27);
+		btnClose.setBounds(430, 390, 90, 35);
 		contentPanel.add(btnClose);
 		
 		AutoID();
@@ -258,6 +268,12 @@ public class Transfer extends JInternalFrame {
 		fillTransferedAccountNo();
 		fillStaff();
 		lbldate.setText(d.getMySQLDateFormat());
+		
+		JLabel lblNewLabel_1 = new JLabel("Transfer Operation");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("Pyidaungsu", Font.BOLD, 17));
+		lblNewLabel_1.setBounds(92, 32, 319, 19);
+		panel.add(lblNewLabel_1);
 	}
 	private void fillTransferedAccountNo() {
 		String str[]=mySQLQueries.getIDForChoice("account");

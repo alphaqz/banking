@@ -68,7 +68,7 @@ public class StaffList extends JInternalFrame {
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 128, 615, 232);
+		scrollPane.setBounds(20, 128, 653, 232);
 		panel.add(scrollPane);
 		
 		tblstaff = new JTable();
@@ -83,7 +83,7 @@ public class StaffList extends JInternalFrame {
 				}
 			}
 		});
-		btnClose.setBounds(546, 371, 89, 33);
+		btnClose.setBounds(354, 371, 90, 35);
 		panel.add(btnClose);
 		
 		btnPrint = new JButton("Print");
@@ -96,7 +96,7 @@ public class StaffList extends JInternalFrame {
 		        }
 			}
 		});
-		btnPrint.setBounds(429, 371, 89, 33);
+		btnPrint.setBounds(237, 371, 90, 35);
 		panel.add(btnPrint);
 		
 		txtName = new JTextField();

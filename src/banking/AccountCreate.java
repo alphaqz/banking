@@ -116,14 +116,13 @@ public class AccountCreate extends JInternalFrame {
 		panel.add(lblAccountType_1_1_1);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(183, 349, 338, 62);
+			buttonPane.setBounds(183, 349, 338, 82);
 			contentPanel.add(buttonPane);
 			{
 				JButton btnSave = new JButton("Save");
 				btnSave.setForeground(Color.WHITE);
 				btnSave.setBackground(new Color(0, 153, 0));
-				btnSave.setBounds(30, 20, 76, 27);
-				btnSave.setMnemonic('S');
+				btnSave.setBounds(30, 20, 90, 35);
 				btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -181,20 +180,20 @@ public class AccountCreate extends JInternalFrame {
 				buttonPane.add(btnSave);
 				getRootPane().setDefaultButton(btnSave);
 				
-				JButton btnClear = new JButton("Clear");
-				btnClear.setBounds(133, 20, 76, 27);
-				btnClear.setMnemonic('C');
-				btnClear.addActionListener(new ActionListener() {
+				JButton btnCancel = new JButton("Cancel");
+				btnCancel.setForeground(new Color(255, 255, 255));
+				btnCancel.setBackground(new Color(255, 215, 0));
+				btnCancel.setBounds(133, 20, 90, 35);
+				btnCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						clear();
 					}
 				});
-				buttonPane.add(btnClear);
+				buttonPane.add(btnCancel);
 			}
 			{
 				btnClose = new JButton("Close");
-				btnClose.setBounds(232, 20, 72, 27);
-				btnClose.setMnemonic('L');
+				btnClose.setBounds(232, 20, 90, 35);
 				btnClose.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(JOptionPane.showConfirmDialog(null,"Are you sure you want to exit?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)

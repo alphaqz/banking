@@ -23,13 +23,14 @@ import javax.swing.JRadioButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
+import javax.swing.border.BevelBorder;
+import java.awt.Font;
 
 public class AccountTypeUpdate extends JInternalFrame {
 	private JTextField txtTitle;
 	private JComboBox cboaccounttypeid;
 	private JButton btnDelete;
 	private JButton btnUpdate;
-	private JButton btnclose;
 	private JRadioButton rdbtnMale = new JRadioButton("male");;
 	private JRadioButton rdbtnFemale = new JRadioButton("Female");;
 	private String gender = "";
@@ -38,6 +39,8 @@ public class AccountTypeUpdate extends JInternalFrame {
 	
 	Border backline=BorderFactory.createLineBorder(Color.black);
 	private JTextField txtInterest;
+	private JLabel lblNewLabel_1;
+	private JButton btnClose;
 
 	/**
 	 * Launch the application.
@@ -62,30 +65,31 @@ public class AccountTypeUpdate extends JInternalFrame {
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setLayout(null);
-			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Account Type Update Info:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(37, 63, 472, 246);
+			panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, new Color(51, 102, 255), new Color(0, 0, 204)));
+			panel.setBounds(86, 15, 519, 335);
 			getContentPane().add(panel);
+			panel.setLayout(null);
 			{
 				JLabel lblNewLabel = new JLabel("Account Type ID:");
+				lblNewLabel.setBounds(102, 127, 113, 14);
 				lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblNewLabel.setBounds(102, 47, 113, 14);
 				panel.add(lblNewLabel);
 			}
 			{
 				JLabel lblCusto = new JLabel("Title :");
+				lblCusto.setBounds(163, 183, 52, 14);
 				lblCusto.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblCusto.setBounds(163, 103, 52, 14);
 				panel.add(lblCusto);
 			}
 			{
 				txtTitle = new JTextField();
+				txtTitle.setBounds(255, 180, 167, 20);
 				txtTitle.setColumns(10);
-				txtTitle.setBounds(255, 100, 167, 20);
 				panel.add(txtTitle);
 			}
 			{
 				cboaccounttypeid = new JComboBox();
+				cboaccounttypeid.setBounds(255, 123, 167, 22);
 				cboaccounttypeid.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(cboaccounttypeid.getSelectedIndex()<=0)
@@ -99,28 +103,33 @@ public class AccountTypeUpdate extends JInternalFrame {
 						}
 					}
 				});
-				cboaccounttypeid.setBounds(255, 43, 167, 22);
 				panel.add(cboaccounttypeid);
 			}
 			
 			JLabel lblJob = new JLabel("Interest :");
+			lblJob.setBounds(124, 238, 91, 14);
 			lblJob.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblJob.setBounds(124, 158, 91, 14);
 			panel.add(lblJob);
 			
 			txtInterest = new JTextField();
+			txtInterest.setBounds(255, 235, 167, 20);
 			txtInterest.setColumns(10);
-			txtInterest.setBounds(255, 155, 167, 20);
 			panel.add(txtInterest);
 			
 			JLabel lblFixedPeriod = new JLabel("Fixed period:");
+			lblFixedPeriod.setBounds(124, 282, 91, 14);
 			lblFixedPeriod.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblFixedPeriod.setBounds(124, 202, 91, 14);
 			panel.add(lblFixedPeriod);
 			
 			spinner = new JSpinner();
-			spinner.setBounds(258, 199, 52, 20);
+			spinner.setBounds(258, 279, 52, 20);
 			panel.add(spinner);
+			{
+				lblNewLabel_1 = new JLabel("Modify Account Type Info:");
+				lblNewLabel_1.setFont(new Font("Pyidaungsu", Font.BOLD, 17));
+				lblNewLabel_1.setBounds(173, 52, 238, 19);
+				panel.add(lblNewLabel_1);
+			}
 			rdbtnFemale.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					gender = "male";
@@ -128,26 +137,9 @@ public class AccountTypeUpdate extends JInternalFrame {
 			});
 		}
 		{
-			btnclose = new JButton("Close");
-			btnclose.setForeground(new Color(255, 255, 255));
-			btnclose.setBackground(new Color(105, 105, 105));
-			btnclose.setMnemonic('C');
-			btnclose.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if(JOptionPane.showConfirmDialog(null,"Are you sure you want to exit?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
-					{	
-						dispose();
-					}
-				}
-			});
-			btnclose.setBounds(424, 326, 85, 39);
-			getContentPane().add(btnclose);
-		}
-		{
-			btnDelete = new JButton("Delete");
-			btnDelete.setMnemonic('D');
+			btnDelete = new JButton("Cancel");
 			btnDelete.setForeground(Color.WHITE);
-			btnDelete.setBackground(Color.RED);
+			btnDelete.setBackground(new Color(255, 215, 0));
 			btnDelete.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
@@ -167,12 +159,11 @@ public class AccountTypeUpdate extends JInternalFrame {
 
 				}
 			});
-			btnDelete.setBounds(329, 326, 85, 39);
+			btnDelete.setBounds(314, 377, 90, 35);
 			getContentPane().add(btnDelete);
 		}
 		{
 			btnUpdate = new JButton("Update");
-			btnUpdate.setMnemonic('U');
 			btnUpdate.setForeground(Color.WHITE);
 			btnUpdate.setBackground(new Color(0, 128, 0));
 			btnUpdate.addActionListener(new ActionListener() {
@@ -208,8 +199,21 @@ public class AccountTypeUpdate extends JInternalFrame {
 			        }
 				}
 			});
-			btnUpdate.setBounds(240, 326, 79, 39);
+			btnUpdate.setBounds(183, 377, 90, 35);
 			getContentPane().add(btnUpdate);
+		}
+		{
+			btnClose = new JButton("Close");
+			btnClose.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(JOptionPane.showConfirmDialog(null,"Are you sure you want to exit?","Confrim",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
+					{	
+						dispose();
+					}
+				}
+			});
+			btnClose.setBounds(436, 376, 90, 35);
+			getContentPane().add(btnClose);
 		}
 		fillAccountType();
 	}
