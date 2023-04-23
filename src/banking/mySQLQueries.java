@@ -475,34 +475,34 @@ public class mySQLQueries {
             }
       }
     
-//    public static boolean updateAmount(String action,String id , String amount)
-//    {
-//        if(action.equals("deposit"))
-//            query = "update account set balance= balance +"+ Integer.parseInt(amount) +" where id='"+id+"'";
-//        else if(action.equals("withdraw"))
-//            query = "update account set balance= balance -"+ Integer.parseInt(amount) +" where id='"+id+"'";
-//        else  if(action.equals("transfer"))
-//            query = "update account set balance="+Integer.parseInt(amount)+" where id='"+id+"'";
-//        else if(action.equals("transferUpdate"))
-//       	 query = "update transfer set amount="+Integer.parseInt(amount)+" where id='"+id+"'";
-//            
-//            try{
-//           	 con=connect.getConnection();
-//                stmt = (Statement) con.createStatement();
-//                if(stmt.executeUpdate(query)==1)
-//                {
-//                    return true;
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null,"The table does not contain the specified ID.","Update Fail",JOptionPane.ERROR_MESSAGE);
-//                    return false;}
-//            }
-//            catch(SQLException e)
-//            {
-//                JOptionPane.showMessageDialog(null, e.getMessage(), "SQLException", JOptionPane.ERROR_MESSAGE);
-//                return false;
-//            }
-//      }
+    public static boolean updateAmount(String action,String id , String amount)
+    {
+        if(action.equals("deposit"))
+            query = "update account set balance= balance +"+ Integer.parseInt(amount) +" where id='"+id+"'";
+        else if(action.equals("withdraw"))
+            query = "update account set balance= balance -"+ Integer.parseInt(amount) +" where id='"+id+"'";
+        else  if(action.equals("transfer"))
+            query = "update account set balance="+Integer.parseInt(amount)+" where id='"+id+"'";
+        else if(action.equals("transferUpdate"))
+       	 query = "update transfer set amount="+Integer.parseInt(amount)+" where id='"+id+"'";
+            
+            try{
+           	 con=connect.getConnection();
+                stmt = (Statement) con.createStatement();
+                if(stmt.executeUpdate(query)==1)
+                {
+                    return true;
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"The table does not contain the specified ID.","Update Fail",JOptionPane.ERROR_MESSAGE);
+                    return false;}
+            }
+            catch(SQLException e)
+            {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "SQLException", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+      }
  
     public static String []getStaffData(String id)
      {
@@ -638,25 +638,25 @@ public class mySQLQueries {
 
 	}
 	
-//	public static String getReceiveAmount(String receiveID) {
-//		try{
-//			con=connect.getConnection();
-//            stmt = (Statement) con.createStatement();
-//            String amt = null;
-//            query = "select balance from account where id='"+receiveID+"'";
-//            rs=stmt.executeQuery(query);
-//            if(rs.next())
-//            {
-//                amt=rs.getString(1);//id
-//            }
-//            return amt;
-//        }catch(SQLException e)
-//        {
-//            JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
-//            return null;
-//        }
-//
-//	}
+	public static String getReceiveAmount(String receiveID) {
+		try{
+			con=connect.getConnection();
+            stmt = (Statement) con.createStatement();
+            String amt = null;
+            query = "select balance from account where id='"+receiveID+"'";
+            rs=stmt.executeQuery(query);
+            if(rs.next())
+            {
+                amt=rs.getString(1);//id
+            }
+            return amt;
+        }catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(),"SQLException",JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+	}
 
 	public static String[] getIDForFilter(String id) {
 		try{

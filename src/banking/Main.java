@@ -58,6 +58,9 @@ public class Main extends JFrame {
 	private JButton btnWithdraw;
 	private JButton btnTransaction;
 	private JButton btnRemoveALl_1;
+	private JPanel imgPanel;
+	private JLabel lblimg;
+	private JButton btnReport;
 	
 
 	/**
@@ -92,6 +95,16 @@ public class Main extends JFrame {
 		desktopPane = new JDesktopPane();
 		desktopPane.setBounds(348, 121, 719, 476);
 		contentPane.add(desktopPane);
+		
+		imgPanel = new JPanel();
+		imgPanel.setBounds(2, -2, 719, 476);
+		desktopPane.add(imgPanel);
+		imgPanel.setLayout(null);
+		
+		lblimg = new JLabel("");
+		lblimg.setIcon(new ImageIcon("C:\\Users\\Probook 440 G6\\Documents\\GitHub\\banking\\images\\bank1.jpg"));
+		lblimg.setBounds(0, 1, 719, 476);
+		imgPanel.add(lblimg);
 		
 		
 		setTitle("Bank Management System");
@@ -249,10 +262,31 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				desktopPane.removeAll();
 				desktopPane.updateUI();
+				lblimg.show();
 			}
 		});
+		
+		btnReport = new JButton("View Report");
+		btnReport.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Report g;
+				try {
+					g = new Report();
+					desktopPane.removeAll();
+					desktopPane.add(g).setVisible(true);
+					desktopPane.updateUI();
+				} catch ( ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnReport.setBorder(null);
+		btnReport.setBounds(64, 244, 140, 53);
+		transactionPanel.add(btnReport);
 		btnRemoveALl_1.setBorder(null);
-		btnRemoveALl_1.setBounds(64, 244, 140, 53);
+		btnRemoveALl_1.setBounds(64, 315, 140, 53);
 		transactionPanel.add(btnRemoveALl_1);
 		accountPanel.setLayout(null);
 		accountPanel.setBorder(null);

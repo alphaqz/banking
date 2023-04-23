@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -49,7 +50,7 @@ import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JCheckBox;
 
-public class Report extends JDialog {
+public class Report extends JInternalFrame {
 	private JButton btnSearch;
 	private JButton btnShowAll;
 	String strdataitem[]=new String[9];
@@ -100,20 +101,20 @@ public class Report extends JDialog {
 	 * @throws ClassNotFoundException 
 	 */
 	public Report() throws ClassNotFoundException {
-		setTitle("Deposit Process");
+		setTitle("Transaction Report");
 		Border blackline = BorderFactory.createLineBorder(Color.black);
-		setBounds(100, 100, 791, 685);
-		
+//		setBounds(100, 100, 791, 685);
+		setBounds(0, 0, Constants.c_width, Constants.c_height);
 
-		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
-		 int centerX = (int) (screenDimension.getWidth() - getWidth()) / 2;
-	     int centerY = (int) (screenDimension.getHeight() - getHeight()) / 2;
-	     setLocation(centerX, centerY);
+//		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
+//		 int centerX = (int) (screenDimension.getWidth() - getWidth()) / 2;
+//	     int centerY = (int) (screenDimension.getHeight() - getHeight()) / 2;
+//	     setLocation(centerX, centerY);
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 755, 600);
+			panel.setBounds(10, 11, 755, 420);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			{
@@ -165,7 +166,7 @@ public class Report extends JDialog {
 						}
 						
 					});
-					btnSearch.setBounds(34, 170, 89, 23);
+					btnSearch.setBounds(21, 170, 89, 23);
 					search.add(btnSearch);
 				}
 				{
@@ -182,7 +183,7 @@ public class Report extends JDialog {
 				            	
 						}
 					});
-					btnShowAll.setBounds(185, 170, 89, 23);
+					btnShowAll.setBounds(128, 170, 89, 23);
 					search.add(btnShowAll);
 				}
 				{
@@ -205,7 +206,7 @@ public class Report extends JDialog {
 							
 						}
 					});
-					cboAccountID.setBounds(97, 25, 197, 22);
+					cboAccountID.setBounds(97, 25, 135, 22);
 					search.add(cboAccountID);
 				}
 				
@@ -219,17 +220,17 @@ public class Report extends JDialog {
 				
 				chkDeposit = new JCheckBox("Deposit");
 				chkDeposit.setSelected(true);
-				chkDeposit.setBounds(20, 66, 73, 23);
+				chkDeposit.setBounds(18, 66, 73, 23);
 				search.add(chkDeposit);
 				
 				chkWithdraw = new JCheckBox("Withdraw");
 				chkWithdraw.setSelected(true);
-				chkWithdraw.setBounds(106, 66, 83, 23);
+				chkWithdraw.setBounds(87, 66, 83, 23);
 				search.add(chkWithdraw);
 				
 				chkTransfer = new JCheckBox("Transfer");
 				chkTransfer.setSelected(true);
-				chkTransfer.setBounds(201, 66, 89, 23);
+				chkTransfer.setBounds(173, 66, 89, 23);
 				search.add(chkTransfer);
 				
 				JLabel lblNewLabel = new JLabel("Account Information");
@@ -253,7 +254,7 @@ public class Report extends JDialog {
 				
 				lblforName = new JLabel("");
 				lblforName.setBorder(new LineBorder(new Color(0, 0, 0)));
-				lblforName.setBounds(487, 57, 140, 14);
+				lblforName.setBounds(487, 57, 183, 14);
 				search.add(lblforName);
 				
 				lblForEmail = new JLabel("");
@@ -282,7 +283,7 @@ public class Report extends JDialog {
 
 				}
 			});
-			scrollPane.setBounds(20, 238, 703, 305);
+			scrollPane.setBounds(20, 238, 703, 167);
 			panel.add(scrollPane);
 			
 			tblReport = new JTable();
