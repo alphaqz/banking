@@ -174,6 +174,11 @@ public class AccountTypeCreate extends JInternalFrame {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						clear();
+					}
+				});
 				cancelButton.setBackground(new Color(255, 215, 0));
 				cancelButton.setForeground(new Color(255, 255, 255));
 				cancelButton.setBounds(143, 13, 90, 35);

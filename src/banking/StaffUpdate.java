@@ -180,20 +180,7 @@ public class StaffUpdate extends JInternalFrame {
 			btnCancel.setBackground(new Color(255, 215, 0));
 			btnCancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					try {
-	                    String id = cboSID.getSelectedItem().toString();
-	                    if(JOptionPane.showConfirmDialog(null, "Are you Sure Delete?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
-	                    {
-	                    	mySQLQueries.deleteRecord("staff", id);
-	                    	fillStaff();
-	                    }
-	                    else
-	                    {
-	                    	JOptionPane.showMessageDialog(null, "Fail to delete record","Cannot Update",JOptionPane.INFORMATION_MESSAGE);
-	                    }
-	                } catch(Exception sqle) {
-	                    sqle.printStackTrace();
-	                }
+					clear();
 
 				}
 			});

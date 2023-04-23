@@ -489,6 +489,7 @@ public class Main extends JFrame {
 		staffPanel.add(btnRemoveAll);
 		
 		JLabel lblNewLabel = new JLabel("Welcome To Bank Management System");
+		lblNewLabel.setForeground(new Color(255, 255, 240));
 		lblNewLabel.setBounds(335, 60, 590, 32);
 		lblNewLabel.setFont(new Font("Pyidaungsu", Font.BOLD, 24));
 		contentPane.add(lblNewLabel);

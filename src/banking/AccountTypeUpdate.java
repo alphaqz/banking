@@ -142,20 +142,7 @@ public class AccountTypeUpdate extends JInternalFrame {
 			btnDelete.setBackground(new Color(255, 215, 0));
 			btnDelete.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					try {
-	                    String id = cboaccounttypeid.getSelectedItem().toString();
-	                    if(JOptionPane.showConfirmDialog(null, "Are you Sure Delete?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
-	                    {
-	                    	mySQLQueries.deleteRecord("accounttype", id);
-	                    	fillAccountType();
-	                    }
-	                    else
-	                    {
-	                    	JOptionPane.showMessageDialog(null, "Fail to delete record","Cannot Update",JOptionPane.INFORMATION_MESSAGE);
-	                    }
-	                } catch(Exception sqle) {
-	                    sqle.printStackTrace();
-	                }
+					clear();
 
 				}
 			});

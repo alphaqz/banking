@@ -216,20 +216,7 @@ public class CustomerUpdate extends JInternalFrame {
 			btnCancel.setForeground(new Color(255, 255, 255));
 			btnCancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					try {
-	                    String id = cbocustomerid.getSelectedItem().toString();
-	                    if(JOptionPane.showConfirmDialog(null, "Are you Sure Delete?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
-	                    {
-	                    	mySQLQueries.deleteRecord("customer", id);
-	                    	fillCustomer();
-	                    }
-	                    else
-	                    {
-	                    	JOptionPane.showMessageDialog(null, "Fail to delete record","Cannot Update",JOptionPane.INFORMATION_MESSAGE);
-	                    }
-	                } catch(Exception sqle) {
-	                    sqle.printStackTrace();
-	                }
+					clear();
 
 				}
 			});

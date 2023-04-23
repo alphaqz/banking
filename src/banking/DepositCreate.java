@@ -323,6 +323,11 @@ public class DepositCreate extends JInternalFrame {
 				buttonPane.setLayout(null);
 				
 				JButton btnCancle = new JButton("Cancel");
+				btnCancle.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						clear();
+					}
+				});
 				btnCancle.setBackground(new Color(255, 215, 0));
 				btnCancle.setForeground(new Color(255, 255, 255));
 				btnCancle.setBounds(131, 5, 90, 35);
