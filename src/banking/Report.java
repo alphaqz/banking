@@ -149,15 +149,15 @@ public class Report extends JInternalFrame {
 				             		+ "from transfer t where receivedAccount = '"+cboAccountID.getSelectedItem()+"' or transferedAccount = '"+cboAccountID.getSelectedItem()+"')";
 							}else {
 								sql =  "select d.id, d.amount, d.date,d.accountno,d.accountno as filter,d.staffno from Deposit d  where accountno = '" + cboAccountID.getSelectedItem() 
-								 + "' and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
+								 + "' and  cast( date as DATE) between '" + dateFormat.format(dateChooserStart.getDate()) 
 								 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "' UNION "
 								 + "select  w.id,w.amount,w.date,w.accountno as received,w.accountno as transfered,w.staffno from withdraw w where accountno = '" + cboAccountID.getSelectedItem() 
-								 + "' and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
+								 + "' and  cast( date as DATE) between '" + dateFormat.format(dateChooserStart.getDate()) 
 								 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "'" 
 								  + "  UNION"
 				             		+ "(select * "
 				             		+ "from transfer t where (receivedAccount = '"+cboAccountID.getSelectedItem()+"' or transferedAccount = '"+cboAccountID.getSelectedItem()+"'"
-				             		+ " ) and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
+				             		+ " ) and  cast( date as DATE) between '" + dateFormat.format(dateChooserStart.getDate()) 
 									 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "')" ;
 							}
 				 
