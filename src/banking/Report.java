@@ -49,6 +49,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JCheckBox;
+import java.awt.Font;
 
 public class Report extends JInternalFrame {
 	private JButton btnSearch;
@@ -113,14 +114,14 @@ public class Report extends JInternalFrame {
 		getContentPane().setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+			panel.setBorder(null);
 			panel.setBounds(10, 11, 755, 420);
 			getContentPane().add(panel);
 			panel.setLayout(null);
 			{
 				JPanel search = new JPanel();
 				search.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Report filter:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				search.setBounds(20, 11, 725, 204);
+				search.setBounds(10, 0, 677, 225);
 				panel.add(search);
 				search.setLayout(null);
 				{
@@ -166,7 +167,7 @@ public class Report extends JInternalFrame {
 						}
 						
 					});
-					btnSearch.setBounds(21, 170, 89, 23);
+					btnSearch.setBounds(21, 186, 89, 23);
 					search.add(btnSearch);
 				}
 				{
@@ -183,13 +184,13 @@ public class Report extends JInternalFrame {
 				            	
 						}
 					});
-					btnShowAll.setBounds(128, 170, 89, 23);
+					btnShowAll.setBounds(128, 186, 89, 23);
 					search.add(btnShowAll);
 				}
 				{
 					lblAccountId = new JLabel("Account ID:");
 					lblAccountId.setHorizontalAlignment(SwingConstants.RIGHT);
-					lblAccountId.setBounds(10, 29, 68, 14);
+					lblAccountId.setBounds(10, 45, 68, 14);
 					search.add(lblAccountId);
 				}
 				{
@@ -206,65 +207,66 @@ public class Report extends JInternalFrame {
 							
 						}
 					});
-					cboAccountID.setBounds(97, 25, 135, 22);
+					cboAccountID.setBounds(97, 41, 135, 22);
 					search.add(cboAccountID);
 				}
 				
 				 dateChooserStart = new JDateChooser();
-				dateChooserStart.setBounds(20, 96, 197, 20);
+				dateChooserStart.setBounds(20, 112, 197, 20);
 				search.add(dateChooserStart);
 				
 				dateChooserEnd = new JDateChooser();
-				dateChooserEnd.setBounds(20, 127, 197, 20);
+				dateChooserEnd.setBounds(20, 143, 197, 20);
 				search.add(dateChooserEnd);
 				
 				chkDeposit = new JCheckBox("Deposit");
 				chkDeposit.setSelected(true);
-				chkDeposit.setBounds(18, 66, 73, 23);
+				chkDeposit.setBounds(18, 82, 73, 23);
 				search.add(chkDeposit);
 				
 				chkWithdraw = new JCheckBox("Withdraw");
 				chkWithdraw.setSelected(true);
-				chkWithdraw.setBounds(87, 66, 83, 23);
+				chkWithdraw.setBounds(87, 82, 83, 23);
 				search.add(chkWithdraw);
 				
 				chkTransfer = new JCheckBox("Transfer");
 				chkTransfer.setSelected(true);
-				chkTransfer.setBounds(173, 66, 89, 23);
+				chkTransfer.setBounds(173, 82, 89, 23);
 				search.add(chkTransfer);
 				
 				JLabel lblNewLabel = new JLabel("Account Information");
-				lblNewLabel.setBounds(368, 29, 135, 14);
+				lblNewLabel.setFont(new Font("Pyidaungsu", Font.BOLD, 13));
+				lblNewLabel.setBounds(351, 27, 135, 14);
 				search.add(lblNewLabel);
 				
 				JLabel lblCustomerName = new JLabel("Customer name:");
 				lblCustomerName.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblCustomerName.setBounds(329, 57, 118, 14);
+				lblCustomerName.setBounds(329, 73, 118, 14);
 				search.add(lblCustomerName);
 				
 				JLabel lblNewLabel_2 = new JLabel("email:");
 				lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblNewLabel_2.setBounds(401, 93, 46, 14);
+				lblNewLabel_2.setBounds(401, 109, 46, 14);
 				search.add(lblNewLabel_2);
 				
 				JLabel lblNewLabel_3 = new JLabel("Gender:");
 				lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
-				lblNewLabel_3.setBounds(401, 133, 46, 14);
+				lblNewLabel_3.setBounds(401, 149, 46, 14);
 				search.add(lblNewLabel_3);
 				
 				lblforName = new JLabel("");
 				lblforName.setBorder(new LineBorder(new Color(0, 0, 0)));
-				lblforName.setBounds(487, 57, 183, 14);
+				lblforName.setBounds(466, 66, 183, 23);
 				search.add(lblforName);
 				
 				lblForEmail = new JLabel("");
 				lblForEmail.setBorder(new LineBorder(new Color(0, 0, 0)));
-				lblForEmail.setBounds(487, 93, 183, 14);
+				lblForEmail.setBounds(466, 103, 183, 23);
 				search.add(lblForEmail);
 				
 				lblforGender = new JLabel("");
 				lblforGender.setBorder(new LineBorder(new Color(0, 0, 0)));
-				lblforGender.setBounds(487, 133, 67, 14);
+				lblforGender.setBounds(466, 143, 67, 23);
 				search.add(lblforGender);
 				
 				chkReceived = new JCheckBox("Received");
@@ -283,7 +285,7 @@ public class Report extends JInternalFrame {
 
 				}
 			});
-			scrollPane.setBounds(20, 238, 703, 167);
+			scrollPane.setBounds(10, 238, 677, 167);
 			panel.add(scrollPane);
 			
 			tblReport = new JTable();
