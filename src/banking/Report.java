@@ -156,8 +156,8 @@ public class Report extends JInternalFrame {
 								 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "'" 
 								  + "  UNION"
 				             		+ "(select * "
-				             		+ "from transfer t where receivedAccount = '"+cboAccountID.getSelectedItem()+"' or transferedAccount = '"+cboAccountID.getSelectedItem()+"'"
-				             		+ " and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
+				             		+ "from transfer t where (receivedAccount = '"+cboAccountID.getSelectedItem()+"' or transferedAccount = '"+cboAccountID.getSelectedItem()+"'"
+				             		+ " ) and  date between '" + dateFormat.format(dateChooserStart.getDate()) 
 									 + "' and '" + dateFormat.format(dateChooserEnd.getDate())  + "')" ;
 							}
 				 
