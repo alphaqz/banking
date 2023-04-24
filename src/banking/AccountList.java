@@ -219,7 +219,7 @@ public class AccountList extends JInternalFrame {
                 strdataitem[3]=rs.getString(2);
                 strdataitem[4]=rs.getString(3);
                 strdataitem[5]=rs.getString(4);
-                    dtm.addRow(strdataitem);
+                dtm.addRow(strdataitem);
             }
             tblaccount.setModel(dtm);
         }

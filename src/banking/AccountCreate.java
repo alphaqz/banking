@@ -170,7 +170,7 @@ public class AccountCreate extends JInternalFrame {
 				        	boolean ee = mySQLQueries.isduplicateCustomerID(customerIDList.get(cboCustomer.getSelectedIndex()-1), 
 				        			accountTypeIDList.get(cboAccountType.getSelectedIndex()-1));
 				        	if(ee) {
-						    	 JOptionPane.showMessageDialog(null,"A customer can open the same account type only once. Please select other Account Type.","Duplicate customer",JOptionPane.INFORMATION_MESSAGE);
+						    	 JOptionPane.showMessageDialog(null,"Account already exist.","Choose other Account Type.",JOptionPane.INFORMATION_MESSAGE);
 
 				        	}else {
 				        		String str[] = new String[8];

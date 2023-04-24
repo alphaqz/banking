@@ -1,18 +1,21 @@
 package banking;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -26,6 +29,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TransferList extends JInternalFrame {
 	private JTable tbltransfer;
@@ -39,6 +45,21 @@ public class TransferList extends JInternalFrame {
 	private JRadioButton rdomonth;
 	private JRadioButton rdoyear;
 	private JRadioButton rdoAll;
+	private JPanel panel_1;
+	private JLabel lblTID;
+	
+	Border backline=BorderFactory.createLineBorder(Color.black);
+	private JLabel lblAmount;
+	private JLabel lblNew;
+	private JLabel lblDate;
+	private JLabel date;
+	private JLabel lblTransferAccountNo;
+	private JLabel lblTAcc;
+	private JLabel lblReceiveAccountNo;
+	private JLabel lblRAcc;
+	private JButton btnDelete;
+	
+	int selectedRow;
 
 //	LocalDate localDate = currDate.toLocalDate();
 
@@ -71,10 +92,22 @@ public class TransferList extends JInternalFrame {
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 139, 663, 217);
+		scrollPane.setBounds(10, 241, 663, 115);
 		panel.add(scrollPane);
 		
 		tbltransfer = new JTable();
+		tbltransfer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int r = tbltransfer.getSelectedRow();
+				selectedRow = r;
+				lblTID.setText(tbltransfer.getValueAt(r, 0).toString());
+				lblAmount.setText(tbltransfer.getValueAt(r, 1).toString());
+                lblDate.setText(tbltransfer.getValueAt(r, 2).toString());
+                lblRAcc.setText(tbltransfer.getValueAt(r, 3).toString());
+                lblTAcc.setText(tbltransfer.getValueAt(r, 4).toString());
+			}
+		});
 		scrollPane.setViewportView(tbltransfer);
 		
 		btnClose = new JButton("Close");
@@ -115,7 +148,7 @@ public class TransferList extends JInternalFrame {
 		        }
 			}
 		});
-		rdomonth.setBounds(10, 42, 109, 27);
+		rdomonth.setBounds(10, 158, 109, 27);
 		panel.add(rdomonth);
 		
 		rdoyear = new JRadioButton("Yearly");
@@ -132,7 +165,7 @@ public class TransferList extends JInternalFrame {
 		        
 			}
 		});
-		rdoyear.setBounds(121, 42, 109, 27);
+		rdoyear.setBounds(121, 158, 109, 27);
 		panel.add(rdoyear);
 		
 		rdoAll = new JRadioButton("Monthly & Yearly");
@@ -148,16 +181,16 @@ public class TransferList extends JInternalFrame {
 		        }
 			}
 		});
-		rdoAll.setBounds(232, 42, 137, 27);
+		rdoAll.setBounds(232, 158, 137, 27);
 		panel.add(rdoAll);
 		
 		cbomonth = new JComboBox();
 		cbomonth.setModel(new DefaultComboBoxModel(new String[] { "-Selected-", "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-		cbomonth.setBounds(10, 96, 82, 27);
+		cbomonth.setBounds(10, 194, 82, 27);
 		panel.add(cbomonth);
 		
 		cboyear = new JComboBox();
-		cboyear.setBounds(121, 96, 82, 27);
+		cboyear.setBounds(121, 194, 82, 27);
 		panel.add(cboyear);
 		
 		JButton btnSearch = new JButton("Search");
@@ -197,7 +230,7 @@ public class TransferList extends JInternalFrame {
 		        }
 			}
 		});
-		btnSearch.setBounds(243, 96, 87, 27);
+		btnSearch.setBounds(243, 194, 87, 27);
 		panel.add(btnSearch);
 		
 		JButton btnAll = new JButton("Show All");
@@ -208,8 +241,89 @@ public class TransferList extends JInternalFrame {
 			    cboyear.setSelectedIndex(0);
 			}
 		});
-		btnAll.setBounds(361, 97, 87, 27);
+		btnAll.setBounds(361, 195, 87, 27);
 		panel.add(btnAll);
+		
+		panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Transfer Info:", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 0, 668, 159);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Transfer ID:");
+		lblNewLabel.setBounds(10, 35, 137, 19);
+		panel_1.add(lblNewLabel);
+		
+		lblTID = new JLabel("");
+		
+		lblTID.setBorder(backline);
+		lblTID.setBounds(185, 29, 124, 29);
+		panel_1.add(lblTID);
+		
+		lblAmount = new JLabel("");
+		lblAmount.setBorder(backline);
+		lblAmount.setBounds(510, 29, 124, 29);
+		panel_1.add(lblAmount);
+		
+		lblNew = new JLabel("Amount :");
+		lblNew.setBounds(417, 35, 71, 19);
+		panel_1.add(lblNew);
+		
+		lblDate = new JLabel("");
+		lblDate.setBorder(backline);
+		lblDate.setBounds(510, 73, 124, 29);
+		panel_1.add(lblDate);
+		
+		date = new JLabel("Date  :");
+		date.setBounds(417, 79, 71, 19);
+		panel_1.add(date);
+		
+		lblTransferAccountNo = new JLabel("Transfered Account No :");
+		lblTransferAccountNo.setBounds(10, 79, 137, 19);
+		panel_1.add(lblTransferAccountNo);
+		
+		lblTAcc = new JLabel("");
+		lblTAcc.setBorder(backline);
+		lblTAcc.setBounds(185, 73, 124, 29);
+		panel_1.add(lblTAcc);
+		
+		lblReceiveAccountNo = new JLabel("Received Account No :");
+		lblReceiveAccountNo.setBounds(10, 121, 137, 19);
+		panel_1.add(lblReceiveAccountNo);
+		
+		lblRAcc = new JLabel("");
+		lblRAcc.setBorder(backline);
+		lblRAcc.setBounds(185, 115, 124, 29);
+		panel_1.add(lblRAcc);
+		
+		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(tbltransfer.getSelectedRow()<0)
+                    JOptionPane.showMessageDialog(null, "Please select row to delete.");
+                else
+                {
+                    deleteRow();
+                    try {
+                        String id = lblTID.getText().toString();
+                        if(JOptionPane.showConfirmDialog(null, "Are you Sure Delete?","Confirm",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION)
+                        {
+                        	mySQLQueries.deleteRecord("transfer", id);
+                        }
+                        else
+                        {
+                        	JOptionPane.showMessageDialog(null, "Fail to delete record","Cannot Update",JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    } catch(Exception sqle) {
+                        sqle.printStackTrace();
+                    }
+                    clearItem();
+                    
+                }
+			}
+		});
+		btnDelete.setBounds(544, 121, 87, 27);
+		panel_1.add(btnDelete);
 		
 		try{
 			clsDBConnection c=new clsDBConnection();
@@ -366,5 +480,22 @@ public class TransferList extends JInternalFrame {
         cboyear.addItem("-Selected-");
         for(int i=2010 ; i<=2050 ; i++ )
             cboyear.addItem(i);
+    }
+    public void deleteRow()
+    {
+    	
+    	dtm.removeRow(selectedRow);
+
+        
+        tbltransfer.setModel(dtm);
+        
+    }
+    public void clearItem()
+    {
+        lblTID.setText("");
+        lblDate.setText("");
+        lblAmount.setText("");
+        lblRAcc.setText("");
+        lblTAcc.setText("");
     }
 }

@@ -76,6 +76,7 @@ public class WithdrawShow extends JInternalFrame {
    private JComboBox cbomonth;
    private JButton btnBoth;
    private JButton btnSearch;
+   private JButton btnPrint;
 
 
 
@@ -199,29 +200,29 @@ public class WithdrawShow extends JInternalFrame {
 
 						}
 					});
-					btndelete.setBounds(436, 132, 89, 23);
+					btndelete.setBounds(544, 132, 89, 23);
 					panel_1.add(btndelete);
 				}
-				{
-					btnupdate = new JButton("Update");
-					btnupdate.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							if(tblwithdraw.getSelectedRow()<0)
-			                {
-			                    JOptionPane.showMessageDialog(null, "Please select row to update");
-			                }
-			                else
-			                {
-			                    deleteRow();//delete selected row
-			                    //itemaddmethod();//update selected row			                   
-			                    clearItem();//clear labels
-			                    cboStaffID.setSelectedIndex(0);//focus at cboitemid
-			                }
-						}
-					});
-					btnupdate.setBounds(544, 132, 89, 23);
-					panel_1.add(btnupdate);
-				}
+//				{
+//					btnupdate = new JButton("Update");
+//					btnupdate.addActionListener(new ActionListener() {
+//						public void actionPerformed(ActionEvent e) {
+//							if(tblwithdraw.getSelectedRow()<0)
+//			                {
+//			                    JOptionPane.showMessageDialog(null, "Please select row to update");
+//			                }
+//			                else
+//			                {
+//			                    deleteRow();//delete selected row
+//			                    //itemaddmethod();//update selected row			                   
+//			                    clearItem();//clear labels
+//			                    cboStaffID.setSelectedIndex(0);//focus at cboitemid
+//			                }
+//						}
+//					});
+//					btnupdate.setBounds(436, 132, 89, 23);
+//					panel_1.add(btnupdate);
+//				}
 				{
 					lblAccountId = new JLabel("Account ID:");
 					lblAccountId.setBounds(10, 131, 85, 14);
@@ -256,13 +257,6 @@ public class WithdrawShow extends JInternalFrame {
 			panel_1.setBounds(194, 372, 290, 52);
 			panel.add(panel_1);
 			
-			JButton btnSave = new JButton("Save");
-			btnSave.setForeground(new Color(255, 255, 255));
-			btnSave.setBackground(new Color(0, 128, 0));
-		
-			btnSave.setBounds(31, 11, 90, 35);
-			panel_1.add(btnSave);
-			
 			JButton btnClose = new JButton("Close");
 			btnClose.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -274,6 +268,19 @@ public class WithdrawShow extends JInternalFrame {
 			});
 			btnClose.setBounds(159, 11, 90, 35);
 			panel_1.add(btnClose);
+			
+			btnPrint = new JButton("Print");
+			btnPrint.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try{
+			            tblwithdraw.print();
+			        }catch(Exception e1) {
+			            JOptionPane.showMessageDialog(null, e1);
+			        }
+				}
+			});
+			btnPrint.setBounds(41, 11, 90, 35);
+			panel_1.add(btnPrint);
 			
 			scrollPane = new JScrollPane();
 			scrollPane.setToolTipText("");
