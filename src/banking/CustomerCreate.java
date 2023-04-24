@@ -173,7 +173,7 @@ public class CustomerCreate extends JInternalFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-		         if(Checking.IsValidName(txtcusname.getText()) || Checking.IsNull(txtcusname.getText()))
+		         if(Checking.IsValidName(txtcusname.getText()) || Checking.IsNull(txtcusname.getText())|| Checking.IsLetter(txtcusname.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null, "Please enter VALID Name.");
 		            txtcusname.requestFocus();
@@ -197,7 +197,7 @@ public class CustomerCreate extends JInternalFrame {
 		        }
 		        else if(!Checking.IsPhoneNoformat(txtphone.getText()))
 		        {
-		            JOptionPane.showMessageDialog(null,"Please enter valid Phone Number. You must start with 09 and entered number after 09 must not be zero!");
+		            JOptionPane.showMessageDialog(null,"Please enter valid Phone Number.");
 		            txtphone.requestFocus();
 		            txtphone.selectAll();
 		        }

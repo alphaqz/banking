@@ -141,7 +141,7 @@ public class StaffEntry extends JInternalFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-		         if(Checking.IsValidName(txtstaname.getText()) || Checking.IsNull(txtstaname.getText()))
+		         if(Checking.IsValidName(txtstaname.getText()) || Checking.IsNull(txtstaname.getText()) || Checking.IsLetter(txtstaname.getText()))
 		        {
 		            JOptionPane.showMessageDialog(null, "Please enter VALID Name.");
 		            txtstaname.requestFocus();
@@ -169,7 +169,7 @@ public class StaffEntry extends JInternalFrame {
 		        }
 		        else if(!Checking.IsPhoneNoformat(txtphone.getText()))
 		        {
-		            JOptionPane.showMessageDialog(null,"Phone Number must start with 09 and entered number after 09 must not be zero!");
+		            JOptionPane.showMessageDialog(null,"Please enter valid phone number.");
 		            txtphone.requestFocus();
 		            txtphone.selectAll();
 		        }		         

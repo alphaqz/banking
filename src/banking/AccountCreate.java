@@ -184,10 +184,10 @@ public class AccountCreate extends JInternalFrame {
 						        {
 						        	//id,amount,accountno,staffno
 						        	String strDepo[] = new String[4];
-						        	str[0] = depositID;
-						        	str[1] = (String)txtBalance.getText();
-						        	str[2] = accountTypeIDList.get(cboAccountType.getSelectedIndex()-1);
-						        	str[3] = staffIDList.get(cboStaff.getSelectedIndex()-1); 
+						        	strDepo[0] = depositID;
+						        	strDepo[1] = (String)txtBalance.getText();
+						        	strDepo[2] = (String)lblForID.getText();
+						        	strDepo[3] = staffIDList.get(cboStaff.getSelectedIndex()-1); 
 						        	 boolean depositSave = mySQLQueries.insertData("deposit", strDepo);
 						        	if(depositSave) {
 						        		JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);
@@ -287,7 +287,7 @@ public class AccountCreate extends JInternalFrame {
         cboAccountType.setSelectedIndex(0);
         cboCustomer.setSelectedIndex(0);
         cboStaff.setSelectedIndex(0);
-        
+        txtBalance.setText("");
     }
 	public void AutoID() throws ClassNotFoundException
 	{

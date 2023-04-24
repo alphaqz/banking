@@ -48,6 +48,7 @@ public class mySQLQueries {
 	    else if(tbName.equals("deposit"))
 	    {
 	        query = "insert into deposit(id,amount,accountno,staffno)values ('"+data[0]+"',"+data[1]+",'"+data[2]+"','"+data[3]+"')";
+	        System.out.println(query);
 	    }
 	    else if(tbName.equals("withdraw"))
 	    {
