@@ -113,10 +113,12 @@ public class AccountTypeList extends JInternalFrame {
        dtm.addColumn("Account Type ID");
        dtm.addColumn("Title");
        dtm.addColumn("Interest");
+       dtm.addColumn("Fixed period");
        tblaccounttype.setModel(dtm);
        setColumnWidth(0,40);
        setColumnWidth(1,50);
        setColumnWidth(2,100);
+       setColumnWidth(3,50);
    }
 
     public void setColumnWidth(int index , int width)
@@ -129,7 +131,7 @@ public class AccountTypeList extends JInternalFrame {
 
     public void fillAccountType()
     {
-        String strdataitem[]=new String[3];
+        String strdataitem[]=new String[4];
         try{
             Statement ste = (Statement) con.createStatement();
             String str = "select * from accounttype";
@@ -139,6 +141,7 @@ public class AccountTypeList extends JInternalFrame {
                 strdataitem[0]=rs.getString(1);
                 strdataitem[1]=rs.getString(2);
                 strdataitem[2]=rs.getString(3);
+                strdataitem[3]=rs.getString(4)+ " months";
                 dtm.addRow(strdataitem);
             }
             tblaccounttype.setModel(dtm);

@@ -334,6 +334,8 @@ public class CustomerUpdate extends JInternalFrame {
         txtaddress.setText("");   
         txtphone.setText("");
         txtemail.setText("");
+        txtJob.setText("");
+        txtNrc.setText("");
         cbocustomerid.requestFocus();
         cbocustomerid.setSelectedIndex(0);
     }

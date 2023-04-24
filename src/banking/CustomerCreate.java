@@ -219,7 +219,7 @@ public class CustomerCreate extends JInternalFrame {
 			         txtNrc.selectAll();
 		         }
 		         else if(!Checking.IsNRCformat(txtNrc.getText())) {
-		        	 System.out.println(txtNrc.getText());
+		        	 //System.out.println(txtNrc.getText());
 		        	 JOptionPane.showMessageDialog(null, "Invalid NRC No");
 		        	 
 		         }

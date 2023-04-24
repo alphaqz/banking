@@ -39,6 +39,8 @@ public class AccountCreate extends JInternalFrame {
 	private JComboBox cboCustomer;
 	private JLabel lblForID;
 	private JLabel lblNewLabel;
+	private JTextField txtBalance;
+	private String depositID;
 	/**
 	 * Launch the application.
 	 */
@@ -114,6 +116,19 @@ public class AccountCreate extends JInternalFrame {
 		JLabel lblAccountType_1_1_1 = new JLabel("Staff :");
 		lblAccountType_1_1_1.setBounds(131, 254, 86, 14);
 		panel.add(lblAccountType_1_1_1);
+		
+		JLabel lblAccountType_1_1_1_1 = new JLabel("Balance:");
+		lblAccountType_1_1_1_1.setBounds(131, 290, 86, 14);
+		panel.add(lblAccountType_1_1_1_1);
+		
+		txtBalance = new JTextField();
+		txtBalance.setBounds(268, 287, 116, 20);
+		panel.add(txtBalance);
+		txtBalance.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Minimum initial balance: 10,000 ks");
+		lblNewLabel_1.setBounds(268, 310, 205, 14);
+		panel.add(lblNewLabel_1);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBounds(183, 349, 338, 82);
@@ -135,6 +150,21 @@ public class AccountCreate extends JInternalFrame {
 				        else if(cboStaff.getSelectedIndex()==0){
 				        	JOptionPane.showMessageDialog(null, "Please choose Staff");						
 				        }
+				        else if(Checking.IsNull(txtBalance.getText())){
+				        	JOptionPane.showMessageDialog(null, "Please add Balance");		
+				        	txtBalance.requestFocus();
+				        	txtBalance.selectAll();
+				        }
+				        else if(!Checking.IsAllDigit(txtBalance.getText())){
+				        	JOptionPane.showMessageDialog(null, "You can only input digits for balance.");		
+				        	txtBalance.requestFocus();
+				        	txtBalance.selectAll();
+				        }
+				        else if(Integer.parseInt( txtBalance.getText())<10000 ){
+				        	JOptionPane.showMessageDialog(null, "Minimum Balance is 10000");		
+				        	txtBalance.requestFocus();
+				        	txtBalance.selectAll();
+				        }
 				        
 				        else {	
 				        	boolean ee = mySQLQueries.isduplicateCustomerID(customerIDList.get(cboCustomer.getSelectedIndex()-1), 
@@ -152,7 +182,21 @@ public class AccountCreate extends JInternalFrame {
 					            boolean save = mySQLQueries.insertData("account", str);
 						        if(save)
 						        {
-						        	JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);
+						        	//id,amount,accountno,staffno
+						        	String strDepo[] = new String[4];
+						        	str[0] = depositID;
+						        	str[1] = (String)txtBalance.getText();
+						        	str[2] = accountTypeIDList.get(cboAccountType.getSelectedIndex()-1);
+						        	str[3] = staffIDList.get(cboStaff.getSelectedIndex()-1); 
+						        	 boolean depositSave = mySQLQueries.insertData("deposit", strDepo);
+						        	if(depositSave) {
+						        		JOptionPane.showMessageDialog(null, "Successfully saved record!","Save Record.",JOptionPane.INFORMATION_MESSAGE);
+						        		
+						        	}else {
+								    	 JOptionPane.showMessageDialog(null,"Deposit create problem.","Cannot Save",JOptionPane.INFORMATION_MESSAGE);
+
+						        	}
+						        		
 						            try {
 									AutoID();
 								} catch (ClassNotFoundException e1) {
@@ -248,6 +292,7 @@ public class AccountCreate extends JInternalFrame {
 	public void AutoID() throws ClassNotFoundException
 	{
 		lblForID.setText((String.valueOf(mySQLQueries.getAutoid("id", "account", "AC-"))));
+		depositID = String.valueOf(mySQLQueries.getAutoid("id", "deposit", "DE-"));		
 	}
 }
 

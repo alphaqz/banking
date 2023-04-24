@@ -25,6 +25,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JSpinner;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
+import javax.swing.SpinnerNumberModel;
 
 public class AccountTypeUpdate extends JInternalFrame {
 	private JTextField txtTitle;
@@ -122,6 +123,7 @@ public class AccountTypeUpdate extends JInternalFrame {
 			panel.add(lblFixedPeriod);
 			
 			spinner = new JSpinner();
+			spinner.setModel(new SpinnerNumberModel(0, 0, 24, 1));
 			spinner.setBounds(258, 279, 52, 20);
 			panel.add(spinner);
 			{
