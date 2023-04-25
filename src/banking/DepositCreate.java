@@ -241,8 +241,8 @@ public class DepositCreate extends JInternalFrame {
 			contentPanel.add(buttonPane);
 			{
 				JButton btnSave = new JButton("Save");
-				btnSave.setForeground(new Color(255, 255, 255));
-				btnSave.setBackground(new Color(0, 128, 0));
+				btnSave.setForeground(new Color(0, 0, 0));
+				btnSave.setBackground(new Color(245, 245, 245));
 				btnSave.setBounds(10, 5, 90, 35);
 				btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -328,8 +328,8 @@ public class DepositCreate extends JInternalFrame {
 						clear();
 					}
 				});
-				btnCancle.setBackground(new Color(255, 215, 0));
-				btnCancle.setForeground(new Color(255, 255, 255));
+				btnCancle.setBackground(new Color(245, 245, 245));
+				btnCancle.setForeground(new Color(0, 0, 0));
 				btnCancle.setBounds(131, 5, 90, 35);
 				buttonPane.add(btnCancle);
 				btnSave.setActionCommand("OK");

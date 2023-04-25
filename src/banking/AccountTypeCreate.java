@@ -102,8 +102,8 @@ public class AccountTypeCreate extends JInternalFrame {
 			contentPanel.add(buttonPane);
 			{
 				JButton btnSave = new JButton("Save");
-				btnSave.setForeground(new Color(255, 255, 255));
-				btnSave.setBackground(new Color(0, 128, 0));
+				btnSave.setForeground(new Color(0, 0, 0));
+				btnSave.setBackground(new Color(245, 245, 245));
 				btnSave.setBounds(25, 13, 90, 35);
 				btnSave.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -179,8 +179,8 @@ public class AccountTypeCreate extends JInternalFrame {
 						clear();
 					}
 				});
-				cancelButton.setBackground(new Color(255, 215, 0));
-				cancelButton.setForeground(new Color(255, 255, 255));
+				cancelButton.setBackground(new Color(245, 245, 245));
+				cancelButton.setForeground(new Color(0, 0, 0));
 				cancelButton.setBounds(143, 13, 90, 35);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);

@@ -41,10 +41,10 @@ public class AccountList extends JInternalFrame {
     		+ "        		on a.accTypeID = at.id \r\n"
     		+ "        		inner join customer c\r\n"
     		+ "        		on a.cusID = c.id";
-	private JLabel lblNewLabel;
-	private JLabel lblAccountType;
-	private JTextField txtName;
+	private JLabel lblCName;
+	private JTextField textField;
 	private JTextField txtAccType;
+	private JLabel lblAccType;
 
 	/**
 	 * Launch the application.
@@ -107,7 +107,7 @@ public class AccountList extends JInternalFrame {
 		panel.add(btnPrint);
 		
 		cboAccNo = new JComboBox();
-		cboAccNo.setBounds(402, 32, 124, 27);
+		cboAccNo.setBounds(397, 42, 124, 27);
 		panel.add(cboAccNo);
 		
 		btnSearch = new JButton("Search");
@@ -116,19 +116,7 @@ public class AccountList extends JInternalFrame {
 				if(cboAccNo.getSelectedIndex()==0) {
 	                JOptionPane.showMessageDialog(null,"Please choose Account No");
 	                cboAccNo.requestFocus();
-	            } 
-				else if(!txtName.getText().isEmpty()) {
-		        	String str = "select * from customer where name LIKE '"+txtName.getText().toString()+"%'";
-//	            	fillData(str);
-	            }
-		        else if(!txtAccType.getText().isEmpty()) {
-		        	String str = "select * from customer where email LIKE '"+txtAccType.getText().toString()+"%'";
-//	            	fillData(str);
-	            }
-		        if(!(txtName.getText().isEmpty() && txtAccType.getText().isEmpty())) {
-		        	String str = "select * from customer where name LIKE '"+txtName.getText().toString()+"%' and email LIKE '"+txtAccType.getText().toString()+"%'";
-//	            	fillData(str);
-	            }else {
+	            } else {
 //	            	tblaccount.removeAll();
 	            	String str = "select a.id,c.name,a.accTypeID,a.staffID from account a "
 	            			+ "inner join customer c on a.cusID = c.id "
@@ -138,7 +126,7 @@ public class AccountList extends JInternalFrame {
 	            }
 			}
 		});
-		btnSearch.setBounds(287, 69, 87, 27);
+		btnSearch.setBounds(297, 83, 87, 27);
 		panel.add(btnSearch);
 		
 		btnShowAll = new JButton("Show All");
@@ -147,26 +135,26 @@ public class AccountList extends JInternalFrame {
 				fillAccount(selectAll);
 			}
 		});
-		btnShowAll.setBounds(288, 32, 87, 27);
+		btnShowAll.setBounds(297, 42, 87, 27);
 		panel.add(btnShowAll);
 		
-		lblNewLabel = new JLabel("Customer Name");
-		lblNewLabel.setBounds(19, 36, 87, 19);
-		panel.add(lblNewLabel);
+		lblCName = new JLabel("Customer Name");
+		lblCName.setBounds(10, 46, 90, 19);
+		panel.add(lblCName);
 		
-		lblAccountType = new JLabel("Account Type");
-		lblAccountType.setBounds(140, 36, 87, 19);
-		panel.add(lblAccountType);
-		
-		txtName = new JTextField();
-		txtName.setBounds(18, 70, 96, 25);
-		panel.add(txtName);
-		txtName.setColumns(10);
+		textField = new JTextField();
+		textField.setBounds(10, 84, 96, 25);
+		panel.add(textField);
+		textField.setColumns(10);
 		
 		txtAccType = new JTextField();
 		txtAccType.setColumns(10);
-		txtAccType.setBounds(140, 70, 96, 25);
+		txtAccType.setBounds(135, 85, 96, 25);
 		panel.add(txtAccType);
+		
+		lblAccType = new JLabel("Account Type");
+		lblAccType.setBounds(135, 47, 90, 19);
+		panel.add(lblAccType);
 		
 		try{
 			clsDBConnection c=new clsDBConnection();
@@ -255,7 +243,7 @@ public class AccountList extends JInternalFrame {
                 strdataitem[3]=rs.getString(2);
                 strdataitem[4]=rs.getString(3);
                 strdataitem[5]=rs.getString(4);
-                dtm.addRow(strdataitem);
+                    dtm.addRow(strdataitem);
             }
             tblaccount.setModel(dtm);
         }

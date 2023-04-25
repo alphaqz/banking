@@ -160,7 +160,7 @@ public class Transfer extends JInternalFrame {
 		
 		btnSave = new JButton("Save");
 		btnSave.setForeground(new Color(255, 255, 255));
-		btnSave.setBackground(new Color(0, 128, 0));
+		btnSave.setBackground(new Color(0, 0, 0));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Checking.IsNull(txtAmount.getText()))

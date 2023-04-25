@@ -212,8 +212,8 @@ public class CustomerUpdate extends JInternalFrame {
 		}
 		{
 			btnCancel = new JButton("Cancel");
-			btnCancel.setBackground(new Color(255, 215, 0));
-			btnCancel.setForeground(new Color(255, 255, 255));
+			btnCancel.setBackground(new Color(245, 245, 245));
+			btnCancel.setForeground(new Color(0, 0, 0));
 			btnCancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					clear();
@@ -225,8 +225,8 @@ public class CustomerUpdate extends JInternalFrame {
 		}
 		{
 			btnUpdate = new JButton("Update");
-			btnUpdate.setForeground(new Color(255, 255, 255));
-			btnUpdate.setBackground(new Color(0, 128, 0));
+			btnUpdate.setForeground(new Color(0, 0, 0));
+			btnUpdate.setBackground(new Color(245, 245, 245));
 			btnUpdate.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 

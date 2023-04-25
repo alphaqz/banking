@@ -140,8 +140,8 @@ public class AccountTypeUpdate extends JInternalFrame {
 		}
 		{
 			btnDelete = new JButton("Cancel");
-			btnDelete.setForeground(Color.WHITE);
-			btnDelete.setBackground(new Color(255, 215, 0));
+			btnDelete.setForeground(new Color(0, 0, 0));
+			btnDelete.setBackground(new Color(245, 245, 245));
 			btnDelete.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					clear();
@@ -153,8 +153,8 @@ public class AccountTypeUpdate extends JInternalFrame {
 		}
 		{
 			btnUpdate = new JButton("Update");
-			btnUpdate.setForeground(Color.WHITE);
-			btnUpdate.setBackground(new Color(0, 128, 0));
+			btnUpdate.setForeground(new Color(0, 0, 0));
+			btnUpdate.setBackground(new Color(245, 245, 245));
 			btnUpdate.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
