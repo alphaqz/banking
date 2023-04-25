@@ -159,8 +159,8 @@ public class Transfer extends JInternalFrame {
 		panel.add(lbldate);
 		
 		btnSave = new JButton("Save");
-		btnSave.setForeground(new Color(255, 255, 255));
-		btnSave.setBackground(new Color(0, 0, 0));
+		btnSave.setForeground(new Color(0, 0, 0));
+		btnSave.setBackground(new Color(245, 245, 245));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Checking.IsNull(txtAmount.getText()))
@@ -241,8 +241,8 @@ public class Transfer extends JInternalFrame {
 		contentPanel.add(btnSave);
 		
 		btnCancel = new JButton("Cancel");
-		btnCancel.setBackground(new Color(255, 215, 0));
-		btnCancel.setForeground(new Color(255, 255, 255));
+		btnCancel.setBackground(new Color(245, 255, 250));
+		btnCancel.setForeground(new Color(0, 0, 0));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clear();
