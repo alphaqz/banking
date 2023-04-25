@@ -1,0 +1,86 @@
+CREATE DATABASE `banking` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE TABLE `account` (
+  `id` varchar(15) NOT NULL,
+  `cusID` varchar(15) DEFAULT NULL,
+  `accTypeID` varchar(45) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `staffID` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `c_idx` (`cusID`),
+  KEY `a_idx` (`accTypeID`),
+  KEY `acc_staff_idx` (`staffID`),
+  CONSTRAINT `a` FOREIGN KEY (`accTypeID`) REFERENCES `accounttype` (`id`),
+  CONSTRAINT `acc_staff` FOREIGN KEY (`staffID`) REFERENCES `staff` (`id`),
+  CONSTRAINT `c` FOREIGN KEY (`cusID`) REFERENCES `customer` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `accounttype` (
+  `id` varchar(15) NOT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `intrest` double DEFAULT NULL,
+  `fixedPeriod` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `customer` (
+  `id` varchar(15) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
+  `job` varchar(45) DEFAULT NULL,
+  `nrc` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nrc_UNIQUE` (`nrc`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `phone_UNIQUE` (`phone`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `deposit` (
+  `id` varchar(15) NOT NULL,
+  `amount` decimal(10,0) DEFAULT NULL,
+  `accountno` varchar(45) NOT NULL,
+  `staffno` varchar(45) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `a_idx` (`accountno`),
+  KEY `s_idx` (`staffno`),
+  CONSTRAINT `acc` FOREIGN KEY (`accountno`) REFERENCES `account` (`id`),
+  CONSTRAINT `staff` FOREIGN KEY (`staffno`) REFERENCES `staff` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `staff` (
+  `id` varchar(15) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `gender` varchar(45) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `phone_UNIQUE` (`phone`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `transfer` (
+  `id` varchar(15) NOT NULL,
+  `amount` varchar(15) DEFAULT NULL,
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `receivedAccount` varchar(15) DEFAULT NULL,
+  `transferedAccount` varchar(15) DEFAULT NULL,
+  `staffId` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tran_staff_idx` (`staffId`),
+  KEY `tra_acc_idx` (`receivedAccount`),
+  KEY `tra_acc2_idx` (`transferedAccount`),
+  CONSTRAINT `tra_acc` FOREIGN KEY (`receivedAccount`) REFERENCES `account` (`id`),
+  CONSTRAINT `tra_acc2` FOREIGN KEY (`transferedAccount`) REFERENCES `account` (`id`),
+  CONSTRAINT `tra_staff` FOREIGN KEY (`staffId`) REFERENCES `staff` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `withdraw` (
+  `id` varchar(15) NOT NULL,
+  `amount` decimal(10,0) DEFAULT NULL,
+  `accountno` varchar(45) NOT NULL,
+  `staffno` varchar(45) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `a_idx` (`accountno`),
+  KEY `s_idx` (`staffno`),
+  CONSTRAINT `acc_with` FOREIGN KEY (`accountno`) REFERENCES `account` (`id`),
+  CONSTRAINT `staff_with` FOREIGN KEY (`staffno`) REFERENCES `staff` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

@@ -143,6 +143,8 @@ public class StaffList extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				String str = "select * from staff";
             	fillStaff(str);
+            	txtEmail.setText("");
+            	txtName.setText("");
 			}
 		});
 		btnAll.setBounds(337, 26, 87, 27);
